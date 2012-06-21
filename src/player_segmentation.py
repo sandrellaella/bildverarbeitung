@@ -4,42 +4,30 @@ import freenect
 #import frame_convert
 import numpy as np
       
-def player_segmentation(threshold_value,depth_value):
+def player_segmentation(depth,timestamp,threshold_value,depth_value):
    
    #capture=cv.CaptureFromCAM(CAM_NUMBER)
    threshold = threshold_value
    current_depth = depth_value
-   while True:
-    
-        #Tiefenbild
-        depth, timestamp = freenect.sync_get_depth()
+   #Tiefenbild -> kommt jetzt von run.py
+   #depth, timestamp = freenect.sync_get_depth()
         
-        #Segmentierung
-        depth = 255 * np.logical_and(depth >= current_depth - threshold,
+   #Segmentierung
+   depth = 255 * np.logical_and(depth >= current_depth - threshold,
                                  depth <= current_depth + threshold)
-        #depth in ein Bild umwandeln (ist bis hierhin ein numpy-array)
-        depth = depth.astype(np.uint8)
-        depth_image = cv.CreateImageHeader((depth.shape[1], depth.shape[0]), cv.IPL_DEPTH_8U,1)
-        #mit Daten fuellen
-        cv.SetData(depth_image, depth.tostring(),
+   #depth in ein Bild umwandeln (ist bis hierhin ein numpy-array)
+   depth = depth.astype(np.uint8)
+   depth_image = cv.CreateImageHeader((depth.shape[1], depth.shape[0]), cv.IPL_DEPTH_8U,1)
+   #mit Daten fuellen
+   cv.SetData(depth_image, depth.tostring(),
                depth.dtype.itemsize * depth.shape[1])
       
-        #Glaetten
-        cv.Smooth(depth_image, depth_image, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
-        #Dilatation um Loecher und Rauschen zu mindern
-        depth_dil = dilate_image(depth_image)        
-        
-        #Erosion 
-        depth_erode = erode_image(depth_dil)
-        
-        #Konturen extrahieren
-        #depth_dil_con = find_contour(depth_dil)
-       
-        #cv.ShowImage('Depth Dil Con', depth_dil_con)
-        cv.ShowImage('Depth Dil', depth_erode)
+   #Glaetten
+   cv.Smooth(depth_image, depth_image, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
+   #Dilatation um Loecher und Rauschen zu mindern
+   depth_seg = dilate_image(depth_image)        
 
-        if cv.WaitKey(10)==27:
-            break
+   return depth_seg
 
 #Dilatation anwenden    
 def dilate_image(img):
