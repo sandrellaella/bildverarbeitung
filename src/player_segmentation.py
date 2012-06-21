@@ -83,4 +83,4 @@ def save_contour(img_contour):
     return points
 
 #FIXME: Abstand des Spielers zur Kamera
-player_segmentation(159,745)
+#player_segmentation(159,745)
