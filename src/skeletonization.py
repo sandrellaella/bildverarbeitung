@@ -40,9 +40,5 @@ class Skeleton():
         #cv.WaitKey()
         
     def morph_skeleton(self,img):
-        #TODO 
+        #TODO?
         return 0
-
-#skeleton = Skeleton()
-#img = "barcode.png"
-#skeleton.distance_skeleton(img)
