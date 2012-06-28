@@ -2,7 +2,8 @@ import player_segmentation
 import freenect
 import cv
 import skeletonization
-#import image_conversion
+from scipy import ndimage
+import image_conversion
 #import numpy
 
 def run():
@@ -16,15 +17,12 @@ def run():
         depth_seg = player_segmentation.player_segmentation(depth_img,timestamp,threshold_value,depth_value)
         #distance map berechnen
         dist_img = skeleton.distance_skeleton(depth_seg)
-		
         
-        #skeleton pruning
-		#Theoretisch duerften hier nur die Pixel uebrigbleiben, die gleich 1 sind
-		cv.CmpS(dist_img,1,dist_img,cv.CV_CMP_EQ)
-
-        cv.ShowImage('Spieler',depth_seg)  
+        dist_img_mat = image_conversion.cv2array(dist_img)       
+       
+        ndimage.morphological_gradient(dist_img_mat, (3,3))
+        
         cv.ShowImage('Distance Image',dist_img)
-        
         if cv.WaitKey(10)==27:
             break
         

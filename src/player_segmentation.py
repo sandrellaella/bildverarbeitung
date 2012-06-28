@@ -1,6 +1,6 @@
 import cv
 import image_conversion
-import freenect
+#import freenect
 #import frame_convert
 import numpy as np
       
@@ -40,9 +40,11 @@ def dilate_image(img):
     return img_dil
     
 def erode_image(img):
-	kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
-	img_erode = cv.CreateImage(cv.GetSize(img),8,1)
-	cv.Erode(img,img_erode,kernel,iterations=2)
+    kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
+    
+    img_erode = cv.CreateImage(cv.GetSize(img),8,1)
+    cv.Erode(img,img_erode,kernel,iterations=5)
+    return img
 
 #Konturen finden. Eingabe ist ein Bild auf dem zuvor die Dilatation angewendet wurde
 def find_contour(img_dil):
