@@ -2,9 +2,6 @@ import player_segmentation
 import freenect
 import cv
 import skeletonization
-#from scipy import ndimage
-#import image_conversion
-#import numpy
 
 def run():
     threshold_value = 159 
@@ -23,8 +20,6 @@ def run():
         dist_gradient_thresh = cv.CreateImage(cv.GetSize(dist_gradient),8,1)
         
         cv.InRangeS(dist_gradient,0.9,1,dist_gradient_thresh)
-        #cv.FloodFill(dist_gradient_thresh, (0,0), 1)
-        
         
         cv.ShowImage('Distance Image Gradientenbetrag',dist_gradient_thresh)
         cv.ShowImage('Distance Image',dist_img)
