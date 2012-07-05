@@ -2,8 +2,8 @@ import player_segmentation
 import freenect
 import cv
 import skeletonization
-from scipy import ndimage
-import image_conversion
+#from scipy import ndimage
+#import image_conversion
 #import numpy
 
 def run():
@@ -17,12 +17,18 @@ def run():
         depth_seg = player_segmentation.player_segmentation(depth_img,timestamp,threshold_value,depth_value)
         #distance map berechnen
         dist_img = skeleton.distance_skeleton(depth_seg)
+        #Erste Stufe fuer das Pruning: Gradientbild berechnen
+        dist_gradient = skeleton.pruning(dist_img,1)
         
-        dist_img_mat = image_conversion.cv2array(dist_img)       
-       
-        ndimage.morphological_gradient(dist_img_mat, (3,3))
+        dist_gradient_thresh = cv.CreateImage(cv.GetSize(dist_gradient),8,1)
         
+        cv.InRangeS(dist_gradient,0.9,1,dist_gradient_thresh)
+        #cv.FloodFill(dist_gradient_thresh, (0,0), 1)
+        
+        
+        cv.ShowImage('Distance Image Gradientenbetrag',dist_gradient_thresh)
         cv.ShowImage('Distance Image',dist_img)
+        #cv.ShowImage("Compare",compare_img)        
         if cv.WaitKey(10)==27:
             break
         

@@ -7,6 +7,8 @@ Created on Thu Jun 14 17:32:49 2012
 
 import cv
 import image_conversion
+from scipy import ndimage
+import numpy
 
 class Skeleton():
 
@@ -39,6 +41,17 @@ class Skeleton():
 
         #cv.WaitKey()
         
-    def morph_skeleton(self,img):
-        #TODO?
-        return 0
+    def pruning(self,skeleton_img,sigma):
+        skeleton_img_mat = image_conversion.cv2array(skeleton_img)
+        #Ausgabe Array fuer das Ergebnis der Gradientberechnung        
+        gradient_output = numpy.empty_like(skeleton_img_mat)
+        #Gradienten-Berechnung
+        ndimage.gaussian_gradient_magnitude(skeleton_img_mat,sigma,gradient_output)
+        #Normalisierung
+        gradient_output /= gradient_output.max()
+        #Array ins Bild umwandeln
+        grad_img = image_conversion.array2cv(gradient_output)
+        
+        
+        
+        return grad_img
