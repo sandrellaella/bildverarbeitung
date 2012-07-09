@@ -53,8 +53,8 @@ class Skeleton():
         grad_img = image_conversion.array2cv(gradient_output)
         #Schwellwertbasierte Segmentierung des Gradientbildes
         dist_gradient_thresh = cv.CreateImage(cv.GetSize(grad_img),8,1)
-        cv.InRangeS(grad_img,0.9,1,dist_gradient_thresh)
+        cv.InRangeS(grad_img,0.8,1,dist_gradient_thresh)
         
         
         
-        return dist_gradient_thresh
+        return grad_img, dist_gradient_thresh

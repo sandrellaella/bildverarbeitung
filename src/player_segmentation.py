@@ -42,9 +42,23 @@ def dilate_image(img):
 def erode_image(img):
     kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
     
-    img_erode = cv.CreateImage(cv.GetSize(img),8,1)
-    cv.Erode(img,img_erode,kernel,iterations=5)
-    return img
+    img_mat = image_conversion.cv2array(img)
+    img_uint8 = cv.CreateImage(cv.GetSize(img),8,1)
+    
+    if img_mat.dtype == 'float32':
+        cv.ConvertScale(img, img_uint8)
+        img_erode = cv.CreateImage(cv.GetSize(img_uint8),8,1)
+        cv.Erode(img_uint8,img_erode,kernel,iterations=2)
+        return img_uint8
+    else:
+        cv.Erode(img,img_erode,kernel,iterations=2)
+        return img
+    
+    
+    
+    
+    
+    
 
 #Konturen finden. Eingabe ist ein Bild auf dem zuvor die Dilatation angewendet wurde
 def find_contour(img_dil):

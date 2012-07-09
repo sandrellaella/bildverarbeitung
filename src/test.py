@@ -8,10 +8,12 @@ Created on Thu Jun 14 17:32:49 2012
 import cv
 import image_conversion
 import skeletonization
+from PIL import Image
+
 
 skeleton = skeletonization.Skeleton()
 
-img = cv.LoadImage("person.jpg")
+img = cv.LoadImage("original.png")
 grey_img = cv.CreateImage(cv.GetSize(img),8,1)
 bin_img = cv.CreateImage(cv.GetSize(img),8,1)
 dist_img = cv.CreateImage(cv.GetSize(img),32,1)
@@ -31,7 +33,7 @@ grey_img = image_conversion.array2cv(grey_img_mat)
 dist_img = skeleton.distance_skeleton(grey_img)
 
 #Pruning/Segmentierung des Skeletts
-dist_gradient = skeleton.pruning(dist_img,1)
+gradient, dist_gradient = skeleton.pruning(dist_img,1)
 dist_gradient_thresh_mat = image_conversion.cv2array(dist_gradient)
 #Differenz der Distance-Map und dem segmentierten Gradientbild
 dist_img_mat = image_conversion.cv2array(dist_img)
@@ -46,11 +48,11 @@ for i in xrange(len(diff[:,1])):
             diff[i,j] = 1
 
 diff_img = image_conversion.array2cv(diff) 
-#cv.ShowImage('Original',img)
-#cv.ShowImage('Original Grau invertiert', grey_img)
-cv.ShowImage('Distance',diff_img)
+
+cv.ShowImage('Distance Map',dist_img)
+cv.ShowImage('Differenz',diff_img)
+cv.ShowImage('dist gradient mit Schwell', dist_gradient)
+cv.ShowImage('Gradient ohne Schwell', gradient)
+
 
 cv.WaitKey()
-
-		
-	
