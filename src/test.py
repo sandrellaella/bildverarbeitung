@@ -8,12 +8,11 @@ Created on Thu Jun 14 17:32:49 2012
 import cv
 import image_conversion
 import skeletonization
-from PIL import Image
 
 
 skeleton = skeletonization.Skeleton()
 
-img = cv.LoadImage("original.png")
+img = cv.LoadImage("person.jpg")
 grey_img = cv.CreateImage(cv.GetSize(img),8,1)
 bin_img = cv.CreateImage(cv.GetSize(img),8,1)
 dist_img = cv.CreateImage(cv.GetSize(img),32,1)

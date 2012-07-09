@@ -54,12 +54,6 @@ def erode_image(img):
         cv.Erode(img,img_erode,kernel,iterations=2)
         return img
     
-    
-    
-    
-    
-    
-
 #Konturen finden. Eingabe ist ein Bild auf dem zuvor die Dilatation angewendet wurde
 def find_contour(img_dil):
     img_contour = cv.CreateImage(cv.GetSize(img_dil),8,1)
