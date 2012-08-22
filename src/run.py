@@ -20,7 +20,7 @@ def run():
         
         dist_gradient_mat = image_conversion.cv2array(dist_gradient)
         dist_img_mat = image_conversion.cv2array(dist_img)
-        
+        #Differenzbild aus Distanzbild und segmentiertem Gradientenbild
         diff = dist_img_mat - dist_gradient_mat
         
         diff_img = image_conversion.array2cv(diff)

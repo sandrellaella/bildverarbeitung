@@ -32,7 +32,7 @@ grey_img = image_conversion.array2cv(grey_img_mat)
 dist_img = skeleton.distance_skeleton(grey_img)
 
 #Pruning/Segmentierung des Skeletts
-gradient, dist_gradient = skeleton.pruning(dist_img,1)
+dist_gradient = skeleton.pruning(dist_img,1)
 dist_gradient_thresh_mat = image_conversion.cv2array(dist_gradient)
 #Differenz der Distance-Map und dem segmentierten Gradientbild
 dist_img_mat = image_conversion.cv2array(dist_img)
@@ -51,7 +51,7 @@ diff_img = image_conversion.array2cv(diff)
 cv.ShowImage('Distance Map',dist_img)
 cv.ShowImage('Differenz',diff_img)
 cv.ShowImage('dist gradient mit Schwell', dist_gradient)
-cv.ShowImage('Gradient ohne Schwell', gradient)
+#cv.ShowImage('Gradient ohne Schwell', gradient)
 
 
 cv.WaitKey()
