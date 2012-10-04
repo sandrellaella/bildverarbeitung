@@ -9,6 +9,7 @@ import cv
 import image_conversion
 from scipy import ndimage
 import numpy
+import cython
 
 class Skeleton():
 
@@ -54,5 +55,20 @@ class Skeleton():
         #Schwellwertbasierte Segmentierung des Gradientbildes
         dist_gradient_thresh = cv.CreateImage(cv.GetSize(grad_img),8,1)
         cv.InRangeS(grad_img,0.8,1,dist_gradient_thresh)
- 
+
         return dist_gradient_thresh
+        
+    def component_labeling(self,pruned_skeleton):
+        background = 0
+        
+        cdef int i
+        cdef int j
+        
+        for i in xrange(len(pruned_skeleton[:,1])):
+            for j in xrange(len(pruned_skeleton[1,:])):
+                if pruned_skeleton[i,j] == 1:
+                    print i,j
+        
+        
+        return background
+

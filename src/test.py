@@ -8,6 +8,7 @@ Created on Thu Jun 14 17:32:49 2012
 import cv
 import image_conversion
 import skeletonization
+import numpy
 
 
 skeleton = skeletonization.Skeleton()
@@ -37,21 +38,21 @@ dist_gradient_thresh_mat = image_conversion.cv2array(dist_gradient)
 #Differenz der Distance-Map und dem segmentierten Gradientbild
 dist_img_mat = image_conversion.cv2array(dist_img)
 diff = dist_img_mat - dist_gradient_thresh_mat      
-#Schwellwertbasierte Segmentierung auf das Differenzbild. Das hier ist laufzeit-
-#kritisch bei der Kinect
-for i in xrange(len(diff[:,1])):
-    for j in xrange(len(diff[1,:])):
-        if diff[i,j] >= 0 and diff[i,j] < 0.2:
-            diff[i,j] = 0
-        elif diff[i,j] >= 0.2 and diff[i,j]<=1:
-            diff[i,j] = 1
+#Schwellwertbasierte Segmentierung des Differenzbildes. Ergibt ein schoenes Skelett
+diff = 1.0 * numpy.logical_and(diff >= 0.2, diff <=1)
 
-diff_img = image_conversion.array2cv(diff) 
+diff_img = image_conversion.array2cv(diff)
 
-cv.ShowImage('Distance Map',dist_img)
+skeleton.component_labeling(diff)
+
+#tracking = skeleton.tracking(diff_img) 
+
+cv.ShowImage('Originalbild', img)
+#cv.ShowImage('Distance Map',dist_img)
 cv.ShowImage('Differenz',diff_img)
-cv.ShowImage('dist gradient mit Schwell', dist_gradient)
-#cv.ShowImage('Gradient ohne Schwell', gradient)
+#cv.ShowImage('dist gradient mit Schwell', dist_gradient)
 
+#cv.ShowImage('Tracking the Skeleton', tracking)
+#cv.ShowImage('Gradient ohne Schwell', gradient)
 
 cv.WaitKey()
