@@ -13,7 +13,7 @@ import numpy
 
 skeleton = skeletonization.Skeleton()
 
-img = cv.LoadImage("hand.jpg")
+img = cv.LoadImage("person6.jpg")
 grey_img = cv.CreateImage(cv.GetSize(img),8,1)
 bin_img = cv.CreateImage(cv.GetSize(img),8,1)
 dist_img = cv.CreateImage(cv.GetSize(img),32,1)
