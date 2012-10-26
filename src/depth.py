@@ -11,35 +11,28 @@ import frame_convert
 import image_conversion
 import numpy
 
+depth_list_global = [] 
+
 def get_depth():
     return frame_convert.pretty_depth(freenect.sync_get_depth()[0])
 
-def depth2():
+def get_depth2():
     return freenect.sync_get_depth()[0]
     
-#def depth3():
-#    return freenect.sync_get_depth()
+def save_depth_map(depth_list,depth_map):
+    depth_list.append(depth_map)
+    
+def get_depth_map(depth_list,index):
+    depth_map = depth_list[index]
+    return depth_map
+    
 
-def correct():
-    depth = image_conversion.cv2array(get_depth())
-    numpy.where(depth == 0, 0, 255)    
-    depth_image=image_conversion.array2cv(depth)
-    return depth_image
+while 1:
     
-def correct2():
-    depth = depth2()
-    #depth = depth2()
-    depth = numpy.where(depth == 2047, 750, depth)
-    #depth_image = image_conversion.array2cv(depth)  
-    return depth
-    
-    
-def show(): 
-    depth_image = correct2()
-    cv.ShowImage('Korrektur',depth_image)
-
-#while True:
- #   show()
-  #  #cv.ShowImage('Normal', get_depth())
-   # if cv.WaitKey(10) == 27:
-    #    break
+    depth = numpy.where(get_depth() == 255, 0, get_depth())
+    depth = numpy.where(get_depth() >= 200, 128, get_depth())
+    depth_img = image_conversion.array2cv(depth)
+    cv.Smooth(depth_img, depth_img, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
+    cv.ShowImage('Depth', depth_img)
+    if cv.WaitKey(10) == 27:
+        break
