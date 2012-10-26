@@ -9,7 +9,6 @@ import cv
 import image_conversion
 from scipy import ndimage
 import numpy
-#import cython
 
 class Skeleton():
 

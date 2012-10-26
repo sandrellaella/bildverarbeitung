@@ -27,7 +27,7 @@ def player_segmentation(depth,timestamp,threshold_value,depth_value):
    #Dilatation um Loecher und Rauschen zu mindern
    depth_seg = dilate_image(depth_image)        
 
-   return depth_seg
+   return depth_seg, depth_image
 
 #Dilatation anwenden    
 def dilate_image(img):
@@ -36,7 +36,6 @@ def dilate_image(img):
     img_dil = cv.CreateImage(cv.GetSize(img),8,1)
     #Dilatation
     cv.Dilate(img,img_dil,kernel,iterations=2)
-            
     return img_dil
     
 def erode_image(img):
