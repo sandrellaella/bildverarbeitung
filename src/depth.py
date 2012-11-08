@@ -27,12 +27,18 @@ def get_depth_map(depth_list,index):
     return depth_map
     
 
-while 1:
+def get_better_depth():    
+    depth = get_depth()
+   
+    depth = numpy.where(depth == 255, 0, depth)
     
-    depth = numpy.where(get_depth() == 255, 0, get_depth())
-    depth = numpy.where(get_depth() >= 200, 128, get_depth())
+    
     depth_img = image_conversion.array2cv(depth)
-    cv.Smooth(depth_img, depth_img, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
-    cv.ShowImage('Depth', depth_img)
-    if cv.WaitKey(10) == 27:
-        break
+    #cv.Smooth(depth_img, depth_img, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
+   
+    return depth_img
+
+#while 1:
+ #   cv.ShowImage('Depth Image', get_better_depth())
+  #  if cv.WaitKey(10)==27:
+   #     break

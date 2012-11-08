@@ -4,8 +4,11 @@ import image_conversion
 #import frame_convert
 import numpy as np
       
-def player_segmentation(depth,timestamp,threshold_value,depth_value):
-   
+def player_segmentation(depth_image_input,threshold_value,depth_value):
+    
+    
+   depth = image_conversion.cv2array(depth_image_input)
+   #print depth
    #capture=cv.CaptureFromCAM(CAM_NUMBER)
    threshold = threshold_value
    current_depth = depth_value
