@@ -34,7 +34,22 @@ class Skeleton():
         #conversion back to cv-image
         dist_img = image_conversion.array2cv(dist_img_mat)
         
-        return dist_img        
+        #TEST
+        #dist_img = skeleton.distance_skeleton(depth_image)        
+        #Erste Stufe fuer das Pruning: Gradientbild berechnen
+        dist_gradient = self.pruning(dist_img,1)
+        
+        dist_gradient_mat = image_conversion.cv2array(dist_gradient)
+        dist_img_mat = image_conversion.cv2array(dist_img)
+        #Differenzbild aus Distanzbild und segmentiertem Gradientenbild
+        diff = dist_img_mat - dist_gradient_mat
+        #diff = numpy.logical_and(diff>=0.2,diff<1)
+        diff = diff * 1.0
+        diff_img = image_conversion.array2cv(diff)
+        #cv.ShowImage('Distance Image Gradientenbetrag',dist_gradient)
+        #cv.ShowImage('Distance Image',dist_img)
+        
+        return diff_img        
         
         #show the original image and the (normalised) result
         #cv.ShowImage('Original Image',img)
@@ -56,6 +71,7 @@ class Skeleton():
         cv.InRangeS(grad_img,0.8,1,dist_gradient_thresh)
 
         return dist_gradient_thresh
+        
         
  
 
