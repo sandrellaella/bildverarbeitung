@@ -72,6 +72,12 @@ class Skeleton():
 
         return dist_gradient_thresh
         
+    def goodFeatures(self,img):
+        feature = []
+        eig_image = cv.CreateImage(cv.GetSize(img), cv.IPL_DEPTH_32F, 1)
+        temp_image = cv.CreateImage(cv.GetSize(img), cv.IPL_DEPTH_32F, 1)
+        feature = cv.GoodFeaturesToTrack(img, eig_image, temp_image, 10, 0.04, 1.0, useHarris = True)
+        return feature
         
  
 
