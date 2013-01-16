@@ -34,7 +34,8 @@ def player_segmentation(depth_image_input,threshold_value,depth_value):
 
 #Dilatation anwenden    
 def dilate_image(img):
-    kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
+    #kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
+    kernel=cv.CreateStructuringElementEx(5, 5, 0, 0,cv.CV_SHAPE_ELLIPSE)
     #In einem neuen Bild speichern
     img_dil = cv.CreateImage(cv.GetSize(img),8,1)
     #Dilatation
