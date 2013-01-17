@@ -58,5 +58,11 @@ class Skeleton():
 
         return dist_gradient_thresh
         
+        
+    def convertSkeleton(self,skeleton_img):
+        array = image_conversion.cv2array(skeleton_img)
+        
+        return 0
+        
  
 

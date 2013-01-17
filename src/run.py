@@ -2,9 +2,10 @@ import player_segmentation
 #import freenect
 import cv
 import skeletonization
-#import image_conversion
-#import numpy
+import image_conversion
+import numpy
 import depth
+import comparison
 #import frame_convert
 #from math import sin, cos, sqrt, pi
 
@@ -21,13 +22,13 @@ def run():
         cv.Smooth(depth_seg, depth_seg, smoothtype=cv.CV_MEDIAN, param1=5, param2=5)
         #Distance Map berechnen und das Skelett daraus extrahieren
         diff_img = skeleton.distance_skeleton(depth_seg)
-        
+       
+        comparison.calcFeatures(diff_img) 
+        skeleton.convertSkeleton(diff_img)
         
         cv.ShowImage('Spieler', depth_seg)
         cv.ShowImage('diff', diff_img)
         cv.ShowImage('Better Depth', depth_image2)  
-        #cv.ShowImage("dst", dst)
-        #cv.ShowImage("color_dst",color_dst)
          
         if cv.WaitKey(10)==27:
             break
