@@ -68,7 +68,7 @@ def motion_detection():
         #Ergebnis ist ein weisses Bild. Deshalb konvertieren
         cv.ConvertScale(running_average_image,running_average_image_converted,1.0,0.0)
         
-        #Aktuelles Bild von vom RunningAverage abziehen
+        #Aktuelles Bild vom RunningAverage abziehen
         cv.AbsDiff(color_image,running_average_image_converted,difference)
         
         #In Graubild konvertieren
@@ -80,9 +80,6 @@ def motion_detection():
         cv.Smooth(grey_image,grey_image,cv.CV_GAUSSIAN,19,0)
         cv.Threshold(grey_image,grey_image,240,255,cv.CV_THRESH_BINARY)
         
-        #Speichern der Koordinaten der Nicht-Schwarzen-Pixel (weiße Pixel). Weiße Pixel sind Indikator fuer Bewegung 
-        #grey_image_mat = numpy.asarray(cv.GetMat(grey_image))
-        #non_black_coords_array = numpy.where(grey_image_mat>3)
         
         bounding_box_list = []
         #Konturen berechnen, um Bewegung zu finden
