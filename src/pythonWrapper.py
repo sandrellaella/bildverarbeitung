@@ -11,7 +11,7 @@ lib = N.ctypeslib.load_library('libpython-wrapper','.')
 lib.vigra_reflectimage_c.restype=int 
 #lib.vigra_reflectimage_c.argtypes = [ N.ctypeslib.ndpointer(N.float32, ndim=2, flags='aligned,contiguous, writeable'), N.ctypeslib.ndpointer(N.float32, ndim=2, flags='aligned, contiguous, writeable'), N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int] 
 lib.vigra_reflectimage_c.argtypes = [ N.ctypeslib.ndpointer(N.uint8, ndim=2, flags='aligned,contiguous, writeable'), N.ctypeslib.ndpointer(N.uint8, ndim=2, flags='aligned, contiguous, writeable'), N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int] 
-lib.static_function.argtypes = [ N.ctypeslib.ndpointer(N.uint8, ndim=2, flags='aligned,contiguous, writeable'), N.ctypeslib.ndpointer(N.uint8, ndim=2, flags='aligned, contiguous, writeable'), N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int] 
+#lib.static_function.argtypes = [ N.ctypeslib.ndpointer(N.uint8, ndim=2, flags='aligned,contiguous, writeable'), N.ctypeslib.ndpointer(N.uint8, ndim=2, flags='aligned, contiguous, writeable'), N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int, N.ctypeslib.ctypes.c_int] 
 def reflectimage_band(arr, reflect_mode): 
     #arr  = N.require(arr, N.float32, ['ALIGNED']) 
     arr = N.require(arr, N.uint8, ['ALIGNED']) 
