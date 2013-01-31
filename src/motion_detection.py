@@ -88,26 +88,26 @@ def motion_detection():
         #Konturen berechnen, um Bewegung zu finden
         contours = cv.FindContours(grey_image,mem_storage,cv.CV_RETR_CCOMP,cv.CV_CHAIN_APPROX_SIMPLE)
         liste = list(contours)
-        print "Liste: ", liste
+        #print "Liste: ", liste
         while contours:        
             if liste:
-                cv.DrawContours(color_image,contours,(255,0,0),(255,0,0),0,thickness=-1)
-                bounding_rect = cv.BoundingRect(liste)
-                #print bounding_rect
-                bounding_box_list.append(bounding_rect)                
+                cv.DrawContours(color_image,contours,(255,0,0),(255,0,0),0,thickness=1)
+                bounding_rect = cv.BoundingRect(contours)
+                bounding_box_list.append(bounding_rect)       
+                #print bounding_box_list
                 contours = contours.h_next() 
                 
-        print "Bounding Box List: ", bounding_box_list
+        #print "Bounding Box List: ", bounding_box_list
         #cv.DrawContours(color_image,contours,(255,0,0),(255,0,0),0,thickness=-1)    
 
          
-        print "Beginn"    
+        #print "Beginn"    
         for box in bounding_box_list:
             #print len(bounding_box_list)
             (x,y,w,h) = box
-            print "Box: ", box
+            #print "Box: ", box
             cv.Rectangle(color_image,(x,y),(x+w,y+h),(0,0,255))
-        print "Ende"
+        #print "Ende"
             
         #Ausgabe der Videos zur Ueberpruefung
         #cv.ShowImage('Video',video)
