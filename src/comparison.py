@@ -5,6 +5,7 @@ Created on Wed Jan 16 12:27:19 2013
 @author: 8schroed
 """
 import cv
+import image_conversion
 
 filename = "hand.jpg"
 image = cv.LoadImage(filename,cv.CV_LOAD_IMAGE_GRAYSCALE)
@@ -39,6 +40,28 @@ def drawFeatures(features,image):
     
     for point in features:
         center = int(point[0]), int(point[1])
-        cv.Circle(image,(center),2,(255,0,0))
+        cv.Circle(image,(center),5,(255,0,0))
+        
+def connectFeatures(image,features,minDistance):
+    epsilon = 5
+    searchDistance = minDistance + epsilon  
+    feature = features.pop()
+    
+    x = feature[0]
+    y = feature[1]
+    
+    found = True
+    templist = []
+    while found:
+        if features:
+           for f in features:
+               x1 = f[0]
+               y1 = f[1]
+               if x1>=x-searchDistance and x1<=x or x1<=x+searchDistance and x1>=x:
+                   if y1>=y-searchDistance and y1<=y or y1<=y+searchDistance and y1>=y:
+                       templist.append((x1,y1))
+                       print templist
+                       found = False
 
+    return 0
 

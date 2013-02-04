@@ -43,24 +43,29 @@ def test(image):
     #diff = diff.astype(numpy.float32)
     diff = diff.astype(numpy.uint8)
     diff_img = image_conversion.array2cv(diff)
+    
 
     features = comparison.calcGoodFeatures(diff_img)
     
-    return features, image, dist_img, diff_img, drawImage
+    #return features, image, dist_img, diff_img, drawImage
+    return diff_img, features
     
 img = cv.LoadImage("hand.jpg")
 #img2 = cv.LoadImage("person.jpg")
 
-corners1, image1, dist_img1, diff_img1, drawImage = test(img)
+#corners1, image1, dist_img1, diff_img1, drawImage = test(img)
 #corners2, image2, dist_img2, diff_img2 = test(img2)
-
+diff_img, features = test(img)
+comparison.drawFeatures(features,diff_img)
+comparison.connectFeatures(diff_img,features,10)
 #print corners1
 #print corners2
-
-cv.ShowImage('Originalbild', image1)
-cv.ShowImage('Distance Map',dist_img1)
-cv.ShowImage('Differenz',diff_img1)
-cv.ShowImage("Zeichnung",drawImage)
+#print features
+cv.ShowImage("Diff-Image", diff_img)
+#cv.ShowImage('Originalbild', image1)
+#cv.ShowImage('Distance Map',dist_img1)
+#cv.ShowImage('Differenz',diff_img1)
+#cv.ShowImage("Zeichnung",drawImage)
 
 #cv.ShowImage('Originalbild2', image2)
 #cv.ShowImage('Distance Map2',dist_img2)
