@@ -8,7 +8,7 @@ import cv
 import image_conversion
 import skeletonization
 import numpy
-import comparison
+import skeleton_improvement
 
     
 
@@ -45,7 +45,7 @@ def test(image):
     diff_img = image_conversion.array2cv(diff)
     
 
-    features = comparison.calcGoodFeatures(diff_img)
+    features = skeleton_improvement.calcGoodFeatures(diff_img)
     
     #return features, image, dist_img, diff_img, drawImage
     return diff_img, features
@@ -56,12 +56,16 @@ img = cv.LoadImage("hand.jpg")
 #corners1, image1, dist_img1, diff_img1, drawImage = test(img)
 #corners2, image2, dist_img2, diff_img2 = test(img2)
 diff_img, features = test(img)
-comparison.drawFeatures(features,diff_img)
-comparison.connectFeatures(diff_img,features,10)
-#print corners1
-#print corners2
-#print features
+#comparison.drawFeatures(features,diff_img)
+#comparison.connectFeatures(diff_img,features,10)
+neighbours = skeleton_improvement.startConnect(features,30,5,img)
+#skeleton_improvement.drawFeatures(features,5,diff_img)
+
+diff_img_arr = image_conversion.cv2array(diff_img)
+skeleton_improvement.findConnectedComponents(diff_img_arr,diff_img)
+diff_img = image_conversion.array2cv(diff_img_arr)
 cv.ShowImage("Diff-Image", diff_img)
+cv.ShowImage("Image",img)
 #cv.ShowImage('Originalbild', image1)
 #cv.ShowImage('Distance Map',dist_img1)
 #cv.ShowImage('Differenz',diff_img1)
