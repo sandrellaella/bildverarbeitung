@@ -1,0 +1,58 @@
+\documentclass[appendixprefix,a4paper,bibliography=totoc,twoside=true,11pt,DIV=11,BCOR=6mm,headsepline,pointlessnumbers]{scrbook}
+\include{packages}
+\include{Defs_commands}
+\begin{document}
+\include{Titleseite}
+\maketitle
+\chapter{Einleitung}
+\section{Aufbau der Projektarbeit}
+%TODO: Muss das wirklich sein?
+\chapter{Aufgabenstellung}
+%Sandra
+\section{Verwendung des Kinect-Sensors}
+\section{Anforderungen}
+
+\chapter{Die Skelettierung}
+\section{Thinning}
+\section{Distanztransformation}
+%Sandra: Theorie über Skelettierung mit der Distanztransformation
+\section{Weitere Verfahren}
+\section{Verwandte Arbeiten}
+\subsection{Extracting Skeletons From Distance Maps}
+%Sandra
+\subsection{A Fast Parallel Algorithm for Thinning Digital Patterns} 
+
+
+\chapter{Implementierung der Algorithmen}
+\section{Wahl der Algorithmen}
+\section{Die Arbeitsumgebung}
+\section{Spieler-Segmentierung}
+%TODO: Tiefeninformation, Verbesserung des Tiefenbilds, Nachbesserung des segmentierten Bildes -> Dilatation
+\section{Thinning}
+\section{Distanztransformation}
+%Sandra
+\chapter{Ergebnisse}
+%Sandra
+%TODO: Kriterien für den Vergleich der Algorithmen -> Eigenschaften eines Skeletts, Laufzeit
+%TODO: Anwendung programmieren?
+\begin{itemize}
+	\item Vergleich der Algorithmen
+	\item Anhand der Kriterien
+	\begin{itemize}
+		\item Erhaltung der Topologie
+		\item Pixelkonnektivität
+		\item Zentriert
+		\item 1 Pixel breit
+	\end{itemize}
+	\item Echtzeitfähigkeit -> Messungen machen -> Vergleich
+	\item Verbesserung des Skeletts (Distanztransformation) mit Breitensuche um Pixelkonnektivität zu erreichen -> Weitere Verbesserungen? -> Ohne Features sondern anhand der weißen Pixel
+	\item Anwendung: Vergleich von Posen -> Features bestimmen. Vllt sowas wie "Spannweite" der Pose in x und in y Richtung (Abstand des "linkesten" zum "rechtesten" Pixel). 
+\end{itemize}
+\chapter{Zusammenfassung}
+\chapter{Fazit und Ausblick}
+\section{Fazit}
+\section{Ausblick}
+\chapter{TODO Anhang}
+Tabelle: Wer hat was geschrieben?\\
+Vollständiger Quellcode
+\end{document}

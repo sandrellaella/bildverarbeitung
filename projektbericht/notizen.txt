@@ -1,0 +1,19 @@
+Notizen zu den Kapiteln
+
+Einleitung und Motivation
+Die obligatorische Einleitung. Eine kleine Motivation zu unserer Themenwahl. Warum ist Skelettierung interessantes Thema etc. Was für Ziele haben wir uns in der Projektarbeit gesetzt (Stichwort: Vergleich von Skelettierungsalgorithmen)?\\
+Ein kleiner Überblick über die Strukturierung der Projektarbeit (was wird in welchem Kapitel beschrieben) sollte hier auch rein.\\
+Anforderungen an unsere Algorithmen...
+
+Die Skelettierung
+Ein Kapitel über die Skelettierung. Allgemeines, wozu ist sie gut, wo findet sie ihre Anwendung? Was für Verfahren gibt es? -> Überleitung zu den Algorithmen, mit denen wir uns beschäftigt haben.
+Dabei sollten Thinning und Distance Map jeweils in einem Unterkapitel beschrieben werden. Als "Related Work"-Abschnitt können (oder sollten) hier (oder als separates Kapitel nach der Einleitung) die Paper beschrieben werden, die wir in der Literaturrecherche behandelt haben.
+
+Implementierung der Algorithmen
+Beschreibung der Umsetzung der beiden Algorithmen. Kurze Beschreibung der Arbeitsumgebung (Programmiersprache, Plattform, Kinect...). Die Vorverarbeitung, nämlich die Spielersegmentierung, muss beschrieben werden. Die Problematik des Tiefenbildes erläutern. Dann in voneinandergetrennten Unterkapiteln die Implementierungen erläutern.
+
+Vergleich der Algorithmen
+Ergebnisse unserer Implementierung und Vergleich der Ergebnisse der beiden Algorithmen. Für die Evaluierung der Algorithmen müssten wir uns noch was überlegen. Wir brauchen ein "Vergleichsmaß".
+
+Zusammenfassung
+Was haben wir gemacht, welche von den Zielen, die wir uns gesetzt haben, haben wir erreicht? Was könnte weiter getan werden? Eventuell eine kleine Bewertung der zwei Semester: Was war schwierig, was war gut...
