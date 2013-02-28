@@ -113,6 +113,11 @@ Da der Infrarot Sensor links des Projektors positioniert ist, treten die Schatte
 
 \chapter{Die Skelettierung}
 \section{Thinning}
+
+Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschliesslich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. 
+
+Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche.
+
 \section{Distanztransformation}
 %Sandra: Theorie über Skelettierung mit der Distanztransformation
 \section{Weitere Verfahren}
@@ -122,19 +127,6 @@ Da der Infrarot Sensor links des Projektors positioniert ist, treten die Schatte
 \subsection{A Fast Parallel Algorithm for Thinning Digital Patterns} 
 
 
-\chapter{Implementierung der Algorithmen}
-\section{Wahl der Algorithmen}
-\section{Die Arbeitsumgebung}
-\section{Spieler-Segmentierung}
-%TODO: Tiefeninformation, Verbesserung des Tiefenbilds, Nachbesserung des segmentierten Bildes -> Dilatation
-%Sandra
-\section{Thinning}
-
-Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschliesslich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. 
-
-Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche.
-
-\subsection{Fast Parallel Thinning Algorithm}
 Der Algorithmus ist insgesamt in mehrere Iterationen unterteilt. Die Randpixel des Musters werden Schicht für Schicht abgetragen. Die Iterationen sind selbst wiederum in mehrere Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten
 Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest Eckpunkte entfernt. \\
 
@@ -223,6 +215,19 @@ Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen gen
 
 
 Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit, und Rauschsicherheit bei Randpunkten. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen.
+
+
+
+\chapter{Implementierung der Algorithmen}
+\section{Wahl der Algorithmen}
+\section{Die Arbeitsumgebung}
+\section{Spieler-Segmentierung}
+%TODO: Tiefeninformation, Verbesserung des Tiefenbilds, Nachbesserung des segmentierten Bildes -> Dilatation
+%Sandra
+\section{Thinning}
+
+
+
 
 \section{Distanztransformation}
 %Sandra
