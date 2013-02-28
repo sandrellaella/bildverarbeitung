@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  28 FEB 2013 18:06
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  28 FEB 2013 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1588,14 +1588,14 @@ Class scrbook Warning: \float@addtolists detected!
 
 ]
 Kapitel 2.
-<Res/Kinect_Components.png, id=137, 826.08624pt x 376.40625pt>
+<Res/Kinect_Components.png, id=133, 826.08624pt x 376.40625pt>
 File: Res/Kinect_Components.png Graphic file (type png)
 
 <use Res/Kinect_Components.png>
 Package pdftex.def Info: Res/Kinect_Components.png used on input line 14.
 (pdftex.def)             Requested size: 312.22694pt x 142.26378pt.
 
-<Res/Kinect_9Points.png, id=138, 640.3925pt x 482.80376pt>
+<Res/Kinect_9Points.png, id=134, 640.3925pt x 482.80376pt>
 File: Res/Kinect_9Points.png Graphic file (type png)
 
 <use Res/Kinect_9Points.png>
@@ -1606,7 +1606,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--39
 
  []
 
-<Res/9_Dots.png, id=143, 697.60625pt x 506.89375pt>
+<Res/9_Dots.png, id=139, 697.60625pt x 506.89375pt>
 File: Res/9_Dots.png Graphic file (type png)
  <use Res/9_Dots.png>
 Package pdftex.def Info: Res/9_Dots.png used on input line 44.
@@ -1625,7 +1625,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
  []
 
-<Res/Res_to_Dist.png, id=150, 662.475pt x 531.9875pt>
+<Res/Res_to_Dist.png, id=146, 662.475pt x 531.9875pt>
 File: Res/Res_to_Dist.png Graphic file (type png)
 
 <use Res/Res_to_Dist.png>
@@ -1651,7 +1651,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--86
 
  []
 
-<Res/Triangulation.png, id=158, 810.02625pt x 550.055pt>
+<Res/Triangulation.png, id=154, 810.02625pt x 550.055pt>
 File: Res/Triangulation.png Graphic file (type png)
 
 <use Res/Triangulation.png>
@@ -1665,7 +1665,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 97--99
 
  []
 
-<Res/Schatten_Strahl.png, id=164, 712.6625pt x 587.19376pt>
+<Res/Schatten_Strahl.png, id=160, 712.6625pt x 587.19376pt>
 File: Res/Schatten_Strahl.png Graphic file (type png)
 
 <use Res/Schatten_Strahl.png>
@@ -1676,7 +1676,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--105
 
  []
 
-<Res/Schatten.png, id=165, 815.045pt x 290.08376pt>
+<Res/Schatten.png, id=161, 815.045pt x 290.08376pt>
 File: Res/Schatten.png Graphic file (type png)
  <use Res/Schatten.png>
 Package pdftex.def Info: Res/Schatten.png used on input line 106.
@@ -1690,7 +1690,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 130--132
 
  []
 
-<Res/SuedOst.png, id=174, 304.13625pt x 429.605pt>
+<Res/SuedOst.png, id=170, 304.13625pt x 429.605pt>
 File: Res/SuedOst.png Graphic file (type png)
  <use Res/SuedOst.png>
 Package pdftex.def Info: Res/SuedOst.png used on input line 134.
@@ -1705,7 +1705,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
-<Res/NordWest.png, id=180, 308.15125pt x 424.58624pt>
+<Res/NordWest.png, id=176, 308.15125pt x 424.58624pt>
 File: Res/NordWest.png Graphic file (type png)
  <use Res/NordWest.png>
 Package pdftex.def Info: Res/NordWest.png used on input line 139.
@@ -1715,7 +1715,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--148
 
  []
 
-<Res/Skelett.png, id=181, 280.04625pt x 409.53pt>
+<Res/Skelett.png, id=177, 280.04625pt x 409.53pt>
 File: Res/Skelett.png Graphic file (type png)
  <use Res/Skelett.png>
 Package pdftex.def Info: Res/Skelett.png used on input line 150.
@@ -1728,7 +1728,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 159--161
 
  []
 
-<Res/PixelNachbarschaft.png, id=187, 810.02625pt x 287.0725pt>
+<Res/PixelNachbarschaft.png, id=183, 810.02625pt x 287.0725pt>
 File: Res/PixelNachbarschaft.png Graphic file (type png)
 
 <use Res/PixelNachbarschaft.png>
@@ -1764,7 +1764,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 180--183
 
  []
 
-<Res/01Folgen.png, id=194, 733.74126pt x 284.06125pt>
+<Res/01Folgen.png, id=190, 733.74126pt x 284.06125pt>
 File: Res/01Folgen.png Graphic file (type png)
  <use Res/01Folgen.png>
 Package pdftex.def Info: Res/01Folgen.png used on input line 184.
@@ -1805,7 +1805,7 @@ Overfull \hbox (3.32469pt too wide) in paragraph at lines 194--200
 we-der Süd- oder Ost-Grenzpunkt,
  []
 
-<Res/Orientierung.png, id=195, 741.77126pt x 301.125pt>
+<Res/Orientierung.png, id=191, 741.77126pt x 301.125pt>
 File: Res/Orientierung.png Graphic file (type png)
 
 <use Res/Orientierung.png>
@@ -1819,7 +1819,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
-<Res/EndpktVerbheit.png, id=200, 502.87875pt x 126.4725pt>
+<Res/EndpktVerbheit.png, id=196, 502.87875pt x 126.4725pt>
 File: Res/EndpktVerbheit.png Graphic file (type png)
 
 <use Res/EndpktVerbheit.png>
@@ -1830,7 +1830,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 208--210
 
  []
 
-<Res/AlgUebersicht.png, id=201, 537.00626pt x 1039.885pt>
+<Res/AlgUebersicht.png, id=197, 537.00626pt x 1039.885pt>
 File: Res/AlgUebersicht.png Graphic file (type png)
 
 <use Res/AlgUebersicht.png>
@@ -1872,39 +1872,29 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 258.
  (./projektbericht.aux (./Titleseite.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 258.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 258.
-
-
-Package rerunfilecheck Warning: File `projektbericht.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `projektbericht.out':
-(rerunfilecheck)             Before: 94AE6958E283B027EC84F89D40C6A6D3;1798
-(rerunfilecheck)             After:  76D8A10F9E575164546C5B330B5A67A2;1712.
+Package rerunfilecheck Info: File `projektbericht.out' has not changed.
+(rerunfilecheck)             Checksum: 76D8A10F9E575164546C5B330B5A67A2;1712.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 258.
  ) 
 Here is how much of TeX's memory you used:
- 20563 strings out of 493488
- 380932 string characters out of 3141326
+ 20561 strings out of 493488
+ 380898 string characters out of 3141326
  443707 words of memory out of 3000000
- 23414 multiletter control sequences out of 15000+200000
+ 23413 multiletter control sequences out of 15000+200000
  75641 words of font info for 81 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  45i,9n,54p,1014b,858s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsection.4.4.1} has been referenced but does no
-t exist, replaced by a fixed one
-
-{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/te
-xlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/2012/te
-xmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2012/texmf-dist/f
-onts/type1/public/lm/lmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/
-public/lm/lmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/l
-mro10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmssbx10.pf
-b>
-Output written on projektbericht.pdf (25 pages, 6397533 bytes).
+{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
+texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/2012/
+texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2012/texmf-dist
+/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type
+1/public/lm/lmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm
+/lmro10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmssbx10.
+pfb>
+Output written on projektbericht.pdf (25 pages, 6397459 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 236 compressed objects within 3 object streams
- 60 named destinations out of 1000 (max. 500000)
- 300 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 282 PDF objects out of 1000 (max. 8388607)
+ 232 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
+ 292 words of extra memory for PDF output out of 10000 (max. 10000000)
 
