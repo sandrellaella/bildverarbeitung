@@ -1,0 +1,19 @@
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lol
+*.lot
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fdb_latexmk
+*.pdf
