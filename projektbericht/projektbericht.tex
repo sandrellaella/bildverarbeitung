@@ -1,11 +1,96 @@
-\documentclass[appendixprefix,a4paper,bibliography=totoc,twoside=true,11pt,DIV=11,BCOR=6mm,headsepline,pointlessnumbers]{scrbook}
-\include{packages}
+\documentclass[
+	12pt,
+	a4paper,
+	BCOR10mm,
+	%chapterprefix,
+	DIV14,
+	listof=totoc,
+	bibliography=totoc,
+	headsepline
+]{scrreprt}
 
-%\include{Defs_commands}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[ngerman, USenglish]{babel}
+
+\usepackage{lmodern}
+
+\usepackage[footnote]{acronym}
+\usepackage[page,toc]{appendix}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage[htt]{hyphenat}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{microtype}
+\usepackage{nicefrac}
+\usepackage{subfig}
+\usepackage{textcomp}
+\usepackage[subfigure,titles]{tocloft}
+\usepackage{units}
+
+\lstset{
+	basicstyle=\ttfamily,
+	frame=single,
+	numbers=left,
+	language=C,
+	breaklines=true,
+	breakatwhitespace=true,
+	postbreak=\hbox{$\hookrightarrow$ },
+	showstringspaces=false,
+	tabsize=4
+}
+
+\renewcommand*{\lstlistlistingname}{Listingverzeichnis}
+
+\renewcommand*{\appendixname}{Anhang}
+\renewcommand*{\appendixtocname}{Anhänge}
+\renewcommand*{\appendixpagename}{Anhänge}
+
+
+\setcounter{tocdepth}{1} 
+
 \begin{document}
-\include{Titleseite}
-\maketitle
-\chapter{Einleitung}
+
+\begin{titlepage}
+	\begin{center}
+		{\titlefont\huge Implementierung von Skelettierungs-Algorithmen mit dem Kinect-Sensor\par}
+
+		\bigskip
+		\bigskip
+
+		{\titlefont\Large --- Projektbericht ---\par}
+
+		\bigskip
+		\bigskip
+
+		{\large Arbeitsbereich Kognitive Systeme\\
+		Fachbereich Informatik\\
+		Fakultät für Mathematik, Informatik und Naturwissenschaften\\
+		Universität Hamburg\par}
+	\end{center}
+	
+	\vfill
+	
+	{\large \begin{tabular}{ll}
+		Vorgelegt von: & Johannes Böhler, Christopher Kroll, Sandra Schröder \\\\
+		Hamburg, den 01.01.2012
+	  \end{tabular}\par}
+
+\end{titlepage}
+
+\newcommand{\Autor}[1]{{\hfill \Large \textit{Autor: #1}}}
+
+\chapter*{Zusammenfassung}
+
+\thispagestyle{empty}
+
+Abstract über unseren Projektbericht
+
+\tableofcontents
 \chapter{Aufgabenstellung}
 \section{Die Kinect-Funktionsweise}
 \subsection{Funktionsweise}
@@ -216,8 +301,6 @@ Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen gen
 
 Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit, und Rauschsicherheit bei Randpunkten. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen.
 
-
-
 \chapter{Implementierung der Algorithmen}
 \section{Wahl der Algorithmen}
 \section{Die Arbeitsumgebung}
@@ -225,10 +308,6 @@ Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit, und Rau
 %TODO: Tiefeninformation, Verbesserung des Tiefenbilds, Nachbesserung des segmentierten Bildes -> Dilatation
 %Sandra
 \section{Thinning}
-
-
-
-
 \section{Distanztransformation}
 %Sandra
 \chapter{Ergebnisse}
