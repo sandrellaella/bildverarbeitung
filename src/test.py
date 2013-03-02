@@ -62,7 +62,6 @@ neighbours = skeleton_improvement.startConnect(features,30,5,img)
 #skeleton_improvement.drawFeatures(features,5,diff_img)
 
 diff_img_arr = image_conversion.cv2array(diff_img)
-skeleton_improvement.findConnectedComponents(diff_img_arr,diff_img)
 diff_img = image_conversion.array2cv(diff_img_arr)
 cv.ShowImage("Diff-Image", diff_img)
 cv.ShowImage("Image",img)

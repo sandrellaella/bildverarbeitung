@@ -77,7 +77,4 @@ def connectFeatures(startpoint,features,searchDistance,img):
     
     return visited
     
-def findConnectedComponents(array,image):
-    
-    
     
