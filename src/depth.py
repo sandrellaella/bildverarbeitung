@@ -11,8 +11,6 @@ import frame_convert
 import image_conversion
 import numpy
 
-depth_list_global = [] 
-
 def get_depth():
     return frame_convert.pretty_depth(freenect.sync_get_depth()[0])
 
@@ -31,14 +29,8 @@ def get_better_depth():
     depth = get_depth()
    
     depth = numpy.where(depth == 255, 0, depth)
-    
-    
     depth_img = image_conversion.array2cv(depth)
-    #cv.Smooth(depth_img, depth_img, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
+    #Glätten des Tiefenbildes
+    cv.Smooth(depth_img, depth_img, smoothtype=cv.CV_MEDIAN, param1=5, param2=5)
    
     return depth_img
-
-#while 1:
- #   cv.ShowImage('Depth Image', get_better_depth())
-  #  if cv.WaitKey(10)==27:
-   #     break

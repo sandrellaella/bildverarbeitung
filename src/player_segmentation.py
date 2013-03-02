@@ -34,7 +34,8 @@ def player_segmentation(depth_image_input,threshold_value,depth_value):
 
 #Dilatation anwenden    
 def dilate_image(img):
-    kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
+    #kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
+    kernel=cv.CreateStructuringElementEx(5, 5, 0, 0,cv.CV_SHAPE_ELLIPSE)
     #In einem neuen Bild speichern
     img_dil = cv.CreateImage(cv.GetSize(img),8,1)
     #Dilatation
@@ -42,7 +43,7 @@ def dilate_image(img):
     #img_dil = erode_image(img_dil)
     return img_dil
     
-def erode_image(img):
+def erode_image(img,iters):
     kernel=cv.CreateStructuringElementEx(3, 3, 0, 0, cv.CV_SHAPE_RECT)
     img_erode = cv.CreateImage(cv.GetSize(img),8,1)
     img_mat = image_conversion.cv2array(img)
@@ -51,10 +52,10 @@ def erode_image(img):
     if img_mat.dtype == 'float32':
         cv.ConvertScale(img, img_uint8)
         img_erode = cv.CreateImage(cv.GetSize(img_uint8),8,1)
-        cv.Erode(img_uint8,img_erode,kernel,iterations=10)
+        cv.Erode(img_uint8,img_erode,kernel,iterations=iters)
         return img_erode
     else:
-        cv.Erode(img,img_erode,kernel,iterations=10)
+        cv.Erode(img,img_erode,kernel,iterations=iters)
         return img_erode
     
 #Konturen finden. Eingabe ist ein Bild auf dem zuvor die Dilatation angewendet wurde

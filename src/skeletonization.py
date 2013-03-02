@@ -12,18 +12,15 @@ import numpy
 
 class Skeleton():
 
+    #Berechnet die Distanztransformation des Eingabebildes img. Zur Extraktion 
+    #der Skelettlinie wird der Gradientenbetrag der Distance-Map bestimmt. 
+    #Eine anschließende Differenzbildung zwischen Gradientenbetrag und
+    #Distance-Map ergibt die Skelettlinie. Die Funktion gibt dieses Differenzbild
+    #zurück. 
     def distance_skeleton(self,img):
-    
-        #img = cv.LoadImage(img)
-
-        #Create an image for the greyvalue image of the original image
-        #grey_img = cv.CreateImage(cv.GetSize(img),8,1)
-        #create an image for the distance map
+        #Ein Zielbild bereitstellen, um das Ergebnis der Distance Transformation zu speichern        
         dist_img = cv.CreateImage(cv.GetSize(img),32,1)
 
-        #conversion to greyvalue image
-        #cv.CvtColor(img,grey_img,cv.CV_BGR2GRAY)
-        
         #distance transform
         cv.DistTransform(img, dist_img, distance_type=cv.CV_DIST_L2)
         #conversion to numpy-array
@@ -33,14 +30,20 @@ class Skeleton():
         dist_img_mat = dist_img_mat/max_of_dist
         #conversion back to cv-image
         dist_img = image_conversion.array2cv(dist_img_mat)
+        #Erste Stufe fuer das Pruning: Gradientbild berechnen
+        #dist_gradient, gradient = self.pruning(dist_img,1)
+        dist_gradient = self.pruning(dist_img,1)
+        dist_gradient_mat = image_conversion.cv2array(dist_gradient)
+        dist_img_mat = image_conversion.cv2array(dist_img)
+        #Zweite Stufe für das Pruning: Differenzbild aus Distanzbild und segmentiertem Gradientenbild
+        diff = dist_img_mat - dist_gradient_mat
+        diff = diff * 1.0
+        diff_img = image_conversion.array2cv(diff)
         
-        return dist_img        
+        #return diff_img, gradient       
+        return diff_img
         
-        #show the original image and the (normalised) result
-        #cv.ShowImage('Original Image',img)
-
-        #cv.WaitKey()
-        
+    #Bestimmen des Gradientenbetrages des Differenzbildes        
     def pruning(self,skeleton_img,sigma):
         skeleton_img_mat = image_conversion.cv2array(skeleton_img)
         #Ausgabe Array fuer das Ergebnis der Gradientberechnung        
@@ -55,7 +58,7 @@ class Skeleton():
         dist_gradient_thresh = cv.CreateImage(cv.GetSize(grad_img),8,1)
         cv.InRangeS(grad_img,0.8,1,dist_gradient_thresh)
 
+        #return dist_gradient_thresh, grad_img
         return dist_gradient_thresh
-        
- 
+        #return grad_img
 
