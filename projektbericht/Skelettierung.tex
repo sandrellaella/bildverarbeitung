@@ -1,14 +1,14 @@
 \chapter{Die Skelettierung}
-\Autor{Sandra Schröder}\\\\
+\Autor{Sandra Schröder}\\
 %TODO: Was ist ein Skelett überhaupt
 Ein Skelett ist ein nützlicher Deskriptor, um Informationen über die Region und den Rand eines Objektes kompakt und effizient
-zu kodieren. \\
+zu kodieren. Es gibt die wesentlichen Grundzüge eines Objektes wieder...\\
 Dieses Kapitel beschreibt bekannte Konzepte und Verfahren zur Skelettierung im Bereich der Bildverarbeitung.\\
 Zwei Verfahren sind im Rahmen der Projektarbeit besonders wichtig: Das \emph{Thinning} (deutsch: Verdünnung) und die \emph{Distanztransformation}. \\
-Um die Übersicht über die grundlegenden Verfahren und Konzepte zu vervollständigen, werden diese in einem separaten 
-Abschnitt kurz vorgestellt. 
+Um die Übersicht über die weiteren grundlegenden Verfahren und Konzepte zu vervollständigen, werden diese in einem separaten 
+Abschnitt kurz vorgestellt.
 \section{Thinning}
-\Autor{Johannes Böhler}\\\\
+\Autor{Johannes Böhler}\\
 Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschliesslich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. 
 
 Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche.
