@@ -9,6 +9,7 @@ import numpy
 
 filename = "hand.jpg"
 image = cv.LoadImage(filename,cv.CV_LOAD_IMAGE_GRAYSCALE)
+
 def calcGoodFeatures(image):
     #grayImage = cv.LoadImage(image,2)
     eigenvalueImage = cv.CreateImage(cv.GetSize(image),cv.IPL_DEPTH_32F,1)
@@ -77,5 +78,3 @@ def connectFeatures(startpoint,features,searchDistance,img):
 
     
     return visited
-    
-    
