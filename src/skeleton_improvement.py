@@ -36,13 +36,14 @@ def calcGoodFeatures(image):
        #     break
     #return corners
     
-def drawFeatures(features,size,image):
+def drawFeatures(features,image):
     
     for point in features:
         center = int(point[0]), int(point[1])
         cv.Circle(image,(center),5,(255,0,0))
         
 def startConnect(features,minDistance,epsilon,img):
+    print features
     searchDistance = minDistance + epsilon
     startpoint = features.pop()
     
