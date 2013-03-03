@@ -56,16 +56,45 @@ Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu
 \newpage
 \section{A Fast Parallel Algorithm for Thinning Digital Patterns} 
 \Autor{Johannes Böhler}\\\\
-Der Algorithmus ist insgesamt in mehrere Iterationen unterteilt. Die Randpixel des Musters werden Schicht für Schicht abgetragen. Die Iterationen sind selbst wiederum in mehrere Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten
-Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest Eckpunkte entfernt. \\
+Der Algorithmus ist insgesamt in mehrere Iterationen unterteilt. Die Randpixel des Musters werden Schicht für Schicht abgetragen. Die Iterationen sind selbst wiederum in mehrere Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten.
+Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest Eckpunkte entfernt.Das entfernen von Nord- und Westgrenzpunkten sowie von Südosteckpunkten erfolgt in der zweiten Subiteration.
 
 
-\includegraphics[width=4cm]{Res/SuedOst.png}
 
 
-Das entfernen von Nord- und Westgrenzpunkten sowie von Südosteckpunkten erfolgt in der zweiten Subiteration.\\
 
-\includegraphics[width=4cm]{Res/NordWest.png}
+
+\begin{figure}[!ht]
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+                 \includegraphics[height=5cm]{Res/SuedOst.png}
+                \caption{Nach erster Subiteration (zu Beginn)  }
+               
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+                \includegraphics[height=5cm]{Res/NordWest.png}
+                \caption{Nach zweiter Subiteration (zu Beginn)}
+               
+        \end{subfigure}
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+                \includegraphics[height=5cm]{Res/Skelett.png}
+                \caption{Skelett des Ursprungsmuster}
+               
+        \end{subfigure}
+        \caption{Zustände des Algorithmus}
+\end{figure}
+
+
+
+
+
 
 \subsection{Anforderungen an den Algorithmus}
 
@@ -76,7 +105,7 @@ Das Skelett soll nach Durchlaufen des kompletten Algorithmus in einheitlicher Di
 Der Algorithmus soll möglichst schnell und effizient arbeiten um Echtzeitfähigkeit gewährleisten zu können.\\
 
 
-\includegraphics[width=4cm]{Res/Skelett.png}
+
 
 \subsection{Ablauf des Algorithmus}
 
@@ -88,37 +117,53 @@ Es werden nun in Abhängigkeit von den 8 Nachbarpixeln, Punkt für Punkt iterati
 Der neue Wert eines Pixels während der n-ten Iteration hängt von dem eigenen Wert während der (n-1)ten Iteration und den Werten der acht Nachbarn während der (n-1)ten Iteration ab. Dies ermöglicht paralleles Transformieren mehrerer Bildpunkte. 
 Die Bedingungen, welche zum Ausführen der Transformation erfüllt sein müssen werden über ein 3x3 Pixel Fenster abgefragt. Der Punkt P1 über dessen Transformation entschieden wird, ist mit allen acht Nachbarn verbunden.\\
 
-\includegraphics[width=8cm]{Res/PixelNachbarschaft.png}
+
+\begin{wrapfigure}{r}{0.48\textwidth}
+  \vspace{-20pt}
+  \begin{center}
+       \includegraphics[width=8cm]{Res/PixelNachbarschaft.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{Betrachteter Pixel P1 und Nachbarumgebung }
+  \vspace{-10pt}
+\end{wrapfigure}
+
 
 
 Der Algorithmus entfernt alle Randpunkte des Musters, außer den Pixeln welche Bestandteil des Skeletts sind. Um die Verbundenheit des Skeletts zu gewährleisten wird ein  Iterationsschritt in zwei Subiterationen aufgeteilt.
 
 In der ersten Subiteration wird der Punkt P1 aus dem Muster gelöscht wenn er folgende Bedingungen erfüllt:\\ \\
-a)2<=B(P1)<=6     
-Bà Anzahl der Nachbarn von P1 !=0
-Die Anzahl der Nachbarn von P1 welche den Wert 1 haben, muss somit zwischen 2 und 6 liegen.\\ \\
-b) A(P1)=1
-AàAnzahl der „01“-Folgen 
-Die Anzahl der 01 Folgen in der geordneten Folge P2,P3...P9 muss genau eins betragen.\\ \\
-c) P2*P4*P6=0  
-Mindestens ein Pixel der Pixelmenge P2, P4, P6 muss den Wert Null haben.\\ \\
-d) P4*P6*P8=0
+\emph{a)} 2<=B(P1)<=6     
+B entspricht der Anzahl der Nachbarn von P1 !=0
+Die Anzahl der Nachbarn von P1 welche den Wert 1 haben, muss somit zwischen 2 und 6 liegen.\\ 
+\emph{b)}  A(P1)=1
+AAnzahl der „01“-Folgen 
+Die Anzahl der 01 Folgen in der geordneten Folge P2,P3...P9 muss genau eins betragen.\\ 
+\emph{c)}  P2*P4*P6=0  
+Mindestens ein Pixel der Pixelmenge P2, P4, P6 muss den Wert Null haben.\\ 
+\emph{d)}  P4*P6*P8=0
 Mindestens ein Pixel der Pixelmenge P4, P6, P8 muss den Wert Null haben.
-\\
+\\ \\
 
 Sind alle Bedingungen a, b ,c und d erfüllt so wird der Wert des Pixels auf 0 gesetzt.
 Dies bedeutet dass er kein Teil des Skelett-Musters mehr ist.
-Wird eine der Bedingungen nicht erfüllt, so bleibt der Pixelwert bei 1.\\
+Wird eine der Bedingungen nicht erfüllt, so bleibt der Pixelwert bei 1.\\ \\ \\
 
-\includegraphics[width=8cm]{Res/01Folgen.png}
 
+\begin{figure}[!ht]
+  \centering
+  \makebox[\textwidth]{%
+   \includegraphics[width=8cm]{Res/01Folgen.png}
+  }
+   \caption{Anzahl 01 folgen in zyklischer Reihenfolge  }
+\end{figure}
 
 In der zweiten Subiteration wird P1 gelöscht falls folgende Bedingungen gelten: \\ \\
-a) 2<=B(P1)<=6 \\ \\
-b) A(P1)=1 \\ \\
-c) P2*P4*P8=0 \\ \\
-d) P2*P6*P8=0 \\ \\
-In der zweiten Subiteration haben sich nur die Bedingungen c und d geändert.\\
+\emph{a)}  2<=B(P1)<=6 \\ 
+\emph{b)}  A(P1)=1 \\ \
+\emph{c)}  P2*P4*P8=0 \\ 
+\emph{d)}  P2*P6*P8=0 \\ \\
+Nur die Bedingungen c und d haben sich geändert.\\ 
 
 Um die Bedingungen der ersten Subiteration zu erfüllen muss
 P4=0 oder P6=0 oder (P2=0 und P8=0)  erfüllt sein.
@@ -127,20 +172,44 @@ Um die Bedingungen der zweiten Subiteration zu erfüllen muss
 P2=0 oder P8=0 oder (P4=0 und P6=0) sein.
 Das heißt P1 ist Nord -oder West-Grenzpunkt oder Südosteckpunkt ist.
 
-\includegraphics[width=8cm]{Res/Orientierung.png}
+
+\begin{figure}[!ht]
+  \centering
+  \makebox[\textwidth]{%
+   \includegraphics[width=8cm]{Res/Orientierung.png}
+  }
+   \caption{Betrachteten Nachbarpunkte in den Bedingungen c und d}
+\end{figure}
 
 
-Während mit Bedingung a (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werden, so wird mit Bedingung b (A(P1)=1) die Auslöschung von Punkten zwischen den Endpunkten der Skelettlinie verhindert.\\
 
-\includegraphics[width=8cm]{Res/EndpktVerbheit.png}
+Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werden, so wird mit Bedingung B (A(P1)=1) die Auslöschung von Punkten zwischen den Endpunkten der Skelettlinie verhindert.\\
+
+
+\begin{figure}[!ht]
+  \centering
+  \makebox[\textwidth]{%
+  \includegraphics[width=8cm]{Res/EndpktVerbheit.png}
+  }
+   \caption{Gewährleistung der Pixelverbundenheit}
+\end{figure}
+
 
 In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter=0 und der Algorithmus beendet, da es anscheinend keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
 Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d nochmals statt. Ist auch nach dem Durchlaufen der zweiten Subitertation der Counter ungleich null so wird der Vorgang iterativ fortgeführt.\\
 
+\begin{wrapfigure}{r}{0.48\textwidth}
+  \vspace{-20pt}
+  \begin{center}
+       \includegraphics[width=6cm]{Res/AlgUebersicht.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{Gesamter Algorithmus in der Übersicht }
+  \vspace{-10pt}
+\end{wrapfigure}
 
 
 
-\includegraphics[width=6cm]{Res/AlgUebersicht.png}
 
 
 Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit, und Rauschsicherheit bei Randpunkten. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen.
