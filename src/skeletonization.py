@@ -41,7 +41,7 @@ class Skeleton():
         diff_img = image_conversion.array2cv(diff)
         
         #return diff_img, gradient       
-        return diff_img
+        return diff_img, dist_img
         
     #Bestimmen des Gradientenbetrages des Differenzbildes        
     def pruning(self,skeleton_img,sigma):
@@ -54,6 +54,7 @@ class Skeleton():
         gradient_output /= gradient_output.max()
         #Array ins Bild umwandeln
         grad_img = image_conversion.array2cv(gradient_output)
+        print grad_img.depth
         #Schwellwertbasierte Segmentierung des Gradientbildes
         dist_gradient_thresh = cv.CreateImage(cv.GetSize(grad_img),8,1)
         cv.InRangeS(grad_img,0.8,1,dist_gradient_thresh)

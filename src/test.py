@@ -31,7 +31,7 @@ def test(image):
                 grey_img_mat[i,j] = 1   
     grey_img = image_conversion.array2cv(grey_img_mat)
     #Distance Transform
-    dist_img = skeleton.distance_skeleton(grey_img)
+    dist_img, dist_map = skeleton.distance_skeleton(grey_img)
     #Pruning/Segmentierung des Skeletts
     dist_gradient = skeleton.pruning(dist_img,1)
     dist_gradient_thresh_mat = image_conversion.cv2array(dist_gradient)
@@ -48,15 +48,15 @@ def test(image):
     features = skeleton_improvement.calcGoodFeatures(diff_img)
     
     #return features, image, dist_img, diff_img, drawImage
-    return diff_img, features
+    return diff_img, features, dist_gradient, dist_map
     
 img = cv.LoadImage("hand.jpg")
 #img2 = cv.LoadImage("person.jpg")
 
 #corners1, image1, dist_img1, diff_img1, drawImage = test(img)
 #corners2, image2, dist_img2, diff_img2 = test(img2)
-diff_img, features = test(img)
-#skeleton_improvement.drawFeatures(features,diff_img)
+diff_img, features, dist_gradient, dist_img = test(img)
+skeleton_improvement.drawFeatures(features,diff_img)
 #comparison.connectFeatures(diff_img,features,10)
 neighbours = skeleton_improvement.startConnect(features,30,5,img)
 #skeleton_improvement.connectDFS(features)
@@ -65,6 +65,8 @@ diff_img_arr = image_conversion.cv2array(diff_img)
 diff_img = image_conversion.array2cv(diff_img_arr)
 cv.ShowImage("Diff-Image", diff_img)
 cv.ShowImage("Image",img)
+cv.ShowImage("Gradient", dist_gradient)
+cv.ShowImage("Distance", dist_img)
 #cv.ShowImage('Originalbild', image1)
 #cv.ShowImage('Distance Map',dist_img1)
 #cv.ShowImage('Differenz',diff_img1)
