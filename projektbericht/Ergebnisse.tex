@@ -51,6 +51,11 @@ Qualitätsmaß, wird diese Ecke verworfen. Die verbleibenden Ecken werden nach i
 Abbildung \ref{fig:features} zeigt das Ergebnis der Berechnung. Die Kreise markieren die Feature-Punkte. Wie man erkennen kann, befinden sich die Features auf der Skelettlinie. Dies ist hilfreich für die weiteren
 Verbesserungen des Skeletts. Befinden sich Features außerhalb der Skelettlinien könnte die ursprüngliche Form des Skeletts und die Topologie des Objekts verfälscht werden.
 \subsection{Breitensuche}
+\begin{itemize}
+\item Design des Algorithmus
+\item orientiert sich am Graphenalgorithmus
+\item wie werden die nächsten Nachbarn gefunden? -> Suchdistanz -> orientiert sich an der minimalen Distanz die bei der Funktion goodfeaturestotrack festgelegt wurde
+\end{itemize}
 \label{subsec:breitesuche}
 \begin{figure}
 \centering
@@ -59,6 +64,14 @@ Verbesserungen des Skeletts. Befinden sich Features außerhalb der Skelettlinien
 \label{fig:hand_BFS}
 \end{figure}
 \subsection{Tiefensuche}
+\begin{itemize}
+\item Design des Algorithmus:
+\item Nächste Nachbarn wie bei BFS
+\item funktioniert grundsätzlich, aber trotzdem noch lücken
+\item weiteres attribut -> nachfolger
+\item Bedingung: Wenn du keinen Nachfolger hast, suche weitere Knoten, die auch keinen Nachfolger haben. Nehme den, der
+am nächsten ist -> Verbinden.
+\end{itemize}
 \begin{figure}
 \centering
 \includegraphics[width=0.4\linewidth]{./fig/hand-punkte-ohne-nachfolger}
