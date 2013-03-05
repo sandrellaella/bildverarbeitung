@@ -147,7 +147,7 @@ for node in remainingNodes:
     #print best_distance_candidate
     candidate = best_distance_candidate[1]
     print candidate.distance
-    if candidate.predecessor is not "nil" and node.whichpath != candidate.whichpath and node.distance < candidate.distance:
+    if candidate.predecessor is not "nil":
         cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (color,color,255), thickness=2, lineType=8, shift=0)
 cv.ShowImage("Image",img)
 cv.WaitKey()

@@ -1,28 +1,34 @@
 \chapter{Ergebnisse}
 %Sandra
 \Autor{Sandra Schröder}\\\\
-Verfahren zur Skelettierung von Bildobjekten fordern bestimmte Eigenschaften an das Skelett. Dies ist zum einen die Pixelkonnektivität. Dies bedeutet, dass keine Lücken...keine Unterbrechungen...denn zusammenhängendes objekt sollte auch zusammenhängendes skelett besitzen. definition pixelkonnektivität.\\
-Des Weiteren sollte das Skelett höchstens 1 Pixel breit sein, da ... und zentriert... besonders medial axis fordert das\\
-Das das Skelett als Deskriptor für die Form eines Objektes dient, sollte es die geometrischen Eigenschaften und die Topologie des Objektes gut wiedergeben können. \\
-Rauschen gibt es immer...robustheit ebenfalls wichtig...
+Verfahren zur Skelettierung von Bildobjekten fordern bestimmte Eigenschaften an das Skelett \textbf{todo Quelle}. Dies ist zum einen die \emph{Konnektivität} des Skeletts. Dies bedeutet, dass es keine Lücken und Unterbrechungen im Skelett gibt. Ein zusammenhängendes Objekt sollte nämlich ein zusammenhängendes Skelett besitzen. 
+Viele Skelettierungsverfahren fordern, dass ein Skelett genau 1 Pixel breit ist und \emph{zentriert} im ursprünglichen Objekt liegt. Zentiert bedeutet, dass der Abstand des Skeletts zum ursprünglichen Rand zu allen Seiten gleich groß ist.\\
+Das das Skelett als Deskriptor für die Form eines Objektes dient, sollte es die geometrischen Eigenschaften und die Topologie des Objektes gut wiedergeben können.\\
+Bilder sind immer mit Rauschen behaftet. Eine Skelettierung sollte, unabhängig davon, wie stark das Rauschen ausgeprägt ist, robust gegenüber solchen Störungen sein.\\
+In den folgenden Abschnitten werden unsere Ergebnisse für die beiden Skelettierungsalgorithmen, die im
+Rahmen dieser Projektarbeit entwickelt wurden, vorgestellt. Zur Bewertung der Ergebnisse greifen wir auf die
+gewünschten Eigenschaften eines Skeletts zurück und überprüfen, ob die Algorithmen sie erfüllen.
 \section{Vergleich der Algorithmen}
+\subsection{Thinning}
+\subsection{Distanztransformation}
 Screenshots und Laufzeitmessungen
 %Mittwoch
+\newpage
 \section{Verbesserung der Skelettqualität}
 Das Skelett, welches mit der Methode der Distanztransformation bestimmt wurde, weist Lücken zwischen den Skelettteilen auf. Um die Topologie und geometrische Eigenschaften des Objekts gut wiederzugeben, ist ein lückenloses Skelett wünschenswert. \\
 Die Ursache der Lücken sind der Gradientenbetrag, der für die Extraktion der Skelettlinie berechnet wurde und die Segmentierung des Gradientenbildes. Abbildung \ref{fig:hand-skelett} zeigt ein Beispiel dazu. Abbildung (a) ist das Originalbild mit dem Objekt, von dem das Skelett, wie in Abbildung (c) zu sehen, bestimmt wurde. Da der Algorithmus auf der Grundlage von Bildern arbeitet, bei denen das Objekt und der Hintergrund schwarz markiert sind,
-wurde das Bild zuvor invertiert. Abbildung (b) zeigt die Distance Map des Originalbildes. Abbildung (d) ist das Gradientenbild der Distance Map. Das Gradientenbild wurde mit einem empirisch gewählten Schwellwert segmentiert, um anschließend die Skelettlinie zu extrahieren. Dadurch werden Linien im Gradientenbild, die einen kleineren Grauwert als der Schwellwert besitzen, eliminiert. \\
-In den folgenden Abschnitten werden Methoden zur Verbesserung des Skeletts vorgestellt. Dies umfasst zum einen die Herstellung Pixelkonnektivität beziehungsweise dem Füllen der Lücken zwischen den Skelettlinien. Zum anderen ist es wünschenswert, dass die Skelettlinie des Objektes nicht breiter als ein Pixel ist. Zuerst wurden markante Punkte auf dem Skelett bestimmt. Diese wurden
-genutzt, um mittels Breitensuche und Tiefensuche Pfade zwischen ihnen zu finden und sie zu verbinden. Punkte werden miteinander
-verbunden, wenn sie nah genug beieinander sind. Das Ergebnis ist ein Skelett
-zusammenhängenden Skelettlinien. Die genaue Umsetzung der Algorithmen wird in den Abschnitten \ref{subsec:breitesuche} und \ref{subsec:tiefensuche} beschrieben.\\
-Breiten -und Tiefensuche liefern aufgrund ihrer algorithmischen Eigenschaften jeweils unterschiedliche Ergebnisse. Die Unterschiede werden gezeigt und es wird diskutiert, inwieweit sich die Verfahren mit der Kinect in Echtzeit anwenden lassen. 
+wurde das Bild zuvor invertiert. Abbildung (b) zeigt die Distance Map des Originalbildes. Abbildung (d) ist das Gradientenbild der Distance Map. Das Gradientenbild wurde mit einem empirisch gewählten Schwellwert segmentiert, um anschließend die Skelettlinie zu extrahieren. Dadurch werden Linien im Gradientenbild, die einen kleineren Grauwert als der Schwellwert besitzen, eliminiert. 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/hand}
 \caption{Bestimmung des Skelett mittels Distanztransformation. (a) Originalbild (b) Distance Map (c) Gradientenbild (d) Skelett}
 \label{fig:hand-skelett}
 \end{figure}
+In den folgenden Abschnitten werden Methoden zur Verbesserung des Skeletts vorgestellt. Dies umfasst zum einen die Herstellung Pixelkonnektivität beziehungsweise dem Füllen der Lücken zwischen den Skelettlinien. Zum anderen ist es wünschenswert, dass die Skelettlinie des Objektes nicht breiter als ein Pixel ist. Zuerst wurden markante Punkte auf dem Skelett bestimmt. Diese wurden
+genutzt, um mittels Breitensuche und Tiefensuche Pfade zwischen ihnen zu finden und sie zu verbinden. Punkte werden miteinander
+verbunden, wenn sie nah genug beieinander sind. Das Ergebnis ist ein Skelett
+zusammenhängenden Skelettlinien. Die genaue Umsetzung der Algorithmen wird in den Abschnitten \ref{subsec:breitesuche} und \ref{subsec:tiefensuche} beschrieben.\\
+Breiten -und Tiefensuche liefern aufgrund ihrer algorithmischen Eigenschaften jeweils unterschiedliche Ergebnisse. Die Unterschiede werden gezeigt und es wird diskutiert, inwieweit sich die Verfahren mit der Kinect in Echtzeit anwenden lassen. 
 \newpage
 \subsection{Berechnung von Features auf dem Skelett}
 \label{subsec:features}
@@ -85,7 +91,7 @@ sind fächerartige Ausläufer, da der Algorithmus in die Breite sucht. %TODO Bes
 Wie bei der Breitensuche wird ausgehend von einem Startknoten ein Graph nach weiteren Knoten durchsucht. 
 Im Gegensatz zur Breitensuche erfolgt das Traversieren des Graphens in die Tiefe. Wurde ein Nachfolgeknoten
 gefunden, wird für diesen weiter geprüft, ob er ebenfalls einen Nachfolgeknoten besitzt. Dies wird
-solange wiederholt (rekursiv) bis kein Nachfolgeknoten mehr gefunden werden kann. Mittels \emph{Backtracking} wird der Pfad zurückverfolgt. Anschließend wird ein neuer Knoten als Startpunkte gesucht, der noch nicht besucht wurde und das Durchsuchen wird für diesen Knoten wiederholt.\\
+solange wiederholt (rekursiv) bis kein Nachfolgeknoten mehr gefunden werden kann. Mittels \emph{Backtracking} wird der Pfad zurückverfolgt. Anschließend wird ein neuer Knoten als Startpunkte gesucht, der noch nicht besucht wurde und das Durchsuchen nach nächsten Nachbarn wird für diesen Knoten wiederholt.\\
 Die Suche nach dem nächsten Nachbarn funktioniert wie bei der Breitensuche (Abbildung \ref{fig:suchdistanz_naechster_nachbar}). Der Quellcode zum Algorithmus befindet sich im Anhang \ref{anhang:quellcode}. \\
 Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass es noch Lücken im Skelett gibt, was auf die Suchdistanz zurückzuführen ist. Ist sie zu klein, können keine weiteren Punkte im Umkreis des aktuellen Punktes gefunden werden und der Algorithmus endet für diesen Pfad. 
 \begin{figure}[htbp]
@@ -99,7 +105,7 @@ Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass e
 		\centering
 		\includegraphics[width=1.0\linewidth]{./fig/hand-dfs}
 	\end{minipage}
-	\caption{Ergebnis der Tiefensuche. TODO Bilder schöner}
+	\caption{Ergebnis der Tiefensuche.}
 	\label{fig:hand_DFS}
 	\end{figure}\\
 Das Skelett, welches aus der Tiefensuche entsteht, bedarf demnach einer Nachbearbeitung. Die Idee ist, Punkte zu finden, die keinen Nachfolger besitzen und für diese Punkte den nächsten Nachbarn zu bestimmen. Dies wird mittels eines Ansatzes realisiert, der zwischen allen Punkten ohne Nachfolger den euklidischen Abstand bestimmt und den Punkt als nächsten Nachbar wählt, der den minimalen Abstand zu dem fest gewählten Punkt hat. In Abbildung \ref{fig:hand-punkte-ohne-nachfolger} wurden die Punkte ohne Nachfolger eingezeichnet. Diese befinden sich
@@ -111,23 +117,20 @@ genau am Ende eines Pfades. Sie entsprechen den Blättern des Baumes, der bei de
 \label{fig:hand-punkte-ohne-nachfolger}
 \end{figure}
 Diese Punkte wurden nun miteinander verbunden. Wie in Abbildung \ref{fig:hand-DFS-endergebnis} zu sehen ist,
-wurden die Punkte ohne Nachfolger, die am nächsten beieinander sind, miteinander verbunden (rote Linien). Ein paar Punkte wurden jedoch falsch verbunden. Dies liegt daran, dass bei der Verbindung eines Knoten
-nicht gespeichert wird, ob er bereits verbunden ist. 
+wurden die Punkte ohne Nachfolger, die am nächsten beieinander sind, miteinander verbunden (rote Linien). Obwohl zwei Punkte falsche Verbindungen erzeugen, liefert der Algorithmus ein gutes Ergebnis für das Skelett. Durch Einführung weiterer Bedingungen - beispielweise, ob ein Punkt bereits verbunden ist - könnten auch diese Ausläufer eliminiert werden. 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.4\linewidth]{./fig/hand-DFS-endergebnis}
 \caption{Ergebnis der Tiefensuche}
 \label{fig:hand-DFS-endergebnis}
 \end{figure}
-\newpage
 \subsection{Diskussion}
 Beide Algorithmen liefern zufriedenstellende Ergebnisse bei der Verbesserung der Skelettqualität. In beiden
 Fällen besteht Pixelkonnektivität und somit ein Zusammenhang zwischen den Skelettkomponenten. Die Ergebnisse
 der beiden Algorithmen sind jeweils unterschiedlich aufgrund ihrer Vorgehensweise bei der Traversierung der Punkte. Die Skelette der beiden Algorithmen die geometrischen Eigenschaften des ursprünglichen Objektes gut wieder. Bei der Breitensuche sowie der Tiefensuche werden die Finger der Hand
-nachgezeichnet. Nur im Bereich des Handballen entstehen - besonders bei der Breitensuche - Ausläufer im Skelett. Abhängig von der Anwendung muss man entscheiden, ob diese Ausläufer stören.\\
+nachgezeichnet. Nur im Bereich des Handballen entstehen - besonders bei der Breitensuche - Ausläufer im Skelett. Abhängig von der Anwendung muss man entscheiden, ob diese Ausläufer stören könnten.\\
 Ein weiterer Faktor, der die Form des modifizierten Skeletts besonders beeinflusst, ist die Suchdistanz zum
 Finden der nächsten Nachbarn. Wird sie zu groß gewählt, werden viele Nachbarn gefunden und somit auch
 mehrere Wege von einem Punkt aus (Beispiel Breitensuche). Ist sie zu klein, entstehen Lücken im Skelett
 und die Konnektivität zwischen den Skelettlinien ist nicht mehr gegeben. Man muss für jedes Bild beziehungsweise für jedes Bildobjekt entscheiden, welche Suchdistanz sich am besten eignet. Dies kann
-bei der Anwendung der beiden Algorithmen auf den Videostream der Kinect hinderlich sein, da die Suchdistanz von Bild zu Bild unterschiedlich sein kann. \\
-Ein weiterer Grund ist die Performanz der Algorithmen.   
+bei der Anwendung der beiden Algorithmen auf den Videostream der Kinect hinderlich sein, da die Suchdistanz von Bild zu Bild unterschiedlich sein kann.  

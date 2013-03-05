@@ -1,0 +1,12 @@
+#Die Segmentierung des Spielers
+def player_segmentation(depth_image_input,
+				threshold_value,depth_value):
+    
+   #Umwandlung des OpenCV-Bildes in ein Numpy-Array
+   depth = image_conversion.cv2array(depth_image_input)
+   threshold = threshold_value
+   current_depth = depth_value
+   #Segmentierung des Tiefenbildes
+   depth = 255 * np.logical_and
+			(depth >= current_depth - threshold,
+			 depth <= current_depth + threshold)

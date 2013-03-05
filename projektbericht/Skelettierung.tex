@@ -14,27 +14,34 @@ Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der 
 
 \section{Distanztransformation}
 \Autor{Sandra Schröder}\\\\
-%Sandra: Theorie über Skelettierung mit der Distanztransformation
-...\\
-Die Distanztransformation eines Binärbildes enthält Informationen über den Abstand der Objektpixel zum Rand des Objekts. Die
-Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen den größten Abstand zum Rand relativ zu den 
-umgebenden Pixeln. Die Pixel mit dem größten Abstand sind dementsprechend die hellsten Pixel in der Distancemap. 
-Die Distancemap beschreibt ein Grauwertgebirge, wobei sich der Gebirgskamm in der Mitte des Objektes befindet.
+Die Distanztransformation eines Binärbildes enthält Informationen über den Abstand der Objektpixel zum ersten Hintergrundpixel. Der Abstand zum Hintergrund wird für jeden Objektpixel bestimmt und in einem
+weiteren Bild (gleiche Dimension und Größe wie das Binärbild) als Grauwert an der Stelle des Objektpixels gespeichert. Das Ergebnis ist die sogenannte \emph{Distance Map} (Distanzkarte). \\
+Zur Bestimmung des Abstands benötigt man Metriken. Eine gängige Metrik - die für den Algorithmus im Rahmen dieser Arbeit auch genutzt wurde - ist die euklidische Metrik $d_2$ \textbf{TODO Quelle} )(Gleichung \ref{eq:d2}):
+\begin{equation}
+\label{eq:d2}
+d_2(p,q) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}  
+\end{equation}
+Die Distance Map kann zur Extraktion des Skeletts benutzt werden. Die
+Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen den größten Abstand zum Hintergrund relativ zu den unmittelbaren Pixeln. Die Pixel mit dem größten Abstand sind dementsprechend die hellsten Pixel in der Distancemap. Betrachtet man diesen Teil der Distance Map beschreibt dieser ein potentielles Skelett.
 \label{sec:distanztransformation}
 \begin{figure}[h]
 	\centering
-	\begin{minipage}{5cm}
+	\begin{minipage}{4cm}
 		\centering
 		\includegraphics[width=1.0\linewidth]{./fig/person.jpg}
 		\label{fig:beispiel_person}
 	\end{minipage}
 	\hspace{3cm}
-	\begin{minipage}{5cm}
+	\begin{minipage}{4cm}
 		\centering
 		\includegraphics[width=1.0\linewidth]{./fig/distance_map_beispiel}
 		\label{fig:distance_map_beispiel}
 	\end{minipage}
 	\caption{Distance Map TODO: nähere Beschreibung}
 \end{figure}
+\subsection{Extraktion des Skeletts}
+%TODO: Vielleicht zu Design und Implementierung??
+Es stellt sich die Frage, wie das Skelett extrahiert werden kann.
+Mitte -> hellste Stelle -> Gradient -> Gradientenbetrag -> ist null an der hellsten Stelle, da keine änderung. abziehen distance map von gradientenbetrag -> ergibt skelettlinie
 \section{Weitere Verfahren}
 \Autor{Christopher Kroll}

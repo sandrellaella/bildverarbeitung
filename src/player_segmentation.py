@@ -57,32 +57,4 @@ def erode_image(img,iters):
     else:
         cv.Erode(img,img_erode,kernel,iterations=iters)
         return img_erode
-    
-#Konturen finden. Eingabe ist ein Bild auf dem zuvor die Dilatation angewendet wurde
-def find_contour(img_dil):
-    img_contour = cv.CreateImage(cv.GetSize(img_dil),8,1)
-    #Kontur finden: Noch einmal Canny ausfuehren
-    cv.Canny(img_dil,img_contour,0.0,255.0)
-    
-    return img_contour
 
-#Kontur aus find_contour speicher    
-def save_contour(img_contour):    
-    #TODO: Cython
-    #edges_dil in ein numpy array umwandeln
-    img_con_num = image_conversion.cv2array(img_contour)
-    
-    points = []
-    
-    i_range = range(len(img_con_num[:,1]))
-    j_range = range(len(img_con_num[1,:]))
-
-    for i in i_range:
-        for j in j_range:
-            if img_con_num[i,j] == 255:
-                points.insert((i,j))
-                
-    return points
-
-#FIXME: Abstand des Spielers zur Kamera
-#player_segmentation(159,745)
