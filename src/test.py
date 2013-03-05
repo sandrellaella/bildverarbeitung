@@ -49,7 +49,7 @@ def test(image):
     
     #return features, image, dist_img, diff_img, drawImage
     return diff_img, features, dist_gradient, dist_map
-    
+  
 img = cv.LoadImage("hand.jpg")
 #img2 = cv.LoadImage("person.jpg")
 
@@ -65,6 +65,7 @@ diff_img_arr = image_conversion.cv2array(diff_img)
 diff_img = image_conversion.array2cv(diff_img_arr)
 cv.ShowImage("Diff-Image", diff_img)
 cv.ShowImage("Image",img)
+cv.SaveImage("hand-bfs.png",img)
 cv.ShowImage("Gradient", dist_gradient)
 cv.ShowImage("Distance", dist_img)
 #cv.ShowImage('Originalbild', image1)

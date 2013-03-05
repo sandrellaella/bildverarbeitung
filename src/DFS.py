@@ -18,6 +18,8 @@ class Node:
         self.feature = features[i]
         self.predecessor = "nil"
         self.postdecessor = "nil"
+        self.whichpath = "nil"
+        self.distance = 0
         
     def getPredecessor(self):
         return self.predecessor
@@ -53,13 +55,16 @@ def findNextFeature(node,remainingNodes):
             if node_dist < distance_min:
                 distance_min = node_dist
                 node_candidate = node_d
+                n.distance = distance_min
+                
             
         
     return (distance_min,node_candidate)
         
-def getPath(goal):
+def getPath(goal,pathnumber):
     path_stack = []
     path_stack.append(goal)
+    goal.whichpath = pathnumber
     while goal.predecessor is not "nil":
         goal = goal.predecessor 
         path_stack.append(goal)
@@ -110,37 +115,39 @@ for i in range(count):
 nodes = DFS(nodes,searchDistance)
 
 path_list = []
-
+pathnumber = 1
 for i in range(len(nodes)):
-    path = getPath(nodes[i])
-    path_list.append(path)
-
+    path = getPath(nodes[i],pathnumber)
+    path_list.append((path,pathnumber))
+    pathnumber = pathnumber + 1
 
 
 remainingNodes = []
 #Pfade zeichnen und Knoten einzeichnen, die keinen Nachfolger haben   
 color = 255
 for path in path_list:
-    for p in path:
+    for p in path[0]:
         x1 = int(p.feature[0])
         y1 = int(p.feature[1])
         if p.predecessor is not "nil":
             x2 = int(p.predecessor.feature[0])
             y2 = int(p.predecessor.feature[1])
-            cv.Line(img, (x1,y1),(x2,y2), (color,color,color), thickness=1, lineType=8, shift=0)
+            cv.Line(img, (x1,y1),(x2,y2), (color,color,color), thickness=2, lineType=8, shift=0)
         if p.postdecessor is "nil":
-            cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,255))
+            #cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,255),thickness=2)
             remainingNodes.append(p)
 
-print path_list
+#print path_list
 #Naechsten Nachbar finden, der keinen Nachfolger hat. 
 color = 50
 color2 = 10
 for node in remainingNodes:
+    print node.distance
     best_distance_candidate = findNextFeature(node,remainingNodes)
     #print best_distance_candidate
     candidate = best_distance_candidate[1]
-    #if candidate.predecessor is not "nil":
-    cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (color,color,255), thickness=1, lineType=8, shift=0)
+    print candidate.distance
+    if candidate.predecessor is not "nil" and node.whichpath != candidate.whichpath and node.distance < candidate.distance:
+        cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (color,color,255), thickness=2, lineType=8, shift=0)
 cv.ShowImage("Image",img)
 cv.WaitKey()

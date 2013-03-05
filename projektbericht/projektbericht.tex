@@ -42,7 +42,7 @@
 	basicstyle=\ttfamily,
 	frame=single,
 	numbers=left,
-	language=C,
+	language=python,
 	breaklines=true,
 	breakatwhitespace=true,
 	postbreak=\hbox{$\hookrightarrow$ },
@@ -111,5 +111,15 @@ Abstract über unseren Projektbericht
 
 \bibliographystyle{alpha}
 \bibliography{literatur}
+
+\appendix       %Beginn des Anhangs
+\chapter{Quellcode}
+\label{anhang:quellcode}
+\section{Verbesserung der Skelettqualität}
+ \lstinputlisting
+    [caption={Breitensuche}
+       \label{lst:javaclass},
+       captionpos=t,language=python]
+ {/home/sandra/projects/bildverarbeitung/src/skeleton_improvement.py}
 
 \end{document}
