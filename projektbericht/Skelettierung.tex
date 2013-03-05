@@ -42,7 +42,7 @@ Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen de
 		\centering
 		\includegraphics[width=1.0\linewidth]{./fig/distance_map_beispiel}	
 	\end{minipage}
-	\caption{Distance Map TODO: nähere Beschreibung}
+	\caption{Beispiel einer Distance Map. Links: Originalbild. Dieses wurde zuerst invertiert, damit das Objekt (Person) weiß markiert ist. Rechts: Resultat der Distanztransformation. Aufällig ist das Maximum in der Mitte.}
 	\label{fig:distance_map_beispiel}
 \end{figure}
 \subsection{Extraktion des Skeletts}
@@ -66,6 +66,6 @@ Entsprechend der Definition des Gradienten, ist an der höchsten Stelle des Grau
 Kodiert man den Gradientenbetrag ebenfalls als ein Grauwertbild, wird der Gebirgskamm eine schwarze Linie
 sein und das potentielle Skelett markieren. In der Distance Map sind die Grauwerte des Gebirskamms ungleich
 null. Bildet man die Differenz dieser beiden Bilder, erhält man als Ergebnis nur die Skelettlinie in
-einem neuen Bild. TODO ZEICHNUNG (das doofe ist: das stimmt gar nicht. das funktioniert alles nur, weil der datentyp zu klein ist...)
+einem neuen Bild. TODO ZEICHNUNG (das doofe ist: das stimmt gar nicht. das funktioniert alles nur, weil der datentyp zu klein ist...) todo irgendwie schummeln
 \section{Weitere Verfahren}
 \Autor{Christopher Kroll}

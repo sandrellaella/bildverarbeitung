@@ -1,19 +1,30 @@
 \chapter{Implementierung der Algorithmen}
 %Sandra Einleitungstext
 \Autor{Sandra Schröder}\\\\
-Dieses Kapitel beschreibt die Umsetzung der Algorithmen Thinning und Distanztransformation.\\
+Dieses Kapitel beschreibt die Algorithmen für Thinning und die Distanztransformation.\\
 Bevor Skelettierungsalgorithmen angewendet werden können, muss ein Binärbild des Bildes erzeugt werden, 
 das die Kinect liefert. Dafür wurde eine Segmentierung implementiert, die Objekte, die sich vor der
 Kinect befinden, weiß markiert. Für die Segmentierung wurde die Tiefeninformation der Kinect genutzt.\\
 Die meisten Programme wurden mit der Programmiersprache \emph{Python} umgesetzt. Aus Performanzgründen 
-erfolgten einige Umsetzungen in \emph{C++}. -> oder in arbeitsumgebung rein?
+erfolgten einige Umsetzungen in \emph{C++}. -> oder in arbeitsumgebung rein?\\
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Procedure{DoSkeletonization}{Image}
+\While{True}
+\State{Segmentiere Spieler}
+\State{Wende Thinning oder Distanztransformation an}
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
 \section{Wahl der Algorithmen}
 %TODO
 \section{Die Arbeitsumgebung}
 %TODO
 \section{Spieler-Segmentierung}
 \Autor{Sandra Schröder}\\\\
-Listing \ref{lst:player_segmentation} zeigt einen Ausschnitt des Quellcodes für die Spielersegmentierung.\\
+Algorithmus oder nur beschreiben??\\
 Es wird nur anhand der Tiefe segmentiert. Um nicht für jeden einzelnen Pixel die Bedingung zu überprüfen, ob er den Schwellwert für die Segmentierung überschreitet beziehungsweise unterschreitet, wird die effiziente Numpy-Funktion \texttt{logical\_and} benutzt, die global auf dem Bild arbeitet und für das gesamte Bild die Schwellwertbedingung prüft. Für den Schwellwert werden zwei 
 Werte definiert, um ein Intervall festzulegen, in dem sich das Objekt befinden darf. 
 \section{Thinning}  % Würde ich mit anfangen da ich diese Woche fast keine Zeit mehr hab was zu machen (Johannes)
