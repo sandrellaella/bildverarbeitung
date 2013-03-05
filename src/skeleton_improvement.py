@@ -21,21 +21,10 @@ def calcGoodFeatures(image):
     qualityLevel = 0.1
     minDistance = 10
     
-    corners = cv.GoodFeaturesToTrack(image,eigenvalueImage,tempImage,cornerCount,qualityLevel,minDistance)
-    
-    #(x,y) = corners[0]
-    #(m,n) = corners[1] 
-       
-    #cv.Circle(image,(int(x),int(y)) ,5,(255,0,0))
-    #cv.Circle(image,(int(m),int(n)),5,(255,0,0))
+    corners = cv.GoodFeaturesToTrack(image,eigenvalueImage,tempImage,
+                                     cornerCount,qualityLevel,minDistance)
     
     return corners
-        
-    #while True:
-     #   cv.ShowImage("Image",image)
-      #  if cv.WaitKey(10)==27:
-       #     break
-    #return corners
     
 def drawFeatures(features,image):
     
@@ -52,7 +41,6 @@ def startConnect(features,minDistance,epsilon,img):
     return neighbours
         
 def connectFeatures(startpoint,features,searchDistance,img):    
-
     
     neighbours = []
     #Besuchte Knoten
@@ -72,7 +60,7 @@ def connectFeatures(startpoint,features,searchDistance,img):
                 if x1>=x-searchDistance and x1<=x or x1<=x+searchDistance and x1>=x:
                     if y1>=y-searchDistance and y1<=y or y1<=y+searchDistance and y1>=y:        
                         neighbours.append((x1,y1))
-                        cv.Line(img, (int(current[0]),int(current[1])), (int(f[0]),int(f[1])), (0,255,0), thickness=1, lineType=8, shift=0)
+                        cv.Line(img, (int(current[0]),int(current[1])), (int(f[0]),int(f[1])), (255,255,255), thickness=2, lineType=8, shift=0)
                         visited.append(f)
                   
 
