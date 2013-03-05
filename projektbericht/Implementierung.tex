@@ -24,17 +24,17 @@ Werte definiert, um ein Intervall festzulegen, in dem sich das Objekt befinden d
 \section{Thinning}  % Würde ich mit anfangen da ich diese Woche fast keine Zeit mehr hab was zu machen (Johannes)
 \section{Skelettierung aus der Distanztransformation}
 %Sandra
-\Autor{Sandra Schröder}
+\Autor{Sandra Schröder}\\\\
 Die Skelettierung anhand der Distanztransformation läuft folgendermaßen ab:
 \begin{itemize}
 \item Bestimmen der Distanztransformation des Binärbildes
 \item Berechne den Gradientenbetrag auf der Distance Map
 \item Differenz zwischen dem Gradientenbild und der Distance Map bilden
 \end{itemize}
-\subsection{Distanztransformation}
-Die Bildverarbeitungsbibliothek bietet eine Funktion zur Bestimmung der Distance Map.
+In Listing \ref*{lst:distanztransformation} ist die Implementierung der Skelettierung zu sehen.
+Die Bildverarbeitungsbibliothek \emph{OpenCV} bietet eine Funktion zur Bestimmung der Distance Map.
 \lstinputlisting
     [caption={Segmentierung des Spielers}
-       \label{lst:player_segmentation},
+       \label{lst:distanztransformation},
        captionpos=t,language=python]
  {./listing/distance_skeleton.py} 
