@@ -1,5 +1,5 @@
 \chapter{Die Skelettierung}
-\Autor{Sandra Schröder}\\
+\Autor{Sandra Schröder}\\\\
 Ein Skelett ist ein nützlicher Deskriptor, um Informationen über die Region und den Rand eines Objektes kompakt und effizient
 zu kodieren. Es gibt die wesentlichen Grundzüge eines Objektes wieder.\\
 Dieses Kapitel beschreibt bekannte Konzepte und Verfahren zur Skelettierung im Bereich der Bildverarbeitung.\\
@@ -14,14 +14,20 @@ Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der 
 
 \section{Distanztransformation}
 \Autor{Sandra Schröder}\\\\
-Die Distanztransformation eines Binärbildes enthält Informationen über den Abstand der Objektpixel zum ersten Hintergrundpixel. Der Abstand zum Hintergrund wird für jeden Objektpixel bestimmt und in einem
+Die Distanztransformation eines Binärbildes enthält Informationen über den Abstand der Objektpixel zum Hintergrund. Der Abstand zum Hintergrund wird für jeden Objektpixel bestimmt und in einem
 weiteren Bild (gleiche Dimension und Größe wie das Binärbild) als Grauwert an der Stelle des Objektpixels gespeichert. Das Ergebnis ist die sogenannte \emph{Distance Map} (Distanzkarte). \\
 Zur Bestimmung des Abstands benötigt man Metriken. Eine gängige Metrik - die für den Algorithmus im Rahmen dieser Arbeit auch genutzt wurde - ist die euklidische Metrik $d_2$ \textbf{TODO Quelle} )(Gleichung \ref{eq:d2}):
 \begin{equation}
 \label{eq:d2}
 d_2(p,q) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}  
 \end{equation}
-Die Distance Map kann zur Extraktion des Skeletts benutzt werden. Die
+Die Definition einer Nachbarschaft spielt
+ebenfalls eine Rolle. Wählt man eine
+4er-Nachbarschaft, wird der Abstand vom Objektpixel zur linken und zur rechten Seite, sowie nach oben und nach unten berechnet. Man erhält dementsprechend
+vier Abstände. In der Distance Map wird der minimale Abstand von den vier Werten
+gespeichert. Bei einer 8er-Nachbarschaft
+kommen die diagonalen Richtungen dazu.\\
+Die Distance Map wird zur Extraktion des Skeletts benutzt. Die
 Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen den größten Abstand zum Hintergrund relativ zu den unmittelbaren Pixeln. Die Pixel mit dem größten Abstand sind dementsprechend die hellsten Pixel in der Distancemap. Betrachtet man diesen Teil der Distance Map beschreibt dieser ein potentielles Skelett.
 \label{sec:distanztransformation}
 \begin{figure}[h]
@@ -40,7 +46,6 @@ Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen de
 	\caption{Distance Map TODO: nähere Beschreibung}
 \end{figure}
 \subsection{Extraktion des Skeletts}
-%TODO: Vielleicht zu Design und Implementierung??
 Es stellt sich die Frage, wie das Skelett extrahiert werden kann.
 Mitte -> hellste Stelle -> Gradient -> Gradientenbetrag -> ist null an der hellsten Stelle, da keine änderung. abziehen distance map von gradientenbetrag -> ergibt skelettlinie
 \section{Weitere Verfahren}

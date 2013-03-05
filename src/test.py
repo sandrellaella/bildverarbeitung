@@ -44,6 +44,7 @@ def test(image):
     diff = diff.astype(numpy.uint8)
     diff_img = image_conversion.array2cv(diff)
     
+    
 
     features = skeleton_improvement.calcGoodFeatures(diff_img)
     
@@ -68,6 +69,7 @@ cv.ShowImage("Image",img)
 cv.SaveImage("hand-bfs.png",img)
 cv.ShowImage("Gradient", dist_gradient)
 cv.ShowImage("Distance", dist_img)
+
 #cv.ShowImage('Originalbild', image1)
 #cv.ShowImage('Distance Map',dist_img1)
 #cv.ShowImage('Differenz',diff_img1)
