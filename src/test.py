@@ -61,7 +61,7 @@ skeleton_improvement.drawFeatures(features,diff_img)
 #comparison.connectFeatures(diff_img,features,10)
 neighbours = skeleton_improvement.startConnect(features,20,5,img)
 #skeleton_improvement.connectDFS(features)
-
+print img.depth
 diff_img_arr = image_conversion.cv2array(diff_img)
 diff_img = image_conversion.array2cv(diff_img_arr)
 cv.ShowImage("Diff-Image", diff_img)
