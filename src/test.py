@@ -51,7 +51,7 @@ def test(image):
     #return features, image, dist_img, diff_img, drawImage
     return diff_img, features, dist_gradient, dist_map
   
-img = cv.LoadImage("hand.jpg")
+img = cv.LoadImage("person.jpg")
 #img2 = cv.LoadImage("person.jpg")
 
 #corners1, image1, dist_img1, diff_img1, drawImage = test(img)
@@ -59,7 +59,7 @@ img = cv.LoadImage("hand.jpg")
 diff_img, features, dist_gradient, dist_img = test(img)
 skeleton_improvement.drawFeatures(features,diff_img)
 #comparison.connectFeatures(diff_img,features,10)
-neighbours = skeleton_improvement.startConnect(features,30,5,img)
+neighbours = skeleton_improvement.startConnect(features,20,5,img)
 #skeleton_improvement.connectDFS(features)
 
 diff_img_arr = image_conversion.cv2array(diff_img)

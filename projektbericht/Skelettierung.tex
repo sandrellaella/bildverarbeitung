@@ -64,8 +64,6 @@ Ein Graubild kann als skalare Funktion $f(x,y)$ beschrieben werden mit $x,y \in 
 $0 \leq f(x,y) \leq 255$. Somit lässt sich der Gradient auch auf Graubilder übertragen.
 Entsprechend der Definition des Gradienten, ist an der höchsten Stelle des Grauwertgebirges der Gradientenbetrag gleich null.\\
 Kodiert man den Gradientenbetrag ebenfalls als ein Grauwertbild, wird der Gebirgskamm eine schwarze Linie
-sein und das potentielle Skelett markieren. In der Distance Map sind die Grauwerte des Gebirskamms ungleich
-null. Bildet man die Differenz dieser beiden Bilder, erhält man als Ergebnis nur die Skelettlinie in
-einem neuen Bild. TODO ZEICHNUNG (das doofe ist: das stimmt gar nicht. das funktioniert alles nur, weil der datentyp zu klein ist...) todo irgendwie schummeln
+sein und das potentielle Skelett markieren. Segmentierung des Gradientenbetragbildes. Skelett schwarz, anderer Bereich ist weiß (außer Hintergrund). Dann Differenz bilden mit Distanz Map. Ergibt Skelett. 
 \section{Weitere Verfahren}
 \Autor{Christopher Kroll}

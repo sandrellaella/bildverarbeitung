@@ -17,9 +17,9 @@ def calcGoodFeatures(image):
     
     
     corners = []
-    cornerCount = 50
+    cornerCount = 30
     qualityLevel = 0.1
-    minDistance = 10
+    minDistance = 5
     
     corners = cv.GoodFeaturesToTrack(image,eigenvalueImage,tempImage,
                                      cornerCount,qualityLevel,minDistance)

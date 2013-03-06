@@ -40,7 +40,7 @@ class Node:
 #Knoten darf aber nicht auf dem gleichen Pfad sein.        
 def findNextFeature(node,remainingNodes):
     feature_of_node = node.feature
-    distance_min = 1000
+    distance_min = 10000
     distances = []
     distance = 0
     node_candidate = ""
@@ -103,6 +103,7 @@ def DFS(nodes,searchDistance):
             
 
 features = [(183.0, 225.0), (174.0, 177.0), (206.0, 245.0), (205.0, 185.0), (220.0, 176.0), (25.0, 224.0), (187.0, 191.0), (191.0, 170.0), (196.0, 235.0), (176.0, 160.0), (155.0, 168.0), (266.0, 128.0), (143.0, 25.0), (83.0, 49.0), (203.0, 71.0), (156.0, 93.0), (145.0, 44.0), (150.0, 68.0), (160.0, 109.0), (168.0, 132.0), (203.0, 133.0), (185.0, 213.0), (43.0, 227.0), (99.0, 250.0), (105.0, 97.0), (91.0, 69.0), (53.0, 231.0), (146.0, 250.0), (86.0, 245.0), (164.0, 122.0), (63.0, 235.0), (153.0, 81.0), (160.0, 243.0), (172.0, 149.0), (196.0, 154.0), (200.0, 144.0), (148.0, 58.0), (203.0, 116.0), (203.0, 94.0), (117.0, 252.0), (186.0, 201.0), (203.0, 106.0), (100.0, 87.0), (232.0, 170.0), (248.0, 154.0), (257.0, 142.0), (123.0, 132.0), (134.0, 150.0), (169.0, 235.0), (140.0, 158.0)]
+#features = [(156.0, 186.0), (148.0, 273.0), (90.0, 158.0), (216.0, 21.0), (170.0, 65.0), (161.0, 102.0), (161.0, 93.0), (158.0, 68.0), (131.0, 195.0), (161.0, 116.0), (159.0, 288.0), (160.0, 86.0), (151.0, 19.0), (156.0, 168.0), (151.0, 26.0), (165.0, 289.0), (150.0, 39.0), (166.0, 214.0), (178.0, 66.0), (159.0, 78.0), (156.0, 181.0), (166.0, 199.0), (209.0, 50.0), (76.0, 153.0), (160.0, 190.0), (156.0, 63.0), (103.0, 174.0), (127.0, 192.0), (94.0, 167.0), (205.0, 60.0)]
 count = len(features)
 img = cv.LoadImage("hand.jpg")
 nodes = []
@@ -123,6 +124,7 @@ for i in range(len(nodes)):
 
 
 remainingNodes = []
+predecessors = []
 #Pfade zeichnen und Knoten einzeichnen, die keinen Nachfolger haben   
 color = 255
 for path in path_list:
@@ -132,10 +134,14 @@ for path in path_list:
         if p.predecessor is not "nil":
             x2 = int(p.predecessor.feature[0])
             y2 = int(p.predecessor.feature[1])
-            cv.Line(img, (x1,y1),(x2,y2), (color,color,color), thickness=2, lineType=8, shift=0)
+            cv.Line(img, (x1,y1),(x2,y2), (color,color,color), thickness=1, lineType=8, shift=0)
         if p.postdecessor is "nil":
-            #cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,255),thickness=2)
+            cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,255),thickness=1)
             remainingNodes.append(p)
+        if p.predecessor is "nil":
+            cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,0),thickness=1)
+            predecessors.append(p)
+            
 
 #print path_list
 #Naechsten Nachbar finden, der keinen Nachfolger hat. 
@@ -148,6 +154,6 @@ for node in remainingNodes:
     candidate = best_distance_candidate[1]
     print candidate.distance
     if candidate.predecessor is not "nil":
-        cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (color,color,255), thickness=2, lineType=8, shift=0)
+        cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (color,color,255), thickness=1, lineType=8, shift=0)
 cv.ShowImage("Image",img)
 cv.WaitKey()
