@@ -1,6 +1,8 @@
 #include <vigra/basicimageview.hxx>
 #include <cstdlib>
 #include <stdlib.h>
+#include <sys/time.h>
+#include <time.h>
 
 
 #ifdef _WIN32
@@ -89,8 +91,18 @@ void thinningGuoHall(cv::Mat& im)
 /**
  * This is an example on how to call the thinning function above.
  */
-LIBEXPORT int vigra_reflectimage_c( int *arr,  int *arr2, const  int width, const  int height, const int reflect_method){ 
-
+LIBEXPORT int vigra_reflectimage_c( int *arr,  int *arr2, const  int width, const  int height, const int reflect_method,int count){ 
+    timeval start,stop;
+    char buffer[256];
+    std::string dateiname = "thinning";
+    std::string dateiendung = ".jpg";
+    std::string name;
+    sprintf(buffer,"%d",count);
+    name = dateiname + buffer + dateiendung;
+    //time_t start,stop; 
+    
+    //tm *start;
+    //tm *stop;
     //TRY: Height und Width vertauscht
     //cv::Mat source(height,width,CV_32FC1,arr);
     cv::Mat source(height,width,CV_8UC1,arr);
@@ -107,11 +119,27 @@ LIBEXPORT int vigra_reflectimage_c( int *arr,  int *arr2, const  int width, cons
     
     cv::threshold(source, bw, 10, 255, CV_THRESH_BINARY);
     //printf("%d\n",bw.type());
+    //Zeit start
+    gettimeofday(&start,0);
+    //start = time(0);
     thinningGuoHall(source);
+    //stop = time(0);
+    //Zeit stop
+    gettimeofday(&stop,0);
+    
     //printf("C++: Aus thinningGuoHall raus\n");
     cv::imshow("Thinning", source);
-    //cv::imshow("dst", bw);
+    std::vector<int> qualityType;
+    qualityType.push_back(CV_IMWRITE_JPEG_QUALITY);
+    qualityType.push_back(90);
     
+    cv::imwrite(name,source,qualityType);
+    //cv::imshow("dst", bw);
+    //long gesamt = (stop - start);
+    //unsigned long gesamt (stop.tv_usec - start.tv_usec);
+    //std::cout << start.tv_sec << ':' << start.tv_usec << std::endl;
+    //std::cout << end.tv_sec << ':' << end.tv_usec << std::endl;
+    //std::cout << "Thinning Zeit " << gesamt << std::endl;
     //cv::waitKey();
     return 0;
 }

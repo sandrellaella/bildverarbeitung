@@ -28,9 +28,9 @@ def player_segmentation(depth_image_input,threshold_value,depth_value):
    #Glaetten
    cv.Smooth(depth_image, depth_image, smoothtype=cv.CV_GAUSSIAN, param1=3, param2=0, param3=0, param4=0)
    #Dilatation um Loecher und Rauschen zu mindern
-   depth_seg = dilate_image(depth_image)        
+   #depth_seg = dilate_image(depth_image)        
 
-   return depth_seg, depth_image
+   return depth_image
 
 #Dilatation anwenden    
 def dilate_image(img):

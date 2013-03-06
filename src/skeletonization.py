@@ -41,7 +41,7 @@ class Skeleton():
         diff_img = image_conversion.array2cv(diff)
         
         #return diff_img, gradient       
-        return diff_img
+        return diff_img,dist_gradient
         
     #Bestimmen des Gradientenbetrages des Differenzbildes        
     def pruning(self,skeleton_img,sigma):
