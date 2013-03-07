@@ -12,21 +12,16 @@ Abschnitt kurz vorgestellt.\\
 Verfahren zur Skelettierung von Bildobjekten fordern bestimmte Eigenschaften an das Skelett \textbf{todo Quelle}. Das ist zum einen die \emph{Konnektivität} des Skeletts. Dies bedeutet, dass es keine Lücken und Unterbrechungen im Skelett gibt. Ein zusammenhängendes Objekt sollte ein zusammenhängendes Skelett besitzen. 
 Viele Skelettierungsverfahren fordern, dass ein Skelett genau 1 Pixel breit ist und \emph{zentriert} im ursprünglichen Objekt liegt. Zentiert bedeutet, dass der Abstand des Skeletts zum ursprünglichen Rand zu allen Seiten gleich groß ist.\\
 Da das Skelett als Deskriptor für die Form eines Objektes dient, sollte es die geometrischen Eigenschaften und die Topologie des Objektes gut wiedergeben können.\\
-\section{Thinning}
+\section{Skelettierung mittels Thinning}
 \Autor{Johannes Böhler}\\
 Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschliesslich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. 
 
 Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche.
 \subsection{A Fast Parallel Algorithm for Thinning Digital Patterns} 
 \Autor{Johannes Böhler}\\\\
+\label{subsec:fastparallel}
 Der gesamte Algorithmus erstreckt sich über mehrere Iterationen. Die Randpixel des Musters werden Schicht für Schicht abgetragen. Die Iterationen selbst, sind wiederum in zwei Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten.
 Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest Eckpunkte entfernt. Das entfernen von Nord- und Westgrenzpunkten sowie von Südosteckpunkten erfolgt in der zweiten Subiteration.
-
-
-
-
-
-
 \begin{figure}[!ht]
         \centering
         \begin{subfigure}[b]{0.3\textwidth}
@@ -54,13 +49,7 @@ Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auc
         \caption{Zustände des Algorithmus}
 \end{figure}
 
-
-
-
-
-
 \subsubsection{Anforderungen an den Algorithmus}
-
 
 \begin{itemize}
 \item[-] Das Rauschen, welches der Algorithmus verursacht soll so gering wie möglich gehalten werden.
@@ -69,11 +58,6 @@ Endpunktverbundenheit bedeutet, dass sich zwischen zwei Endpunkten eines Skelett
 \item[-] Das Skelett soll nach Durchlaufen des kompletten Algorithmus in einheitlicher Dicke von einem Pixel vorliegen.
 \item[-] Der Algorithmus soll möglichst schnell und effizient arbeiten um Echtzeitfähigkeit gewährleisten zu können. \\
 \end{itemize}
-
- 
-
-
-
 
 \subsubsection{Ablauf des Algorithmus}
 
@@ -180,8 +164,8 @@ Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit, und Rau
 \section{Skelettierung mittels Distanztransformation}
 \Autor{Sandra Schröder}\\\\
 Die Distanztransformation eines Binärbildes enthält Informationen über den Abstand der Objektpixel zum Hintergrund. Der Abstand zum Hintergrund wird für jeden Objektpixel bestimmt und in einem
-weiteren Bild (gleiche Dimension und Größe wie das Binärbild) als Grauwert an der Stelle des Objektpixels gespeichert. Das Ergebnis ist die sogenannte \emph{Distance Map} (Distanzkarte). \\
-Zur Bestimmung des Abstands benötigt man Metriken. Eine gängige Metrik - die für den Algorithmus im Rahmen dieser Arbeit auch genutzt wurde - ist die euklidische Metrik $d_2$ \textbf{TODO Quelle} (Gleichung \ref{eq:d2}):
+weiteren Bild (gleiche Dimension und Größe wie das Binärbild) als Grauwert an der Stelle des Objektpixels gespeichert. Das Ergebnis ist die sogenannte \emph{Distance Map} (Abbildung \ref{fig:distance_map_beispiel}). \\
+Zur Bestimmung des Abstands benötigt man Metriken. Eine gängige Metrik - die für den Algorithmus im Rahmen dieser Arbeit auch genutzt wurde - ist die euklidische Metrik $d_2$ (Gleichung \ref{eq:d2}):
 \begin{equation}
 \label{eq:d2}
 d_2(p,q) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}  
@@ -189,11 +173,13 @@ d_2(p,q) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}
 Die Definition einer Nachbarschaft spielt
 ebenfalls eine Rolle. Wählt man eine
 4er-Nachbarschaft, wird der Abstand vom Objektpixel zur linken und zur rechten Seite, sowie nach oben und nach unten berechnet. Man erhält dementsprechend
-vier Abstände. In der Distance Map wird der minimale Abstand von den vier Werten
-gespeichert. Bei einer 8er-Nachbarschaft
-kommen die diagonalen Richtungen dazu.\\
+vier Abstände. In der Distance Map wird der minimale Abstand von den vier Werten gespeichert. Bei einer 8er-Nachbarschaft
+kommen die diagonalen Richtungen dazu. Abhängig von der gewählten
+Nachbarschaft und der Metrik ergeben sich unterschiedliche Distance
+Maps.\\
 Die Distance Map wird zur Extraktion des Skeletts benutzt. Die
-Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen den größten Abstand zum Hintergrund relativ zu den unmittelbaren Pixeln. Die Pixel mit dem größten Abstand sind dementsprechend die hellsten Pixel in der Distancemap. Betrachtet man diesen Teil der Distance Map beschreibt dieser ein potentielles Skelett.
+Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen den größten Abstand zum Hintergrund relativ zu den unmittelbaren Pixeln. Die Pixel mit dem größten Abstand sind dementsprechend die hellsten Pixel in der Distance Map. Die umgebenden Pixel haben einen kleineren Grauwert und der Grauwert der Pixel verringert sich, je näher die Pixel am Hintergrund liegen. Die Distance Map ist ein \emph{Grauwertgebirge}. Der hellste
+Teil der Distance Map beschreibt eine skelettförmige Struktur.
 \label{sec:distanztransformation}
 \begin{figure}[h]
 	\centering
@@ -210,20 +196,9 @@ Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen de
 	\caption{Beispiel einer Distance Map. Links: Originalbild. Dieses wurde zuerst invertiert, damit das Objekt (Person) weiß markiert ist. Rechts: Resultat der Distanztransformation. Aufällig ist das Maximum in der Mitte.}
 	\label{fig:distance_map_beispiel}
 \end{figure}
-%TODO:
-Auf das Originalbild (Abbildung (a)) wird die Distanztransformation
-angwendet und das Ergebnis ist die Distance Map. Aus der Distance
-Map 
-
-Abbildung (a) ist das Originalbild mit dem Objekt, von dem das Skelett, wie in Abbildung (d) zu sehen, bestimmt wurde. Da der Algorithmus auf der Grundlage von Bildern arbeitet, bei denen das Objekt weiß und der Hintergrund schwarz markiert sind,
-wurde das Bild zuvor invertiert. Abbildung (b) zeigt das Gradientenbetragsbild der Distance Map des Originalbildes. Die schwarze Linie markiert die potentielle Skelettlinie des Objektes. Der Gradientenbetrag ist hier gleich null, da dies die höchste Stelle (lokales Maximum) im Grauwertgebirge ist. Das Gradientenbetragsbild wurde segmentiert, um ein Binärbild zu erhalten. Jedoch treten bei der Segmentierung
-bereits Lücken auf, die bei dem Resultat der Differenzbildung zwischen der Distance Map und dem segmentierten Gradientenbild auch erhalten bleiben (Abbildung (d)).
-%\subsection{Extraktion des Skeletts}
-Es stellt sich die Frage, wie das Skelett extrahiert werden kann. Betrachtet man die Struktur einer
-Distance Map, wie zum Beispiel in Abbildung \ref{fig:distance_map_beispiel}, erkennt man, dass die Pixel,
-die in der Mitte des Objektes liegen, den größten Abstand zum Hintergrund haben. Die Distance Map bildet ein Grauwertgebirge. Diese Information wird ausgenutzt, um die Skelettlinie, das heißt die höchste Stelle
-im Grauwertgebirge, zu extrahieren. \\
-Die Idee ist, den Gradienten der Distance Map zu bestimmen. Der Gradient (Gleichung \ref{eq:gradient}) ist ein Differentialoperator und liefert, angewandt auf ein Skalarfeld, die Richtung des stärksten Anstiegs, sowie die Amplitude des Anstiegs (Gradientenbetrag):
+Ein Graubild kann als skalare Funktion $f(x,y)$ beschrieben werden mit $x,y \in \mathbb{N}$ und
+$0 \leq f(x,y) \leq 255$. 
+Die Idee ist, den Gradienten beziehungsweise den Gradientenbetrag der Distance Map zu bestimmen. Der Gradient (Gleichung \ref{eq:gradient}) ist ein Differentialoperator und liefert, angewandt auf ein Skalarfeld, die Richtung des stärksten Anstiegs, sowie die Amplitude des Anstiegs (Gradientenbetrag):
 \begin{equation}
 \label{eq:gradient}
 %      \[
@@ -233,11 +208,21 @@ Die Idee ist, den Gradienten der Distance Map zu bestimmen. Der Gradient (Gleich
       \end{bmatrix}
 %  \]
 \end{equation}
-Ein Graubild kann als skalare Funktion $f(x,y)$ beschrieben werden mit $x,y \in \mathbb{N}$ und
-$0 \leq f(x,y) \leq 255$. Somit lässt sich der Gradient auch auf Graubilder übertragen.
 Entsprechend der Definition des Gradienten, ist an der höchsten Stelle des Grauwertgebirges der Gradientenbetrag gleich null.\\
-Kodiert man den Gradientenbetrag ebenfalls als ein Grauwertbild, wird der Gebirgskamm eine schwarze Linie
-sein und das potentielle Skelett markieren. Segmentierung des Gradientenbetragbildes. Skelett schwarz, anderer Bereich ist weiß (außer Hintergrund). Dann Differenz bilden mit Distanz Map. Ergibt Skelett. 
+Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimension und Größe wie die Distance Map, wird der Gebirgskamm als Linie mit kleinen Grauwerten (fast Null) kodiert. Diese markiert das Skelett. Eine schwellwerbasierte Segmentierung des Gradientenbetragbildes bewirkt, dass die Skelettlinien schwarz sind. Andere Bereiche, die größer als der Schwellwert sind und somit nicht zum Skelett gehören erhalten den Grauwert $255$ (weiß). 
+Um endgültig nur die Skelettlinie zu erhalten, wird die Differenz
+zwischen der Distance Map und dem segmentierten Gradientenbetragsbild gebildet. Der Teil der Distance Map der nicht
+auf der höchsten Stelle des Grauwertgebirges liegt hat entweder einen Grauwert kleiner oder gleich $255$. Bei
+der Differenzbildung kann der Grauwert dieser Pixel nur negativ werden, da von diesen Grauwerten der Grauwert $255$ abgezogen wird (weißer Bereich des segmentierten Gradientenbetragsbildes). Negative
+Grauwerte werden auf $0$ gesetzt. Als Ergebnis erhält man die Skelettlinie mit Grauwerten ungleich $0$. 
+\clearpage
+\newpage
+%\begin{figure}
+%\centering
+%\includegraphics[width=1.0\linewidth]{./fig/skelettierung-prinzip}
+%\caption{Die Idee der Skelettierung mittels Distanztransformation.}
+%\label{fig:skelettierung-prinzip}
+%\end{figure}
 \subsection{Extracting Skeletons From Distance Maps}
 \Autor{Sandra Schröder}\\\\ 
 In dem Paper \emph{Extracting Skeletons from Distance Maps} beschreibt der Autor einen Algorithmus, der effizient und schnell
@@ -245,7 +230,6 @@ aus einem distanztransformierten Bild ein Skelett extrahiert \cite{extracting_sk
 von Ableitungen höherer Ordnung und die Auswertung von komplexen Gleichungen verzichten. Das Verfahren, welches der Autor zur 
 Extraktion der Skelettlinien eines Objekt vorstellt, ist die sogenannte \emph{Ridge Point Detection} (deutsch: \emph{Gebirgskammdetektion}). Dabei nutzt der Autor eine grundlegende Eigenschaft der Distance Map. Wie in Abschnitt \ref{sec:distanztransformation} beschrieben, ist die Distance Map ein Grauwertgebirge, wobei der Gebirgskamm zentriert im Objekt liegt. Betrachtet man nur diesen Teil der Distance Map und projiziert ihn auf das Originalbild, 
 lässt sich eine skelett-artige Beschreibung des Objekts erkennen.\\\\
-%TODO: Vielleicht ein Bild dazu?
 Die Gebirgskammdetektion ist ein gradientenbasiertes Verfahren. Liegt ein Punkt auf den Gebirgskamm, so hat er in 
 seiner unmittelbaren Umgebung den größten Abstand zum Objektrand und den größten Grauwert relativ zu seinen Nachbarn. Dieser Punkt ist somit ein lokales Maximum. Aufgrund dieser Tatsache eignet  sich der Gradient am besten, um solch einen Punkt zu detektieren. Der Gradient zeigt nach Definition in die Richtung des stärksten Anstiegs. Dies bedeutet, dass der Gradient eines Punktes, der nicht auf dem Kamm liegt, in die Richtung des Kammes zeigt. Wählt man nun Punkte näher am Kamm, so wird der Anstieg
 geringer, da die Differenz zwischen dem Grauwert des betrachteten Gebirgspunktes und dem aktuell gewählten Punkt kleiner wird. Überquert man den Kamm, kehrt sich die Richtung des Gradienten um und zeigt wieder zum Kamm. Hier findet ein Vorzeichenwechsel des Gradientenbetrags statt. Der Punkt auf dem Gebirgskamm bildet eine \emph{sign barrier} zwischen den Gradientenbeträgen der sich gegenüberliegenden Punkte, wobei sich der Gebirgspunkt zwischen diesen beiden Punkten befindet. Diese
@@ -279,7 +263,6 @@ erzeugt dieser Punkt einen Vorzeichwechsel zwischen den beiden Punkten, die den 
 Abbildung zeigt, dass es mehrere Punkte hintereinander in der Distance Map mit dem gleichen Grauwert geben kann, aber auch ein
 Hinweis für einen Gebirgskamm sind. Dies entspricht im Grauwertgebirge einem Plateau.\\
 Der Algorithmus sucht nun in x -und in y Richtung - von oben nach unten und von links nach rechts - in der Distance Map nach diesen Mustern und markiert die Punkte nach den Eigenschaften \emph{strong}, \emph{good}, \emph{weak} und \emph{none}. 
-%TODO: Doof ausgedrück der folgende Satz
 Diese Markierung gibt die Stärke der Sicherheit des Punktes wieder, ein Punkt auf dem Gebirgskamm zu sein. \\
 Wurden alle Punkte in beide Richtungen untersucht, hat jeder Punkt ein passendes Label. Diese Labels werden weiter benutzt, um eine Graphenrepräsentation des Skeletts zu erstellen.\\
 Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu einem Gebirgskamm gehören \cite{extracting_skeletons_distancemaps}. Abbildung \ref{fig:paper_ergebnis} zeigt ein Ergebnis des Algorithmus. Die gestrichelte Linie in der rechten Abbildung beschreibt das theoretische Skelett, die grau unterlegten Punkte sind die vom Algorithmus gewählten Punkte, die zu einem Gebirgskamm gehören und einem Skelettpunkt entsprechen.

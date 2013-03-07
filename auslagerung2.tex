@@ -1,0 +1,15 @@
+Es stellt sich die Frage, wie diese Skelettlinie extrahiert werden
+kann, um ein Skelett zu erhalten, welches die gewünschten Kriterien
+erfüllt.\\  
+Auf das Originalbild (Abbildung (a)) wird die Distanztransformation
+angwendet und das Ergebnis ist die Distance Map. Aus der Distance
+Map 
+
+Abbildung (a) ist das Originalbild mit dem Objekt, von dem das Skelett, wie in Abbildung (d) zu sehen, bestimmt wurde. Da der Algorithmus auf der Grundlage von Bildern arbeitet, bei denen das Objekt weiß und der Hintergrund schwarz markiert sind,
+wurde das Bild zuvor invertiert. Abbildung (b) zeigt das Gradientenbetragsbild der Distance Map des Originalbildes. Die schwarze Linie markiert die potentielle Skelettlinie des Objektes. Der Gradientenbetrag ist hier gleich null, da dies die höchste Stelle (lokales Maximum) im Grauwertgebirge ist. Das Gradientenbetragsbild wurde segmentiert, um ein Binärbild zu erhalten. Jedoch treten bei der Segmentierung
+bereits Lücken auf, die bei dem Resultat der Differenzbildung zwischen der Distance Map und dem segmentierten Gradientenbild auch erhalten bleiben (Abbildung (d)).
+%\subsection{Extraktion des Skeletts}
+Es stellt sich die Frage, wie das Skelett extrahiert werden kann. Betrachtet man die Struktur einer
+Distance Map, wie zum Beispiel in Abbildung \ref{fig:distance_map_beispiel}, erkennt man, dass die Pixel,
+die in der Mitte des Objektes liegen, den größten Abstand zum Hintergrund haben. Die Distance Map bildet ein Grauwertgebirge. Diese Information wird ausgenutzt, um die Skelettlinie, das heißt die höchste Stelle
+im Grauwertgebirge, zu extrahieren. \\

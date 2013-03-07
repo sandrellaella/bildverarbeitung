@@ -147,9 +147,9 @@ for path in path_list:
         if p.predecessor is not "nil":
             x2 = int(p.predecessor.feature[0])
             y2 = int(p.predecessor.feature[1])
-            cv.Line(img, (x1,y1),(x2,y2), (color,color,color), thickness=1, lineType=8, shift=0)
+            cv.Line(img, (x1,y1),(x2,y2), (color,color,color), thickness=2, lineType=8, shift=0)
         if p.postdecessor is "nil":
-            cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,255),thickness=1)
+            cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,255),thickness=2)
             remainingNodes.append(p)
         #if p.predecessor is "nil":
         #    cv.Circle(img,(int(p.feature[0]),int(p.feature[1])),5,(255,0,0),thickness=1)
@@ -172,9 +172,10 @@ for node in remainingNodes:
         best_cand = findNextFeature(candidate,remainingNodes)
         #Symmetrische Bedingung
         #if best_cand[1].nodenumber == node.nodenumber:
-        cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (color,color,255), thickness=1, lineType=8, shift=0)
+        cv.Line(img, (int(node.feature[0]),int(node.feature[1])),(int(candidate.feature[0]),int(candidate.feature[1])), (0,255,0), thickness=2, lineType=8, shift=0)
         candidate.root = node.root
 
 
 cv.ShowImage("Image",img)
+cv.SaveImage("hand-DFS-endergebnis.png",img)
 cv.WaitKey()

@@ -1,15 +1,13 @@
 \chapter{Implementierung der Algorithmen}
 \Autor{Sandra Schröder}\\\\
-Im Rahmen des Projekts wurden zwei Algorithmen für die Skelettierung untersucht, implementiert entwickelt...\\
-In diesem Kapitel wird die Umsetzung der Algorithmen beschrieben vorgestellt...\\\\
-läuft in zwei schritten ab..Segmentierung, Skelettextraktion...\\
-segmentierung bei beiden anätzen identisch....
-Der Algorithmus erhält einen Videostream von Tiefenbilder der Kinect. Diese werden für die
-Skelettierung weiterverarbeitet. \\
-Bevor Skelettierungsalgorithmen angewendet werden können, muss ein Binärbild des Bildes erzeugt werden, 
-das die Kinect liefert. Dafür wurde eine Segmentierung implementiert, die Objekte, die sich vor der
-Kinect befinden, weiß markiert. Für die Segmentierung wurde nur die Tiefeninformation der Kinect genutzt.
-Anschließend werden die Algorithmen angewandt. 
+Im Rahmen des Projekts wurden zwei Algorithmen für die Skelettierung implementiert. Dies ist zum einen
+die Skelettierung nach Thinning nach dem Algorithmus der in Abschnitt \ref{subsec:fastparallel} beschrieben wurde. Die Skelettierung mittels Distanztransformation wurde nach einer eigenen Idee entwickelt und
+umgesetzt.\\
+Die Skelettierung läuft in zwei Schritten ab. Erst wird der Spieler segmentiert. Man erhält als
+Ergebnis ein Binärbild, welches im zweiten Schritt weiterverarbeitet wird, um ein Skelett zu extrahieren. 
+Die Segmentierung des Spielers ist bei beiden Ansätzen identisch.
+In diesem Kapitel wird die Umsetzung der Algorithmen anhand signifikanten Codeausschnitten der Implementierungen vorgestellt. Ein Überblick über die technische Umsetzung gibt einen Eindruck über die
+verwendeten Programmiersprachen und Arbeitsumgebungen.
 \section{Technische Umsetzung}
 \Autor{Christopher Kroll}
 Die meisten Programme wurden mit der Programmiersprache \emph{Python} umgesetzt. Aus Performanzgründen 
