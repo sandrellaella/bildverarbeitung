@@ -108,11 +108,21 @@ Endpunktverbundenheit bedeutet, dass sich zwischen zwei Endpunkten eines Skelett
 \end{itemize}
 
  
-
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{%
+   \includegraphics[width=8cm]{./Res/PixelNachbarschaft}
+  }
+   \caption{Betrachteter Pixel P1 und Nachbarumgebung}
+   \label{fig:PixelNachbarschaft}
+\end{figure}
 
 
 
 \subsection{Ablauf des Algorithmus}
+
+
+
 
 Es wird davon ausgegangen, dass zu Beginn ein binär digitalisiertes Bild vorliegt.
 Die Pixel werden mit Hilfe einer zweidimensionalen Matrix IT durchlaufen, deren Wert an der jeweiligen Stelle IT(i,j) entweder 0 oder 1 ist.
@@ -121,21 +131,12 @@ Es werden in Abhängigkeit von den 8 Nachbarpixeln (siehe Abbildung 4.5), Transf
 
 Der neue Wert eines Pixels während der n-ten Iteration hängt von dem eigenen Wert während der (n-1)ten Iteration und den Werten der acht Nachbarn während der (n-1)ten Iteration ab. Dies ermöglicht paralleles Transformieren mehrerer Bildpunkte. 
 Die Bedingungen, welche zum Ausführen der Transformation erfüllt sein müssen werden über ein 3x3 Pixel Fenster abgefragt. Der Punkt P1 über dessen Transformation entschieden wird, ist mit allen acht Nachbarn direkt verbunden.\\
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{./Res/PixelNachbarschaft}
-\caption{Betrachteter Pixel P1 und Nachbarumgebung}
-\label{fig:PixelNachbarschaft}
-\end{figure}
-%\begin{wrapfigure}{r}{0.48\textwidth}
-%  \vspace{-20pt}
-%  \begin{center}
-%       \includegraphics[width=8cm]{Res/PixelNachbarschaft.png}
-%  \end{center}
-%  \vspace{-20pt}
-%  \caption{Betrachteter Pixel P1 und Nachbarumgebung }
-%  \vspace{-10pt}
-%\end{wrapfigure}
+
+
+
+
+
+
 Der Algorithmus entfernt alle Randpunkte des Musters, außer den Pixeln welche Bestandteil des Skeletts sind. Um die Verbundenheit des Skeletts zu gewährleisten wird ein  Iterationsschritt in zwei Subiterationen aufgeteilt.\\\\
 In der ersten Subiteration wird der Punkt P1 aus dem Muster gelöscht, wenn er folgende Bedingungen erfüllt:
 \begin{itemize} 

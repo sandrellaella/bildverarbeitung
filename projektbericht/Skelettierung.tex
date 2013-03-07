@@ -75,21 +75,13 @@ Es werden in Abhängigkeit von den 8 Nachbarpixeln (siehe Abbildung 4.5), Transf
 
 Der neue Wert eines Pixels während der n-ten Iteration hängt von dem eigenen Wert während der (n-1)ten Iteration und den Werten der acht Nachbarn während der (n-1)ten Iteration ab. Dies ermöglicht paralleles Transformieren mehrerer Bildpunkte. 
 Die Bedingungen, welche zum Ausführen der Transformation erfüllt sein müssen werden über ein 3x3 Pixel Fenster abgefragt. Der Punkt P1 über dessen Transformation entschieden wird, ist mit allen acht Nachbarn direkt verbunden.\\
-\begin{figure}
+\begin{figure} [!ht]
 \centering
 \includegraphics[width=0.7\linewidth]{./Res/PixelNachbarschaft}
 \caption{Betrachteter Pixel P1 und Nachbarumgebung}
 \label{fig:PixelNachbarschaft}
 \end{figure}
-%\begin{wrapfigure}{r}{0.48\textwidth}
-%  \vspace{-20pt}
-%  \begin{center}
-%       \includegraphics[width=8cm]{Res/PixelNachbarschaft.png}
-%  \end{center}
-%  \vspace{-20pt}
-%  \caption{Betrachteter Pixel P1 und Nachbarumgebung }
-%  \vspace{-10pt}
-%\end{wrapfigure}
+
 Der Algorithmus entfernt alle Randpunkte des Musters, außer den Pixeln welche Bestandteil des Skeletts sind. Um die Verbundenheit des Skeletts zu gewährleisten wird ein  Iterationsschritt in zwei Subiterationen aufgeteilt.\\\\
 In der ersten Subiteration wird der Punkt P1 aus dem Muster gelöscht, wenn er folgende Bedingungen erfüllt:
 \begin{itemize} 
@@ -97,7 +89,7 @@ In der ersten Subiteration wird der Punkt P1 aus dem Muster gelöscht, wenn er f
 B entspricht der Anzahl der Nachbarn von P1 !=0
 Die Anzahl der Nachbarn von P1 welche den Wert 1 haben, muss somit zwischen 2 und 6 liegen.
 \item \emph{b)}  A(P1)=1
-AAnzahl der „01“-Folgen 
+Anzahl der „01“-Folgen 
 Die Anzahl der 01 Folgen in der geordneten Folge P2,P3...P9 muss genau eins betragen.
 \item \emph{c)}  P2*P4*P6=0  
 Mindestens ein Pixel der Pixelmenge P2, P4, P6 muss den Wert Null haben.
@@ -112,8 +104,9 @@ Wird eine der Bedingungen nicht erfüllt, so bleibt der Pixelwert bei 1.\\
   \makebox[\textwidth]{%
    \includegraphics[width=8cm]{Res/01Folgen.png}
   }
-   \caption{Anzahl 01 folgen in zyklischer Reihenfolge  }
+   \caption{Bedingung B: Anzahl 01 folgen in zyklischer Reihenfolge  }
 \end{figure}
+
 In der zweiten Subiteration wird P1 gelöscht falls folgende Bedingungen gelten:
 \begin{itemize} 
 \item \emph{a)}  2<=B(P1)<=6 
@@ -121,21 +114,27 @@ In der zweiten Subiteration wird P1 gelöscht falls folgende Bedingungen gelten:
 \item \emph{c)}  P2*P4*P8=0 
 \item \emph{d)}  P2*P6*P8=0
 \end{itemize}
+
 Nur die Bedingungen c und d haben sich geändert.\\
 Um die Bedingungen der ersten Subiteration zu erfüllen, muss
 P4=0 oder P6=0 oder (P2=0 und P8=0)  erfüllt sein.
-Dies impliziert dass P1 entweder Süd- oder Ost-Grenzpunkt, oder Nordwesteckpunkt ist.
-Um die Bedingungen der zweiten Subiteration zu erfüllen muss
+Dies impliziert dass P1 entweder Süd- oder Ost-Grenzpunkt, oder Nordwesteckpunkt ist.Um die Bedingungen der zweiten Subiteration zu erfüllen muss
 P2=0 oder P8=0 oder (P4=0 und P6=0) sein.
-P1 ist Nord- oder West-Grenzpunkt oder Südosteckpunkt.
+P1 ist Nord- oder West-Grenzpunkt oder Südosteckpunkt.\\
+
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
    \includegraphics[width=8cm]{Res/Orientierung.png}
   }
-   \caption{Betrachteten Nachbarpunkte in den Bedingungen c und d}
+   \caption{Betrachteten Nachbarpunkte in den Bedingungen c und d  }
 \end{figure}
+
+
+
+
 Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werden, so wird mit Bedingung B (A(P1)=1) die Auslöschung von Punkten zwischen den Endpunkten der Skelettlinie verhindert.\\
+
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
@@ -144,28 +143,29 @@ Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werde
    \caption{Gewährleistung der Pixelverbundenheit}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{./Res/AlgUebersicht}
-\caption{Gesamter Algorithmus in der Übersicht.}
-\label{fig:AlgUebersicht}
-\end{figure}
 
-%\begin{wrapfigure}{l}{0.48\textwidth} 
-%  \vspace{-20pt}
-%  \begin{center}
-%       \includegraphics[width=6cm]{Res/AlgUebersicht.png}
-%  \end{center}
-%  \vspace{-20pt}
-%  \caption{Gesamter Algorithmus in der Übersicht }
-%  \vspace{-10pt}
-%\end{wrapfigure}
 In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter=0 und der Algorithmus beendet, da es keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
 
 Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich null so wird der Vorgang iterativ fortgeführt.\\
+
+
+\begin{figure}[!ht]
+  \centering
+  \makebox[\textwidth]{%
+  \includegraphics[width=5cm]{Res/AlgUebersicht.png}
+  }
+   \caption{Gesamter Algorithmus in der Übersicht}
+\end{figure}
+
+
+
+
+
+
+
 \subsubsection{Resultate}
 
-Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit, und Rauschsicherheit bei Randpunkten. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen.
+Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit und Rauschverhalten der Randpunkte. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen.
 
 \newpage
 \section{Skelettierung mittels Distanztransformation}
