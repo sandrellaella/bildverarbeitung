@@ -114,8 +114,8 @@ für die Eckendetektion weiterverwendet. Ist der minimale Eigenwert einer Ecke k
 Qualitätsmaß, wird diese Ecke verworfen. Die verbleibenden Ecken werden nach ihrer Qualität absteigend sortiert. Anschließend wird überprüft, ob es in der spezifizierten Distanz Ecken gibt, die stärker sind. 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.4\linewidth]{./fig/features}
-\caption{Ergebnis der Funktion \texttt{goodFeaturesToTrack}. Die weißen Linien markieren das Rohskelett, die Kreise markieren die Features, die auf dem Skelett gefunden wurden. Qualitätslevel: 0.1 - gewünschte Anzahl von Ecken: 50 - minimale Distanz zwischen den Ecken: 10}
+\includegraphics[width=0.7\linewidth]{./fig/features.pdf}
+\caption{Ergebnis der Funktion \texttt{goodFeaturesToTrack}. Links: Originalbild. Rechts: Berechnetes Distanzskelett mit Features. Die roten Linien markieren das Rohskelett, die weißen Kreise markieren die Features, die auf dem Skelett gefunden wurden.}
 \label{fig:features}
 \end{figure}
 Abbildung \ref{fig:features} zeigt das Ergebnis der Berechnung. Die Kreise markieren die Feature-Punkte. Wie man erkennen kann, befinden sich die Features auf der Skelettlinie. Dies ist hilfreich für die weiteren
@@ -188,9 +188,9 @@ Für diese Punkte wird der nächste Nachbarpunkt bestimmt, der
 ebenfalls keinen Nachfolger besitzt. Es wird zwischen allen Punkten ohne Nachfolger den euklidischen Abstand bestimmt und der Punkt als nächsten Nachbar wählt, der den minimalen Abstand zu dem fest gewählten Punkt hat. In Abbildung \ref{fig:hand-punkte-ohne-nachfolger} wurden die Punkte ohne Nachfolger eingezeichnet. 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.4\linewidth]{./fig/hand-DFS-ohne-nachfolger}
+\includegraphics[width=0.4\linewidth]{./fig/zhks_gefaerbt}
 \caption{Das Skelett nach der ersten Verarbeitungsstufe. Das Skelett besitzt Zusammenhangskomponenten, die nicht 
-miteinander verbunden sind. Magentafarbene Kreise markieren die Punkte ohne Nachfolger}
+miteinander verbunden sind. Diese wurden farbig hervorgehoben. Magentafarbene Kreise markieren die Punkte ohne Nachfolger}
 \label{fig:hand-punkte-ohne-nachfolger}
 \end{figure}
 Diese befinden sich genau am Ende eines Pfades. Sie entsprechen den Blättern des Baumes, der bei der Tiefensuche für einen Startknoten entsteht. Das Skelett besitzt in dieser Abbildung fünf Zusammenhangskomponenten,
