@@ -1,23 +1,15 @@
 \chapter{Implementierung der Algorithmen}
 \Autor{Sandra Schröder}\\\\
-Dieses Kapitel beschreibt die Algorithmen für Thinning und die Distanztransformation.\\
+Im Rahmen des Projekts wurden zwei Algorithmen für die Skelettierung untersucht, implementiert entwickelt...\\
+In diesem Kapitel wird die Umsetzung der Algorithmen beschrieben vorgestellt...\\\\
+läuft in zwei schritten ab..Segmentierung, Skelettextraktion...\\
+segmentierung bei beiden anätzen identisch....
 Der Algorithmus erhält einen Videostream von Tiefenbilder der Kinect. Diese werden für die
 Skelettierung weiterverarbeitet. \\
 Bevor Skelettierungsalgorithmen angewendet werden können, muss ein Binärbild des Bildes erzeugt werden, 
 das die Kinect liefert. Dafür wurde eine Segmentierung implementiert, die Objekte, die sich vor der
 Kinect befinden, weiß markiert. Für die Segmentierung wurde nur die Tiefeninformation der Kinect genutzt.
 Anschließend werden die Algorithmen angewandt. 
-\begin{algorithm}
-\begin{algorithmic}[1]
-\Procedure{DoSkeletonization}{Image}
-\While{True}
-\State{Segmentiere Spieler}
-\State{Wende Thinning oder Distanztransformation an}
-\EndWhile
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-%TODO
 \section{Technische Umsetzung}
 \Autor{Christopher Kroll}
 Die meisten Programme wurden mit der Programmiersprache \emph{Python} umgesetzt. Aus Performanzgründen 

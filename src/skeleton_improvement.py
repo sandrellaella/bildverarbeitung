@@ -17,7 +17,7 @@ def calcGoodFeatures(image):
     
     
     corners = []
-    cornerCount = 30
+    cornerCount = 10
     qualityLevel = 0.1
     minDistance = 5
     

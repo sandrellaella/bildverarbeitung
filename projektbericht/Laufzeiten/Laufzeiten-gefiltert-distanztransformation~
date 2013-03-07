@@ -1,0 +1,29 @@
+Distanztransformation
+
+Erste Messung:
+46371 function calls in 16.723 CPU seconds
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+
+1    0.389    0.389   16.723   16.723 run.py:11(run)
+
+126    0.001    0.000    2.326    0.018 depth.py:14(get_depth)
+126    0.039    0.000    3.456    0.027 depth.py:28(get_better_depth)
+126    0.001    0.000    0.058    0.000 player_segmentation.py:36(dilate_image)
+126    0.309    0.002    0.453    0.004 player_segmentation.py:7(player_segmentation)
+126    0.221    0.002    9.594    0.076 skeletonization.py:20(distance_skeleton)
+126    0.103    0.001    8.960    0.071 skeletonization.py:47(pruning)
+
+Zweite Messung:
+38538 function calls in 12.888 CPU seconds
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+1    0.334    0.334   12.888   12.888 run.py:11(run)
+
+105    0.001    0.000    1.189    0.011 depth.py:14(get_depth)
+105    0.032    0.000    2.128    0.020 depth.py:28(get_better_depth)
+105    0.001    0.000    0.048    0.000 player_segmentation.py:36(dilate_image)
+105    0.256    0.002    0.375    0.004 player_segmentation.py:7(player_segmentation)
+105    0.183    0.002    8.003    0.076 skeletonization.py:20(distance_skeleton)
+105    0.082    0.001    7.478    0.071 skeletonization.py:47(pruning)
+

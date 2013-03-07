@@ -1,0 +1,24 @@
+Thinning
+
+Erste Messung:
+
+1424 function calls in 28.159 CPU seconds
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+1    0.002    0.002   28.159   28.159 run.py:11(run)
+
+29    0.000    0.000    0.013    0.000 player_segmentation.py:36(dilate_image)
+29    0.056    0.002    0.088    0.003 player_segmentation.py:7(player_segmentation)
+29   26.222    0.904   26.224    0.904 pythonWrapper.py:15(reflectimage_band)
+
+
+Zweite Messung:
+
+1277 function calls in 22.125 CPU seconds
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+1    0.002    0.002   22.125   22.125 run.py:11(run)
+
+26    0.000    0.000    0.012    0.000 player_segmentation.py:36(dilate_image)
+26    0.050    0.002    0.079    0.003 player_segmentation.py:7(player_segmentation)
+26   19.089    0.734   19.090    0.734 pythonWrapper.py:15(reflectimage_band)
