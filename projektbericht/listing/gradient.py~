@@ -1,0 +1,7 @@
+#Gradienten-Berechnung
+ndimage.gaussian_gradient_magnitude(skeleton_img_mat,
+			sigma,gradient_output)
+#Vor -und Nachbearbeitungen
+#Segmentierung
+cv.InRangeS(grad_img,lowerbound,upperbound,
+			dist_gradient_thresh)

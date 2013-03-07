@@ -1,0 +1,3 @@
+#Berechnung Differenzbild
+diff = dist_img_mat - dist_gradient_mat
+diff = diff * 1.0

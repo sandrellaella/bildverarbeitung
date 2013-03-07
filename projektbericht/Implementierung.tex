@@ -12,18 +12,67 @@ verwendeten Programmiersprachen und Arbeitsumgebungen.
 \Autor{Christopher Kroll}
 Die meisten Programme wurden mit der Programmiersprache \emph{Python} umgesetzt. Aus Performanzgründen 
 erfolgten einige Umsetzungen in \emph{C++}. -> oder in arbeitsumgebung rein?\\
+freenect, opencv, python, c++, numpy, spyder
 \section{Spieler-Segmentierung}
 \Autor{Sandra Schröder}\\\\
-Algorithmus oder nur beschreiben??\\
-Es wird nur anhand der Tiefe segmentiert. Um nicht für jeden einzelnen Pixel die Bedingung zu überprüfen, ob er den Schwellwert für die Segmentierung überschreitet beziehungsweise unterschreitet, wird die effiziente Numpy-Funktion \texttt{logical\_and} benutzt, die global auf dem Bild arbeitet und für das gesamte Bild die Schwellwertbedingung prüft. Für den Schwellwert werden zwei 
-Werte definiert, um ein Intervall festzulegen, in dem sich das Objekt befinden darf. 
-\section{Thinning}  % Würde ich mit anfangen da ich diese Woche fast keine Zeit mehr hab was zu machen (Johannes)
-\section{Skelettierung aus der Distanztransformation}
+Es wird anhand der Tiefeninformation segmentiert, die die Kinect liefert. Der Open-Source-Treiber für die Kinect - \emph{Freenect} - bietet Funktionen für den Zugriff auf die
+Tiefenwerte. Die Funktion \texttt{pretty\_depth} des Moduls
+\texttt{frame\_convert} normiert die Tiefenwerte auf das 
+Intervall $[0,...,255]$. 
+\lstset{
+caption={Tiefenwerte zurückgeben}
+\label{lst:getdepth}
+}
+\lstinputlisting{./listing/getdepth.py}
+Um nicht für jeden einzelnen Pixel die Bedingung zu überprüfen, ob er den Schwellwert für die Segmentierung überschreitet beziehungsweise unterschreitet, wird die effiziente Numpy-Funktion \texttt{logical\_and} benutzt, die global auf dem Bild arbeitet und für das gesamte Bild die Schwellwertbedingung prüft. Eine pixelgenaue Überprüfung wäre mit Python eine ineffiziente Lösung.\\ Für den Schwellwert werden zwei 
+Werte definiert, um ein Intervall festzulegen, in dem sich das Objekt befinden darf. In Listing \ref{lst:spielersegmentierung} legen die Variablen \texttt{current\_depth} und \texttt{threshold} das Intervall fest. 
+\lstset{
+caption={Spielersegmentierung in Python}
+\label{lst:spielersegmentierung}
+}
+\lstinputlisting{./listing/player_segmentation.py}
+Da die Funktion auf Numpy-Arrays arbeitet, muss das Bildobjekt zuvor in ein Array umgewandelt werden. 
+Es wurden vorgefertigte Funktionen von OpenCV benutzt, die diese Konvertierung vornehmen. 
+\section{Skelettierung mittels Thinning}  % Würde ich mit anfangen da ich diese Woche fast keine Zeit mehr hab was zu machen (Johannes)
+\section{Skelettierung mittels Distanztransformation}
 %Sandra
 \Autor{Sandra Schröder}\\\\
+Der theoretische Ablauf der Skelettierung wurde bereits im Kapitel \ref{ch:Skelettierung} beschrieben. Zur
+Rekapitulation werden die Schritte kurz aufgezählt. \\
 Die Skelettierung anhand der Distanztransformation läuft folgendermaßen ab:
 \begin{itemize}
 \item Bestimmen der Distanztransformation des Binärbildes
 \item Berechne den Gradientenbetrag auf der Distance Map
 \item Differenz zwischen dem Gradientenbild und der Distance Map bilden
 \end{itemize}
+Die Distance Map kann mit einer Funktion aus der Bildverarbeitungsbibliothek \emph{OpenCV} einfach berechnet
+werden. Die Funktion (Listing \ref{lst:disttransform}) erwartet als Eingabe das Originalbild (\texttt{img}) und ein Bild (\texttt{dist\_img}), um
+das Ergebnis speichern zu können (gleiche Größe und Dimension wie das Originalbild). Eine weitere Möglichkeit, die die Funktion bietet, ist die Angabe einer Metrik, nach der der Abstand eines Pixels zum
+Hintergrund bestimmt wird. Es wurde die euklidische Metrik benutzt.
+\lstset{
+caption={Berechnen der Distance Map des Spielers.}
+\label{lst:disttransform}
+}
+\lstinputlisting{./listing/distancetransform.py}
+Zur Bestimmung des Gradientenbetrages der Distance Map wurde die Numpy-Funktion \texttt{gaussian\_gradient\_magnitude} genutzt. Die Funktion berechnet den Gradientenbetrag mit Ableitungen
+der Gaussfunktion. Die Variable \texttt{sigma} ist dementsprechend für die Standardabweichung $\sigma$ 
+des Gaussfilters gedacht \footnote{Für weitere Dokumentationen siehe: http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.filters.gaussian\_gradient\_magnitude.html}. Das Ergebnis dieser Funktion wird in ein Bildobjekt
+konvertiert und entsprechend festgelegter Schwellwerte (\texttt{lowerbound}, \texttt{upperbound}) segmentiert.
+\lstset{
+caption={Gradientenbetrag der Distance Map und Segmentierung des Gradientenbetragsbildes.}
+\label{lst:gradient}
+}
+\lstinputlisting{./listing/gradient.py}
+Zur Differenzbildung und endgültigen Berechnung des Distanzskelettes werden die Bildobjekte in Arrays umgewandelt. 
+Diese Arrays können einfach voneinander abgezogen werden. 
+\lstset{
+caption={Differenz zwischen Distance Map und segmentiertem Gradientenbetrag}
+\label{lst:difference}
+}
+\lstinputlisting{./listing/difference.py}
+Bei der Implementierung wurden in keinem Fall Operationen ausgeführt, die auf einzelne Pixel zugreifen. Situationen, in denen
+pixelgenaue Operationen durchgeführt werden könnten, wurden
+umgangen, indem Arrayoperationen oder Funktionen aus der
+OpenCV-Bibliothek benutzt wurden. Ein pixelgenauer Zugriff
+könnte bei einer Interpretersprache wie Python zu einer sehr langsamen
+Ausführung der Skelettberechnung führen.

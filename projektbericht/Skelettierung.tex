@@ -1,17 +1,24 @@
 \chapter{Die Skelettierung}
 \label{ch:Skelettierung}
 \Autor{Sandra Schröder}\\\\
-TODO: Genaue Theorie zur Skelettierung. Eigenschaften. Abhängig von Verfahren blaaaaaaaaaaa
-Dieses Kapitel beschreibt bekannte Konzepte und Verfahren zur Skelettierung im Bereich der Bildverarbeitung.\\
-Eigenschaften eines Skeletts. Abhängig von der Anwendung, des Algorithmus, des Verfahrens... \\
-1 Pixel breit: Für Datenkomprimierung: man braucht nicht mehr als 1 Pixel für di Breite einer Linie, genügt
-um Form zu beschreiben, sonst unnötig viel Information...\\
-Zwei Verfahren sind im Rahmen der Projektarbeit besonders wichtig: Das \emph{Thinning} (deutsch: Verdünnung) und die \emph{Distanztransformation}. \\
+Unter einem Skelett kann man sich einen Deskriptor vorstellen, der die Grundzüge eines Objekts wiedergibt. Zur Erfassung von bestimmten Eigenschaften von Binärbildern vereinfachen Skelette im Allgemeinen die Analysen, da durch die Reduzierung der Daten unwesentliche Eigenschaften ausge-
+blendet werden. Es stellt sich jedoch die Frage, welche weiteren Kriterien es gibt, um die Qualität eines Skeletts besser bewerten zu können. Im Laufe
+der Entwicklung diverser Skelettierungsalgorithmen sind 
+immer mehr Anforderungen an Skelette entstanden. \\
+Ein wichtiges Merkmal ist die  \emph{Konnektivität} des Skeletts. Dies bedeutet, dass es keine Lücken und Unterbrechungen im Skelett gibt, denn ein zusammenhängendes Objekt sollte ein zusammenhängendes Skelett besitzen.\\
+Viele Skelettierungsverfahren fordern, dass ein Skelett genau ein Pixel breit ist. Dies ist beispielsweise in der Datenkomprimierung wichtig. Möchte man die Struktur eines
+Objektes mit möglichst wenig Pixeln speichern, genügt ein
+Skelett mit der minimal möglichen Pixelbreite. Eine breitere
+Skelettlinie könnte unter Umständen zu viele unnötige Informationen beinhalten. Des Weiteren sollte das Skelett zentriert im Objekt liegen. Das bedeutet, dass Abstand der
+Pixel der Skelettlinien nach links und nach rechts 
+möglichst gleich sein sollte.\\
+Topologische Eigenschaften sind Merkmale, die sich nicht explizit auf die konkrete Form einer Region beziehen, sondern auf ihre strukturellen Eigenschaften, die auch bei starken Verformungen erhalten bleiben.
+Da das Skelett als Deskriptor für die Form eines Objektes dient, diese Eigenschaften gut erhalten können. Dies 
+dient als Grundlage für die Rekonstruktion des ursprünglichen Objektes.  \\\\
+Dieses Kapitel beschreibt bekannte Konzepte und Verfahren zur Skelettierung im Bereich der Bildverarbeitung.
+Zwei Verfahren wurden im Rahmen der Projektarbeit genauer untersucht: Die Skelettierung mittels \emph{Thinning} und mittels \emph{Distanztransformation}. \\
 Um die Übersicht über die weiteren grundlegenden Verfahren und Konzepte zu vervollständigen, werden diese in einem separaten 
-Abschnitt kurz vorgestellt.\\
-Verfahren zur Skelettierung von Bildobjekten fordern bestimmte Eigenschaften an das Skelett \textbf{todo Quelle}. Das ist zum einen die \emph{Konnektivität} des Skeletts. Dies bedeutet, dass es keine Lücken und Unterbrechungen im Skelett gibt. Ein zusammenhängendes Objekt sollte ein zusammenhängendes Skelett besitzen. 
-Viele Skelettierungsverfahren fordern, dass ein Skelett genau 1 Pixel breit ist und \emph{zentriert} im ursprünglichen Objekt liegt. Zentiert bedeutet, dass der Abstand des Skeletts zum ursprünglichen Rand zu allen Seiten gleich groß ist.\\
-Da das Skelett als Deskriptor für die Form eines Objektes dient, sollte es die geometrischen Eigenschaften und die Topologie des Objektes gut wiedergeben können.\\
+Abschnitt kurz vorgestellt.
 \section{Skelettierung mittels Thinning}
 \Autor{Johannes Böhler}\\
 Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschliesslich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. 

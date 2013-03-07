@@ -1,0 +1,2 @@
+def get_depth():
+    return frame_convert.pretty_depth(freenect.sync_get_depth()[0])
