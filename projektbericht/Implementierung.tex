@@ -14,9 +14,10 @@ F"ur die Implementierung wurden die bereitgestellten iMacs am Informatikum in St
 Um die Verbindung zu der Kinect herzustellen, wurde das quelloffene Framework libfreenect  der OpenKinect-Gruppe benutzt. Libfreenect bietet Treiber und Bibliotheken, um zum Beispiel die Bilder der Kamera anzuzeigen oder den eingebauten Motor zu steuern. \\
 Um die empfangenen Bilder verarbeiteten zu k"onnen wurde die Bibliothek OpenCV eingesetzt. Sie unterst"utzt unter anderem beim Speichern und Laden von Bildern und bei der Segmentierung. \\
 Der Gro"steil der Programmiierung erfolgte in der Sprache Python. Hierbei handelt es sich um eine leicht zu erlernende Skriptsprache. Allerdings traten im Laufe des Projektes Performanzprobleme bei der Implementierung des Thinning-Algorithmus auf. Aus diesem Grund wurde "uber einen Python-Wrapper der in C++ implementierte Algorithmus eingebaut. N"aheres dazu wird in Kapitel \ref{implThinning} beschrieben.
-Als Entwicklungsumgebung wurde spyder f"ur die Python-Programmierung und Xcode f"ur die C++-Programmierung benutzt.
+Als Entwicklungsumgebung wurde Spyder f"ur die Python-Programmierung und Apples Xcode f"ur die C++-Programmierung benutzt.
 TODO numpy
 \section{Spieler-Segmentierung}
+\label{segmentierung}
 \Autor{Sandra Schröder}\\\\
 Es wird anhand der Tiefeninformation segmentiert, die die Kinect liefert. Der Open-Source-Treiber für die Kinect - \emph{Freenect} - bietet Funktionen für den Zugriff auf die
 Tiefenwerte. Die Funktion \texttt{pretty\_depth} des Moduls
@@ -38,8 +39,18 @@ Da die Funktion auf Numpy-Arrays arbeitet, muss das Bildobjekt zuvor in ein Arra
 Es wurden vorgefertigte Funktionen von OpenCV benutzt, die diese Konvertierung vornehmen. 
 \section{Skelettierung mittels Thinning} 
 \label{implThinning}
-\Autor{Christopher Kroll}
-Da man sich schon durch den Seminarteil mit dem Algorithmus 'A Fast Parallel Algorithm for Thinning Digital Patterns' besch"aftigte, fiel die Wahl des Thinning-Algorithmus zun"achst auf diesen.
+\Autor{Christopher Kroll} \\ \\
+Da man sich schon durch den Seminarteil mit dem Algorithmus 'A Fast Parallel Algorithm for Thinning Digital Patterns' besch"aftigte, fiel die Wahl des Thinning-Algorithmus zun"achst auf diesen. \\
+Der Algorithmus arbeitet mit Bin"arbildern, also alle Objektpixel sind auf 1, bzw. 255 gesetzt und alle Hintergrundpixel auf 0. Die in Kapitel \ref{segmentierung} vorgestellte Spieler-Segmentierung liefert jedoch ein Grauwertbild. So war nun der erste Schritt dieses Bild in ein Bin"arbild umzuwandeln. Die Idee war das zweidimensionale Grauwertbildarray mit zwei Schleifen zu durchlaufen und jeden Wert, der gr"o"ser als 128 ist auf 255 zu setzen. Jeder Wert der kleiner oder gleich 128 ist, wird auf 0 gesetzt (siehe Listing \ref{lst:grayscaleToBinary}). 
+\lstset{
+caption={Binarisierung des Grauwertbildes.}
+\label{lst:grayscaleToBinary}
+}
+\lstinputlisting{./listing/grayscaleToBinary.py}
+So erhalten wir ein Array, das nur aus den Werten 0 und 255 besteht. Das Problem dabei war allerdings die nicht ausreichende Leistungsf"ahigkeit von Python. Schon bei diesen zwei ineinander verschachtelten Schleifen bestand keine Echtzeitf"ahigkeit mehr. Ohne auch nur den iterativen - und somit rechenintensiven - Thinning-Algorithmus eingesetzt zu haben stockte das Ergebnisbild zu stark. Aus diesem Grund musste eine Alternative zu Python gefunden werden. Die Wahl fiel auf die leistungsst"arkere Compilersprache C++. \\ \\
+TODO quelle heraussuchen vergleich python-c++?
+\\ \\
+Nun sollten jedoch nicht zwei unterschiedliche Programme entstehen - Distanztransformation mit Python und Thinning mit C++ und die Spieler-Segmentierung in Python sollte auch f"ur die Thinning-Skelettierung benutzt werden. Die L"osung war die M"oglichkeit der Anbindung von Python an eine andere Programmiersprache, in diesem Fall C++.
 
 \section{Skelettierung mittels Distanztransformation}
 %Sandra
