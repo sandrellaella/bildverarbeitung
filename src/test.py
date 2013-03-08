@@ -59,7 +59,7 @@ img = cv.LoadImage("person.jpg")
 diff_img, features, dist_gradient, dist_img = test(img)
 skeleton_improvement.drawFeatures(features,diff_img)
 #comparison.connectFeatures(diff_img,features,10)
-neighbours = skeleton_improvement.startConnect(features,20,5,img)
+neighbours = skeleton_improvement.startConnect(features,20,img)
 #skeleton_improvement.connectDFS(features)
 print img.depth
 diff_img_arr = image_conversion.cv2array(diff_img)

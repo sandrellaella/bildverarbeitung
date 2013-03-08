@@ -39,20 +39,28 @@
 \usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{amssymb} %mathe-symbole
+\usepackage{xcolor}
 
 
 
 
 \lstset{
-	basicstyle=\ttfamily,
+	%basicstyle=\ttfamily,
+	basicstyle=\ttfamily\scriptsize,
 	frame=single,
+	frameround=tttt,
 	numbers=left,
 	language=python,
 	breaklines=true,
 	breakatwhitespace=true,
 	postbreak=\hbox{$\hookrightarrow$ },
 	showstringspaces=false,
-	tabsize=4
+	tabsize=1,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	%identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+    xleftmargin=\parindent
 }
 
 \renewcommand*{\lstlistlistingname}{Listingverzeichnis}
@@ -116,14 +124,7 @@
 \bibliographystyle{alpha}
 \bibliography{literatur}
 
-%\appendix       %Beginn des Anhangs
-%\chapter{Quellcode}
-%\label{anhang:quellcode}
-%\section{Verbesserung der Skelettqualität}
-% \lstinputlisting
-%    [caption={Breitensuche}
-%       \label{lst:javaclass},
-%       captionpos=t,language=python]
-% {../src/skeleton_improvement.py}
+\appendix       %Beginn des Anhangs
+\include{anhang}
 
 \end{document}
