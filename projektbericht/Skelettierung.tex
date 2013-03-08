@@ -279,8 +279,9 @@ Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu
 \label{fig:paper_ergebnis}
 \end{figure}
 \section{Weitere Verfahren}
-\Autor{Christopher Kroll}\\
-Neben Thinning und Distanztransformation bilden Algorithmen, die auf kritische Punkte basieren, die dritte Kategorie. Hier werden kritische, bzw. wichtige Punkte detektiert, die dann zu einem Skelett verbunden werden. Zwei Vertreter dieser Kategorie sind der einfache Kritische-Punkte-ANsatz und die Triangulations-Technik. 
+\Autor{Christopher Kroll}\\ \\
+Neben Thinning und Distanztransformation bilden Algorithmen, die auf kritische Punkte basieren, die dritte Kategorie. Hier werden kritische, bzw. wichtige Punkte detektiert, die dann zu einem Skelett verbunden werden. Zwei Vertreter dieser Kategorie sind der einfache Kritische-Punkte-Ansatz und die Triangulations-Technik. \\ 
+Beim einfachen Kritische-Punkte-Ansatz wird das Quellbild spalten- oder zeilenweise durchgegangen. Werden Objektpixel gefunden, so wird die Mitte dieses 'Objektpixelblocks' markiert. Dies sind die kritischen Punkte, die nach der Markierung verbunden werden und somit das Skelett bilden. Ein Nachteil dieses Ansatzes ist, dass abh"angig von der Lage des Objektes und der Wahl, ob das Quellbild zeilen- oder spaltenweise durchlaufen wird unterschiedliche Ergebnisse erzielt werden, das Verfahren ist somit nicht isotrop.
 TODO naeher beschreiben, drauf eingehen
 \\ \\
 Zu erw"ahnen ist au"serdem, dass es neben diesen drei vorgestellten Skelettierungskategorien noch weitere Algorithmen gibt, die jedoch sehr speziell und sich dadurch schwer kategorisieren lassen (zum Beispiel das Hamilton-Jacobi-Skelett).
