@@ -1,5 +1,6 @@
 \chapter{Quellcode}
 \label{anhang:quellcode}
+Hier werden die wichtigsten Ausschnitte des Quellcodes gezeigt. 
 \section{Skelettierung - Startup}
  \lstinputlisting
     [caption={Startup}
@@ -27,4 +28,22 @@
        \label{lst:breitensuche},
        captionpos=t,language=python]
  {./listing/fuerAnhang/skeleton_improvement.py}
+ \newpage
 \subsection{Tiefensuche}
+\lstinputlisting
+    [caption={Verbinden der Zusammenhangskomponenten, die mit der Tiefensuche gefunden wurden.}
+       \label{lst:connectcomponents},
+       captionpos=t,language=python]
+ {./listing/fuerAnhang/connectComponents2.py}
+ 
+ \lstinputlisting
+     [caption={Die Tiefensuche.}
+        \label{lst:tiefensuche},
+        captionpos=t,language=python]
+  {./listing/fuerAnhang/dfs.py}
+  
+ \lstinputlisting
+      [caption={Finden des nächstgelegenen Punktes.}
+         \label{lst:findnextfeature},
+         captionpos=t,language=python]
+   {./listing/fuerAnhang/nextfeature.py}

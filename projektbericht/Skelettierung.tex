@@ -220,7 +220,7 @@ Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimen
 Um endgültig nur die Skelettlinie zu erhalten, wird die Differenz
 zwischen der Distance Map und dem segmentierten Gradientenbetragsbild gebildet. Der Teil der Distance Map der nicht
 auf der höchsten Stelle des Grauwertgebirges liegt hat entweder einen Grauwert kleiner oder gleich $255$. Bei
-der Differenzbildung kann der Grauwert dieser Pixel nur negativ werden, da von diesen Grauwerten der Grauwert $255$ abgezogen wird (weißer Bereich des segmentierten Gradientenbetragsbildes). Negative
+der Differenzbildung kann der Grauwert dieser Pixel nur kleiner gleich 0 werden, da von diesen Grauwerten der Grauwert $255$ abgezogen wird (weißer Bereich des segmentierten Gradientenbetragsbildes). Negative
 Grauwerte werden auf $0$ gesetzt. Als Ergebnis erhält man die Skelettlinie mit Grauwerten ungleich $0$. 
 %\begin{figure}
 %\centering

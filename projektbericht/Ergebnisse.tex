@@ -47,7 +47,7 @@ Obwohl der Thinning-Algorithmus bezüglich der gewünschten Eigenschaften von Sk
 liefert, ist er deutlich langsamer als die Skelettierung mittels
 Distanztransformation. Diese nimmt etwa $60\%$ der Gesamtlaufzeit
 des Programms ein, während die Skelettierung nach Thinning etwa
-$92\%$ der gesamten Programmlaufzeit beansprucht. %TODO: Kann man das so messen?? -> Christian fragen
+$92\%$ der gesamten Programmlaufzeit beansprucht.
 \begin{table}[htbp]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
@@ -82,7 +82,6 @@ $92\%$ der gesamten Programmlaufzeit beansprucht. %TODO: Kann man das so messen?
 \caption{Laufzeiten Skelettierung mittels Thinning}
 \label{tab:laufzeiten_thinning}
 \end{table}
-%TODO: Laufzeiten...
 \newpage
 \section{Distanztransformation - Verbesserung der Skelettqualität}
 \label{sec:verbesserung}
@@ -130,7 +129,8 @@ Mittels Breitensuche sollen Pfade zwischen den markanten Punkten auf dem Skelett
 Knoten wird ein Nachbarschaftsmaß definiert. Abbildung \ref{fig:suchdistanz_naechster_nachbar} zeigt, wie überprüft wird, ob ein Punkt in einem festgelegten Intervall des Punktes $(x,y)$ liegt. Es wird eine Suchdistanz für beide Richtungen festgelegt. Sie
 wird entsprechend der minimalen Distanz, die zwischen markanten Punkten erlaubt ist, gewählt (Abschnitt \ref{subsec:features}). \\
 Erst wird in x-Richtung gesucht, dann in y-Richtung. Fällt der Punkt in das Intervall, wird er als besucht markiert und
-mit dem Punkt $(x,y)$ verbunden. In Anhang \ref{anhang:quellcode} befindet sich der Quellcode zur Breitensuche.
+mit dem Punkt $(x,y)$ verbunden. 
+In Anhang \ref{anhang:quellcode} befindet sich der Quellcode zur Breitensuche. Die Zeilen $78$/$79$ von Listing \ref{lst:breitensuche} zeigen die Umsetzung des Suchkreuzes aus der Abbildung. 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/suchdistanz_naechster_nachbar}
@@ -162,7 +162,7 @@ Wie bei der Breitensuche wird ausgehend von einem Startknoten ein Graph nach wei
 Im Gegensatz zur Breitensuche erfolgt das Traversieren des Graphens in die Tiefe. Wurde ein Nachfolgeknoten
 gefunden, wird für diesen weiter geprüft, ob er ebenfalls einen Nachfolgeknoten besitzt. Dies wird
 solange wiederholt (rekursiv) bis kein Nachfolgeknoten mehr gefunden werden kann. Mittels \emph{Backtracking} wird der Pfad zurückverfolgt. Anschließend wird ein neuer Knoten als Startpunkte gesucht, der noch nicht besucht wurde und das Durchsuchen nach nächsten Nachbarn wird für diesen Knoten wiederholt.\\
-Die Suche nach dem nächsten Nachbarn funktioniert wie bei der Breitensuche (Abbildung \ref{fig:suchdistanz_naechster_nachbar}). Der Quellcode zum Algorithmus befindet sich im Anhang \ref{anhang:quellcode}. \\
+Die Suche nach dem nächsten Nachbarn funktioniert wie bei der Breitensuche (Abbildung \ref{fig:suchdistanz_naechster_nachbar}). \\
 Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass es noch Lücken im Skelett gibt, was auf die Suchdistanz zurückzuführen ist. Ist sie zu klein, können keine weiteren Punkte im Umkreis des aktuellen Punktes gefunden werden und der Algorithmus endet für diesen Pfad. 
 \begin{figure}[htbp]
 	\centering
@@ -178,41 +178,36 @@ Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass e
 	\caption{Ergebnis der Tiefensuche.}
 	\label{fig:hand_DFS}
 	\end{figure}\\
-Das Skelett, welches aus der Tiefensuche entsteht, bedarf demnach einer Nachbearbeitung. \\
+Um die Konnektivität des Skeletts zu gewährleisten, muss das Skelett nachbearbeitet werden. \\
 Das Skelett, welches aus der ersten Stufe der Verbesserung entstanden ist, besitzt Zusammenhangskomponenten. Innerhalb der Zusammenhangskomponenten ist die Pixelkonnektivität gewährleistet, die globale Konnektivität zwischen den Komponenten jedoch nicht. Die Idee des
 nächsten Verbesserungsschrittes ist es, die Zusammenhangskomponenten
 zu verbinden, die am nächsten beieinander liegen. Dazu werden
-die Punkte aus den Zusammenhangskomponenten extrahiert, die
-keinen Nachfolger besitzen. 
+die Punkte aus den Zusammenhangskomponenten extrahiert, die die Endpunkte der Komponenten sind. Das sind
+entweder Punkte ohne Vorgänger oder ohne Nachfolger. 
 Für diese Punkte wird der nächste Nachbarpunkt bestimmt, der
-ebenfalls keinen Nachfolger besitzt. Es wird zwischen allen Punkten ohne Nachfolger den euklidischen Abstand bestimmt und der Punkt als nächsten Nachbar wählt, der den minimalen Abstand zu dem fest gewählten Punkt hat. In Abbildung \ref{fig:hand-punkte-ohne-nachfolger} wurden die Punkte ohne Nachfolger eingezeichnet. 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.4\linewidth]{./fig/zhks_gefaerbt}
-\caption{Das Skelett nach der ersten Verarbeitungsstufe. Das Skelett besitzt Zusammenhangskomponenten, die nicht 
-miteinander verbunden sind. Diese wurden farbig hervorgehoben. Magentafarbene Kreise markieren die Punkte ohne Nachfolger}
-\label{fig:hand-punkte-ohne-nachfolger}
-\end{figure}
-Diese befinden sich genau am Ende eines Pfades. Sie entsprechen den Blättern des Baumes, der bei der Tiefensuche für einen Startknoten entsteht. Das Skelett besitzt in dieser Abbildung fünf Zusammenhangskomponenten,
+ebenfalls ein Endpunkt einer Komponente ist. Zwischen den Endpunkten der aktuell betrachteten Komponente und den Endpunkten anderer Komponenten wird der euklidischen Abstand bestimmt und der Punkt als nächsten Nachbar gewählt, der den minimalen Abstand zu dem fest gewählten Punkt hat. Wichtig ist, dass nur Punkte
+verbunden werden, die jeweils auf unterschiedlichen Zusammenhangskomponenten liegen. Welcher Punkt auf welcher Komponente liegt, wird bereits bei der Tiefensuche bestimmt. 
+In Abbildung \ref{fig:offeneenden} wurden die Endpunkte farbig markiert. Dies sind
+alles Kandidaten zum Verbinden der Komponenten. Das Skelett besitzt in dieser Abbildung fünf Zusammenhangskomponenten,
 wobei eine Zusammenhangskomponente aus genau einem Punkt besteht
-(auf dem Ringfinger der Hand).\\
-Des Weiteren sollten nur Punkte miteinander verbunden werden, die
-nicht auf der gleichen Zusammenhangskomponente liegen. Dafür wird
-überprüft, ob Punkte die gleiche Wurzel besitzen. Ist dies der 
-Fall, liegen sie auf der gleichen Zusammenhangskomponente. \\
-Abbildung \ref{fig:hand-DFS-endergebnis} zeigt das Endergebnis 
-des zweiten Verbesserungsschrittes. 
-\begin{figure}[htbp]
+(auf dem Ringfinger der Hand). Dieser Punkt besitzt weder einen Vorgänger noch einen Nachfolger.
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.4\linewidth]{./fig/hand-DFS-endergebnis}
-\caption{Ergebnis der Tiefensuche. Die weiße Linie ist das Skelett,
+\includegraphics[width=0.4\linewidth]{./fig/offeneEnden.png}
+\caption{Zusammenhangskomponenten und ihre Endpunkte.}
+\label{fig:offeneenden}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\linewidth]{./fig/dfs-endergebnis-hand2.png}
+\caption{Ergebnis des zweiten Verarbeitungsschrittes der Tiefensuche. Die weiße Linie ist das Skelett,
 das aus dem ersten Verarbeitungsschritt entstanden ist. Die grünen
-Linien sind die Verbindungen zwischen den Zusammenhangskomponenten,
-die sich am nächsten sind und deren Punkte (ohne Nachfolger) nicht
-auf der gleichen Zusammenhangskomponente liegen.}
+Linien sind die Verbindungen zwischen den Zusammenhangskomponenten.}
 \label{fig:hand-DFS-endergebnis}
 \end{figure}
-\clearpage
+Abbildung \ref{fig:hand-DFS-endergebnis} zeigt, wie die Zusammenhangskomponenten miteinander verbunden
+wurden. Es wurden immer die Zusammenhangskomponenten miteinander verbunden, die sich am nächsten liegen.
+Nun ist die Skelettkonnektivität gegeben.
 \section{Fazit}
 Beide Algorithmen (Thinning und Distanztransformation) liefern 
 Skelette. Diese realisieren die gewünschten Eigenschaften eines
@@ -225,6 +220,3 @@ Da es sich um einen Ansatz handelt, der nach der Projektzeit
 entstanden ist, wurde der Ansatz nicht auf der Kinect, sondern auf
 statischen Bildern getestet. \\
 Laufzeit...
-%1. Beide Algorithmen liefern Skelette.
-%2. Skelettqualität unterschiedlich. Bei Thinning hervorragend. Bei Dist.Trans. vor allem Pixelkonnektivät nicht vollständig gegeben. Es wurden Verbesserungsmöglichkeiten diskutiert, die auch zur globalen Pixelkonnektivität führen.
-%3. Auch mit diesen Verbessungen sollte der Dist.Trans mit etwa der vierfachen Geschwindigkeit laufen. Trotzdem mit Interpretersprache programmiert! (Im Vergleich zu Thinning.)
