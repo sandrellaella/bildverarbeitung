@@ -9,10 +9,13 @@ Die Segmentierung des Spielers ist bei beiden Ansätzen identisch.
 In diesem Kapitel wird die Umsetzung der Algorithmen anhand signifikanten Codeausschnitten der Implementierungen vorgestellt. Ein Überblick über die technische Umsetzung gibt einen Eindruck über die
 verwendeten Programmiersprachen und Arbeitsumgebungen.
 \section{Technische Umsetzung}
-\Autor{Christopher Kroll}
-Die meisten Programme wurden mit der Programmiersprache \emph{Python} umgesetzt. Aus Performanzgründen 
-erfolgten einige Umsetzungen in \emph{C++}. -> oder in arbeitsumgebung rein?\\
-freenect, opencv, python, c++, numpy, spyder
+\Autor{Christopher Kroll}\\
+F"ur die Implementierung wurden die bereitgestellten iMacs am Informatikum in Stellingen gew"ahlt. Der Vorteil war neben der Performanz die schon eingerichtete Arbeitsumgebung.\\
+Um die Verbindung zu der Kinect herzustellen, wurde das quelloffene Framework libfreenect  der OpenKinect-Gruppe benutzt. Libfreenect bietet Treiber und Bibliotheken, um zum Beispiel die Bilder der Kamera anzuzeigen oder den eingebauten Motor zu steuern. \\
+Um die empfangenen Bilder verarbeiteten zu k"onnen wurde die Bibliothek OpenCV eingesetzt. Sie unterst"utzt unter anderem beim Speichern und Laden von Bildern und bei der Segmentierung. \\
+Der Gro"steil der Programmiierung erfolgte in der Sprache Python. Hierbei handelt es sich um eine leicht zu erlernende Skriptsprache. Allerdings traten im Laufe des Projektes Performanzprobleme bei der Implementierung des Thinning-Algorithmus auf. Aus diesem Grund wurde "uber einen Python-Wrapper der in C++ implementierte Algorithmus eingebaut. N"aheres dazu wird in Kapitel \ref{implThinning}
+Als Entwicklungsumgebung wurde spyder f"ur die Python-Programmierung und Xcode f"ur die C++-Programmierung benutzt.
+TODO numpy
 \section{Spieler-Segmentierung}
 \Autor{Sandra Schröder}\\\\
 Es wird anhand der Tiefeninformation segmentiert, die die Kinect liefert. Der Open-Source-Treiber für die Kinect - \emph{Freenect} - bietet Funktionen für den Zugriff auf die
@@ -33,7 +36,10 @@ caption={Spielersegmentierung in Python}
 \lstinputlisting{./listing/player_segmentation.py}
 Da die Funktion auf Numpy-Arrays arbeitet, muss das Bildobjekt zuvor in ein Array umgewandelt werden. 
 Es wurden vorgefertigte Funktionen von OpenCV benutzt, die diese Konvertierung vornehmen. 
-\section{Skelettierung mittels Thinning}  % Würde ich mit anfangen da ich diese Woche fast keine Zeit mehr hab was zu machen (Johannes)
+\section{Skelettierung mittels Thinning} 
+\label{implThinning}
+\Autor{Christopher Kroll}
+
 \section{Skelettierung mittels Distanztransformation}
 %Sandra
 \Autor{Sandra Schröder}\\\\
