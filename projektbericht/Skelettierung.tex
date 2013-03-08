@@ -17,10 +17,12 @@ Zwei Verfahren wurden im Rahmen der Projektarbeit genauer untersucht: Die Skelet
 Um die Übersicht über die weiteren grundlegenden Verfahren und Konzepte zu vervollständigen, werden diese in einem separaten 
 Abschnitt kurz vorgestellt.
 \section{Skelettierung mittels Thinning}
-\Autor{Johannes Böhler}\\
-Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschliesslich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. 
+\Autor{Johannes Böhler, Christopher Kroll}\\ \\
+Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschlie"slich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. \\ \\
+Alle Thinning-Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche. Dabei werden nach und nach die Konturpixel, also die Objektpixel, die mit den Hintergrundpixeln benachbart sind, "uberpr"uft. Je nach Algorithmus liegen verschiedene Kriterien vor, ob diese gel"oscht, also als Hintergrundpixel markiert werden k"onnen. Ein Kriterium ist auf jeden Fall, dass die Zusammengeh"origkeit der Skelettpixel bewahrt wird. Eine weitere Gemeinsamkeit der unterschiedlichen Ans"atze ist, dass das Ausd"unnen solange stattfindet, bis am Objekt keine "Anderung mehr gemacht wurde.
 
-Alle Thinning Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche.
+Beim Thinning wird die Zusammengeh"origkeit nicht ver"andert, wodurch die topologische Struktur des Objektes erhalten bleibt. 
+
 \subsection{A Fast Parallel Algorithm for Thinning Digital Patterns} 
 \Autor{Johannes Böhler}\\\\
 \label{subsec:fastparallel}
