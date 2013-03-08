@@ -1,20 +1,17 @@
 \chapter{Die Skelettierung}
 \label{ch:Skelettierung}
 \Autor{Sandra Schröder}\\\\
-Unter einem Skelett kann man sich einen Deskriptor vorstellen, der die Grundzüge eines Objekts wiedergibt. Zur Erfassung von bestimmten Eigenschaften von Binärbildern vereinfachen Skelette im Allgemeinen die Analysen, da durch die Reduzierung der Daten unwesentliche Eigenschaften ausge-
-blendet werden. Es stellt sich jedoch die Frage, welche weiteren Kriterien es gibt, um die Qualität eines Skeletts besser bewerten zu können. Im Laufe
-der Entwicklung diverser Skelettierungsalgorithmen sind 
-immer mehr Anforderungen an Skelette entstanden. \\
-Ein wichtiges Merkmal ist die  \emph{Konnektivität} des Skeletts. Dies bedeutet, dass es keine Lücken und Unterbrechungen im Skelett gibt, denn ein zusammenhängendes Objekt sollte ein zusammenhängendes Skelett besitzen.\\
+Unter einem Skelett versteht man einen Deskriptor, der die topologischen Eigenschaften eines Objekts beschreibt. Das sind Merkmale, die sich nicht explizit auf die konkrete Form einer Region beziehen, sondern auf ihre strukturellen Eigenschaften, die auch bei starken Verformungen erhalten bleiben. Zur Erfassung von bestimmten Eigenschaften von Binärbildern vereinfachen Skelette die Analysen, da durch die Reduzierung der Daten unwesentliche Eigenschaften ausgeblendet werden. Diese Abstraktion von für die Anwendung unwichtigen Eigenschaften ist eine zentrale Eigenschaft des Skelettes beziehungsweise eines Deskriptors im Allgemeinen. 
+Historisch sind im Laufe der Entwicklung diverser Skelettierungsalgorithmen 
+immer mehr konkrete Anforderungen an Skelette entstanden. \\
+Eine wichtige Anforderung ist die  \emph{Konnektivität} des Skeletts. Dies bedeutet, dass es keine Lücken und Unterbrechungen im Skelett gibt, denn ein zusammenhängendes Objekt sollte ein zusammenhängendes Skelett besitzen.\\
 Viele Skelettierungsverfahren fordern, dass ein Skelett genau ein Pixel breit ist. Dies ist beispielsweise in der Datenkomprimierung wichtig. Möchte man die Struktur eines
 Objektes mit möglichst wenig Pixeln speichern, genügt ein
 Skelett mit der minimal möglichen Pixelbreite. Eine breitere
 Skelettlinie könnte unter Umständen zu viele unnötige Informationen beinhalten. Des Weiteren sollte das Skelett zentriert im Objekt liegen. Das bedeutet, dass Abstand der
 Pixel der Skelettlinien nach links und nach rechts 
 möglichst gleich sein sollte.\\
-Topologische Eigenschaften sind Merkmale, die sich nicht explizit auf die konkrete Form einer Region beziehen, sondern auf ihre strukturellen Eigenschaften, die auch bei starken Verformungen erhalten bleiben.
-Da das Skelett als Deskriptor für die Form eines Objektes dient, diese Eigenschaften gut erhalten können. Dies 
-dient als Grundlage für die Rekonstruktion des ursprünglichen Objektes.  \\\\
+In wie weit alle Anforderungen an das Skelett erfüllt sein müssen, ist allerdings für jeden Anwendungfall neu zu diskutieren.
 Dieses Kapitel beschreibt bekannte Konzepte und Verfahren zur Skelettierung im Bereich der Bildverarbeitung.
 Zwei Verfahren wurden im Rahmen der Projektarbeit genauer untersucht: Die Skelettierung mittels \emph{Thinning} und mittels \emph{Distanztransformation}. \\
 Um die Übersicht über die weiteren grundlegenden Verfahren und Konzepte zu vervollständigen, werden diese in einem separaten 
@@ -169,10 +166,11 @@ Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit und Raus
 
 \newpage
 \section{Skelettierung mittels Distanztransformation}
+\label{sec:distanztransformation}
 \Autor{Sandra Schröder}\\\\
 Die Distanztransformation eines Binärbildes enthält Informationen über den Abstand der Objektpixel zum Hintergrund. Der Abstand zum Hintergrund wird für jeden Objektpixel bestimmt und in einem
 weiteren Bild (gleiche Dimension und Größe wie das Binärbild) als Grauwert an der Stelle des Objektpixels gespeichert. Das Ergebnis ist die sogenannte \emph{Distance Map} (Abbildung \ref{fig:distance_map_beispiel}). \\
-Zur Bestimmung des Abstands benötigt man Metriken. Eine gängige Metrik - die für den Algorithmus im Rahmen dieser Arbeit auch genutzt wurde - ist die euklidische Metrik $d_2$ (Gleichung \ref{eq:d2}):
+Zur Bestimmung des Abstands benötigt man Metriken. Eine gängige Metrik - die für den Algorithmus im Rahmen dieser Arbeit auch genutzt wurde - ist die euklidische Metrik $d_2$:
 \begin{equation}
 \label{eq:d2}
 d_2(p,q) = \sqrt{(p_x - q_x)^2 + (p_y - q_y)^2}  
@@ -183,11 +181,10 @@ ebenfalls eine Rolle. Wählt man eine
 vier Abstände. In der Distance Map wird der minimale Abstand von den vier Werten gespeichert. Bei einer 8er-Nachbarschaft
 kommen die diagonalen Richtungen dazu. Abhängig von der gewählten
 Nachbarschaft und der Metrik ergeben sich unterschiedliche Distance
-Maps.\\
-Die Distance Map wird zur Extraktion des Skeletts benutzt. Die
-Pixel die im Objekt beziehungsweise in Objektregionen mittig liegen, besitzen den größten Abstand zum Hintergrund relativ zu den unmittelbaren Pixeln. Die Pixel mit dem größten Abstand sind dementsprechend die hellsten Pixel in der Distance Map. Die umgebenden Pixel haben einen kleineren Grauwert und der Grauwert der Pixel verringert sich, je näher die Pixel am Hintergrund liegen. Die Distance Map ist ein \emph{Grauwertgebirge}. Der hellste
-Teil der Distance Map beschreibt eine skelettförmige Struktur.
-\label{sec:distanztransformation}
+Maps.\\\\
+Die Pixel mit dem größten Abstand zum ersten Pixel des Hintergrunds sind die hellsten Pixel in der Distance Map. Die umgebenden Pixel haben einen kleineren Grauwert und der Grauwert der Pixel verringert sich, je näher die Pixel am Hintergrund liegen.
+Dementsprechend beschreiben die hellsten Pixel des \emph{Grauwertgebirges} eine skelettförmige Struktur, die im Folgenden aus extrahiert werden soll.
+Wir verfolgen einen Ansatz, der auf der Bildung des Gradienbetrages der Distance Map beruht.\\
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{4cm}
@@ -215,21 +212,23 @@ Die Idee ist, den Gradienten beziehungsweise den Gradientenbetrag der Distance M
       \end{bmatrix}
 %  \]
 \end{equation}
-Entsprechend der Definition des Gradienten, ist an der höchsten Stelle des Grauwertgebirges der Gradientenbetrag gleich null.\\
+Entsprechend der Definition des Gradienten, ist an den lokalen Maxima des Grauwertgebirges der Gradientenbetrag gleich null.\\
 Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimension und Größe wie die Distance Map, wird der Gebirgskamm als Linie mit kleinen Grauwerten (fast Null) kodiert. Diese markiert das Skelett. Eine schwellwerbasierte Segmentierung des Gradientenbetragbildes bewirkt, dass die Skelettlinien schwarz sind. Andere Bereiche, die größer als der Schwellwert sind und somit nicht zum Skelett gehören erhalten den Grauwert $255$ (weiß). 
 Um endgültig nur die Skelettlinie zu erhalten, wird die Differenz
 zwischen der Distance Map und dem segmentierten Gradientenbetragsbild gebildet. Der Teil der Distance Map der nicht
 auf der höchsten Stelle des Grauwertgebirges liegt hat entweder einen Grauwert kleiner oder gleich $255$. Bei
 der Differenzbildung kann der Grauwert dieser Pixel nur kleiner gleich 0 werden, da von diesen Grauwerten der Grauwert $255$ abgezogen wird (weißer Bereich des segmentierten Gradientenbetragsbildes). Negative
 Grauwerte werden auf $0$ gesetzt. Als Ergebnis erhält man die Skelettlinie mit Grauwerten ungleich $0$. 
+Im Folgenden wird das aus der Distanztransformation bestimmte Skelett zur Abgrenzung zum Thinning-Algorithmus als \emph{Distanzskelett} bezeichnet.
 %\begin{figure}
 %\centering
 %\includegraphics[width=1.0\linewidth]{./fig/skelettierung-prinzip}
 %\caption{Die Idee der Skelettierung mittels Distanztransformation.}
 %\label{fig:skelettierung-prinzip}
 %\end{figure}
-\subsection{Extracting Skeletons From Distance Maps}
+\subsection{Verwandte Arbeit \cite{extracting_skeletons_distancemaps}: Extracting Skeletons From Distance Maps}
 \Autor{Sandra Schröder}\\\\ 
+Zur oben beschrieben Berechnung des Skelettes aus einer Distance Map gibt es verwandte Arbeiten, von denen nun eine vorgestellt wird. 
 In dem Paper \emph{Extracting Skeletons from Distance Maps} beschreibt der Autor einen Algorithmus, der effizient und schnell
 aus einem distanztransformierten Bild ein Skelett extrahiert \cite{extracting_skeletons_distancemaps}. Der Autor legt besonders hohen Wert darauf, dass die Extraktion keine komplizierten Berechnungen beinhaltet. Er möchte vor allem auf die Berechnung
 von Ableitungen höherer Ordnung und die Auswertung von komplexen Gleichungen verzichten. Das Verfahren, welches der Autor zur 
@@ -248,7 +247,7 @@ gegenüber und umschließen den roten Punkt. Ihre auf die Projektionlinie projiz
 \label{fig:paper_ridge_point_detection}
 \end{figure}
 Die Idee des Algorithmus ist, Projektionslinien durch die Distance Map zu legen und das Verhalten der Gradientenbeträge
-auf diesen Lininen zu beobachten. Der Autor hat festgestellt, dass sich dabei mehrere Muster von Vorzeichenwechsel der
+auf diesen Lininen zu beobachten. Man stellt fest, dass sich dabei mehrere Muster von Vorzeichenwechsel der
 Gradientenbeträge erkennen lassen. Diese Muster können dabei ein Indiz für einen Gebirgspunkt und somit für einen Punkt des Skeletts sein. \\
 Dabei stellt sich die Frage, wieviele Richtungen mit diesen Linien untersucht werden sollen. Man kann beobachten, dass es
 einen Vorzeichenwechsel in den Gradientenbeträgen gibt, wenn die Projektionslinie den Gebirgskamm schneidet. Dementsprechend 
@@ -258,7 +257,7 @@ zu untersuchen. Dabei wählt man die eine Richtung parallel zur x-Achse und die 
 \begin{figure}
 \centering
 \includegraphics[width=0.8\linewidth]{./fig/muster_strong_good.pdf}
-\caption{Muster für Hinweise auf einen Gebirgskamm. Diese beiden Muster sind ein starkes (\emph{strong}, linke Abbildung) und ein gutes (\emph{good}, rechte Abbildung) Indiz für einen Punkt auf dem Gebirgskamm. \textbf{TODO die Abbildung ist doof}}
+\caption{Muster für Hinweise auf einen Gebirgskamm. Diese beiden Muster sind ein starkes (\emph{strong}, linke Abbildung) und ein gutes (\emph{good}, rechte Abbildung) Indiz für einen Punkt auf dem Gebirgskamm.}
 \label{fig:muster_strong_good}
 \end{figure}
 Es existieren insgesamt vier Muster, die auf einen Gebirgskamm deuten. Zwei davon sind in Abbildung \ref{fig:muster_strong_good}

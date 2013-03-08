@@ -27,7 +27,7 @@ caption={Tiefenwerte zurückgeben}
 \label{lst:getdepth}
 }
 \lstinputlisting{./listing/getdepth.py}
-Um nicht für jeden einzelnen Pixel die Bedingung zu überprüfen, ob er den Schwellwert für die Segmentierung überschreitet beziehungsweise unterschreitet, wird die effiziente Numpy-Funktion \texttt{logical\_and} benutzt, die global auf dem Bild arbeitet und für das gesamte Bild die Schwellwertbedingung prüft. Eine pixelgenaue Überprüfung wäre mit Python eine ineffiziente Lösung.\\ Für den Schwellwert werden zwei 
+Um nicht für jeden einzelnen Pixel die Bedingung zu überprüfen, ob er den Schwellwert für die Segmentierung überschreitet beziehungsweise unterschreitet, wird die effiziente Numpy-Funktion \texttt{logical\_and} benutzt, die global auf dem Bild arbeitet und für das gesamte Bild die Schwellwertbedingung prüft. Eine pixelweise Überprüfung wäre mit Python eine ineffiziente Lösung.\\ Für den Schwellwert werden zwei 
 Werte definiert, um ein Intervall festzulegen, in dem sich das Objekt befinden darf. In Listing \ref{lst:spielersegmentierung} legen die Variablen \texttt{current\_depth} und \texttt{threshold} das Intervall fest. 
 \lstset{
 caption={Spielersegmentierung in Python}
@@ -61,8 +61,8 @@ caption={Berechnen der Distance Map des Spielers.}
 }
 \lstinputlisting{./listing/distancetransform.py}
 Zur Bestimmung des Gradientenbetrages der Distance Map wurde die Numpy-Funktion \texttt{gaussian\_gradient\_magnitude} genutzt. Die Funktion berechnet den Gradientenbetrag mit Ableitungen
-der Gaussfunktion. Die Variable \texttt{sigma} ist dementsprechend für die Standardabweichung $\sigma$ 
-des Gaussfilters gedacht \footnote{Für weitere Dokumentationen siehe: http://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.filters.gaussian\_gradient\_magnitude.html}. Das Ergebnis dieser Funktion wird in ein Bildobjekt
+der Gaussfunktion. Die Variable \texttt{sigma} ist die Standardabweichung 
+des Gaussfilters. Das Ergebnis dieser Funktion wird in ein Bildobjekt
 konvertiert und entsprechend festgelegter Schwellwerte (\texttt{lowerbound}, \texttt{upperbound}) segmentiert.
 \lstset{
 caption={Gradientenbetrag der Distance Map und Segmentierung des Gradientenbetragsbildes.}
@@ -77,8 +77,8 @@ caption={Differenz zwischen Distance Map und segmentiertem Gradientenbetrag}
 }
 \lstinputlisting{./listing/difference.py}
 Bei der Implementierung wurden in keinem Fall Operationen ausgeführt, die auf einzelne Pixel zugreifen. Situationen, in denen
-pixelgenaue Operationen durchgeführt werden könnten, wurden
+pixelweise Operationen durchgeführt werden könnten, wurden
 umgangen, indem Arrayoperationen oder Funktionen aus der
-OpenCV-Bibliothek benutzt wurden. Ein pixelgenauer Zugriff
+OpenCV-Bibliothek benutzt wurden. Ein pixelweiser Zugriff
 könnte bei einer Interpretersprache wie Python zu einer sehr langsamen
 Ausführung der Skelettberechnung führen.
