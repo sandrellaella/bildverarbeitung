@@ -9,9 +9,15 @@ Die Studenten sollten in diesem Projekt die Daten der Microsoft Kinect-Kamera nu
 Die digitale Bildverarbeitung hilft unter anderem bei der Erkennung von Objekten, wie zum Beispiel bei der vollautomatisierten Qualit"atskontrolle. Um auch bei gro"sen Datenmengen noch performant arbeiten zu k"onnen, bedient man sich oft des Mittels der Abstraktion. Das Projektthema dieser Arbeit dreht sich um eine M"oglichkeit der Abstraktion, n"amlich der Skelettierung. \\
 Der Begriff 'Skelett' taucht in vielen Fachbereichen, wie zum Beispiel der Anatomie, Biologie oder Architektur auf. In der digitalen Bildverarbeitung hat er einen "ahnlichen Sinn wie in diesen Bereichen: Es stellt von einem Objekt das Grundger"ust dar. Dieses Ger"ust ist der zentrale Hauptbestandteil, mit dessen Hilfe sich R"uckschl"usse auf das gesamte Objekt (siehe Dinosaurierskelette) ergeben. \\
 Aus Sicht der Bildverarbeitung kann ein Skelett folgenderma"sen definiert werden: Ein Skelett ist ein n"utzlicher Deskriptor, um Informationen "uber die Region und den Rand eines Objektes kompakt und effizient zu kodieren und gibt die wesentlichen Grundz"uge eines Objektes wieder. In diesem Fachbereich kommen noch weitere Eigenschaften des Skeletts hinzu. Das Ziel ist die Information eines Objektes zu reduzieren ohne dabei die Grundstruktur zu verletzen. So ist eine Anforderung, dass die 'Pixelkonnektivit"at' gew"ahrleistet ist, also alle sp"ateren Skelettpixel mindestens einen benachbarten Skelettpixel besitzen und das Skelett nicht unterbrochen ist. \\
-Bei der Skelettierung muss weiterhin beachtet werden, dass die topologische Struktur des Originalbildes nicht ver"andert wird. Trotz eventueller Verformung bei der Skelettbildung muss die strukturelle Eigenschaft erhalten bleiben; so ist bei einer automatisierten Zeichenerkennung die Strichst"arke unerheblich, lediglich der generelle Aufbau des Buchstaben ist relevant. \\
-\includegraphics[width=1.0\linewidth]{./fig/topologischeStruktur}
-TODO auf das Bild eingehen, verkleinern?
+Bei der Skelettierung muss weiterhin beachtet werden, dass die topologische Struktur des Originalbildes nicht ver"andert wird. Trotz eventueller Verformung bei der Skelettbildung, wie in Abbildung \ref{fig:topologischeStruktur} dargestellt, muss die strukturelle Eigenschaft erhalten bleiben; so ist bei einer automatisierten Zeichenerkennung die Strichst"arke unerheblich, lediglich der generelle Aufbau des Buchstaben ist relevant. \\
+%\includegraphics[width=1.0\linewidth]{./fig/topologischeStruktur}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./fig/topologischeStruktur}
+\caption{Skelettierung des Buchstaben A TODO cite \cite{TODO cite?}}
+\label{fig:topologischeStruktur}
+\end{figure}
+
 TODO  geschichte und 3 Gruppen der skelettierung
 
 
@@ -19,6 +25,6 @@ TODO  geschichte und 3 Gruppen der skelettierung
 \label{aufgabenstellung}
 Unsere Gruppe entschied sich f"ur die Datenauswertung einer Person ('Spieler'). Dabei war zun"achst das Ziel den Bewegungsablauf bei Sport"ubungen zu analysieren und eine R"uckmeldung zu geben, ob diese richtig ausgef"uhrt wurden. So soll zum Beispiel bei Kniebeugen durch eine Messung des Winkels zwischen Ober- und Unterschenkel der Person eine Hilfestellung gegeben werden. \\ \\ 
 Um dieses Ziel zu erreichen muss zun"achst der Spieler von anderen Gegenst"anden im Raum getrennt, also herausgefiltert werden (Segmentierung). F"ur die Bewegungsanalyse ist es hilfreich nicht den gesamten Menschen, wom"oglich noch mit st"orender Kleidung, zu betrachten, sondern nur sein Skelett. Um das Skelett zu erhalten, bot sich die Wahl zwischen schon implementierten Skelettierungsalgorithmen zu benutzen oder dies selbst zu implementieren. Da das Thema des Projektes die Bildverarbeitung und nicht eine Anwendungsprogrammierung ist, fiel die Entscheidung auf die Konzentration auf die Skelettierung. Das Ziel war nun verschiedene Ans"atze zu implementieren und hinsichtlich Qualit"at und Leistung zu vergleichen.  \\ \\
-%anforderungen
-TODO anforderungen
+Dabei mussten einige Kriterien beachtet werden. Zuallererst muss auf die Qualit"at des erzeugten Skeletts geachtet werden. Es sollte als eine Skelettrepr"asentation des Quellbildes erkannt werden, also ein zentrales Grundger"ust mit vorhandener Pixelkonnektivit"at. Desweiteren ist die Leistungsf"ahigkeit relevant. Die Algorithmen sollen echtzeitf"ahig sein, damit der Spieler eine unmittelbare R"uckmeldung seiner Bewegungen erh"alt.
 \section{Aufbau der Projektarbeit}
+TODO am ende wenn struktur steht
