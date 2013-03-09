@@ -215,19 +215,36 @@ Die Idee ist, den Gradienten beziehungsweise den Gradientenbetrag der Distance M
 %  \]
 \end{equation}
 Entsprechend der Definition des Gradienten, ist an den lokalen Maxima des Grauwertgebirges der Gradientenbetrag gleich null.\\
-Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimension und Größe wie die Distance Map, wird der Gebirgskamm als Linie mit kleinen Grauwerten (fast Null) kodiert. Diese markiert das Skelett. Eine schwellwerbasierte Segmentierung des Gradientenbetragbildes bewirkt, dass die Skelettlinien schwarz sind. Andere Bereiche, die größer als der Schwellwert sind und somit nicht zum Skelett gehören erhalten den Grauwert $255$ (weiß). 
+Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimension und Größe wie die Distance Map, wird der Gebirgskamm als Linie mit kleinen Grauwerten (fast Null) kodiert. Diese markiert das Skelett. Eine schwellwerbasierte Segmentierung des Gradientenbetragbildes bewirkt, dass die Skelettlinien schwarz sind (Abbildung \ref{fig:bildung_gradient}). Andere Bereiche, die größer als der Schwellwert sind und somit nicht zum Skelett gehören erhalten den Grauwert $255$ (weiß). 
+\begin{figure}
+\centering
+\includegraphics[width=1.0\linewidth]{./fig/bildung_gradient}
+\caption{Segmentierung des Gradientenbetrags aus der Distance Map.}
+\label{fig:bildung_gradient}
+\end{figure}
+\FloatBarrier
+\noindent
 Um endgültig nur die Skelettlinie zu erhalten, wird die Differenz
 zwischen der Distance Map und dem segmentierten Gradientenbetragsbild gebildet. Der Teil der Distance Map der nicht
 auf der höchsten Stelle des Grauwertgebirges liegt hat entweder einen Grauwert kleiner oder gleich $255$. Bei
 der Differenzbildung kann der Grauwert dieser Pixel nur kleiner gleich 0 werden, da von diesen Grauwerten der Grauwert $255$ abgezogen wird (weißer Bereich des segmentierten Gradientenbetragsbildes). Negative
-Grauwerte werden auf $0$ gesetzt. Als Ergebnis erhält man die Skelettlinie mit Grauwerten ungleich $0$. 
+Grauwerte werden auf $0$ gesetzt. Als Ergebnis erhält man die Skelettlinie mit Grauwerten ungleich $0$. Um ein binärkodiertes Skelett zu erhalten, wird auf dem Differenzbild
+anschließend eine schwellwertbasierte Segmentierung ausgeführt (Abbildung \ref{fig:differenzbildung}).
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{./fig/differenzbildung}
+\caption{Differenzbildung zwischen dem segmentieren Gradientenbetragsbild und der Distance Map.}
+\label{fig:differenzbildung}
+\end{figure}
 Im Folgenden wird das aus der Distanztransformation bestimmte Skelett zur Abgrenzung zum Thinning-Algorithmus als \emph{Distanzskelett} bezeichnet.
+\FloatBarrier
 %\begin{figure}
 %\centering
 %\includegraphics[width=1.0\linewidth]{./fig/skelettierung-prinzip}
 %\caption{Die Idee der Skelettierung mittels Distanztransformation.}
 %\label{fig:skelettierung-prinzip}
 %\end{figure}
+\clearpage
 \subsection{Verwandte Arbeit \cite{extracting_skeletons_distancemaps}: Extracting Skeletons From Distance Maps}
 \Autor{Sandra Schröder}\\\\ 
 Zur oben beschrieben Berechnung des Skelettes aus einer Distance Map gibt es verwandte Arbeiten, von denen nun eine vorgestellt wird. 
@@ -271,13 +288,7 @@ Hinweis für einen Gebirgskamm sind. Dies entspricht im Grauwertgebirge einem Pl
 Der Algorithmus sucht nun in x -und in y Richtung - von oben nach unten und von links nach rechts - in der Distance Map nach diesen Mustern und markiert die Punkte nach den Eigenschaften \emph{strong}, \emph{good}, \emph{weak} und \emph{none}. 
 Diese Markierung gibt die Stärke der Sicherheit des Punktes wieder, ein Punkt auf dem Gebirgskamm zu sein. \\
 Wurden alle Punkte in beide Richtungen untersucht, hat jeder Punkt ein passendes Label. Diese Labels werden weiter benutzt, um eine Graphenrepräsentation des Skeletts zu erstellen.\\
-Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu einem Gebirgskamm gehören \cite{extracting_skeletons_distancemaps}. Abbildung \ref{fig:paper_ergebnis} zeigt ein Ergebnis des Algorithmus. Die gestrichelte Linie in der rechten Abbildung beschreibt das theoretische Skelett, die grau unterlegten Punkte sind die vom Algorithmus gewählten Punkte, die zu einem Gebirgskamm gehören und einem Skelettpunkt entsprechen.
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{./fig/paper_ergebnis}
-\caption{Ergebnis der Ridge Point Detection \cite{extracting_skeletons_distancemaps}. Links: Graphische Darstellung. Rechts: Darstellung als Bildmatrix. }
-\label{fig:paper_ergebnis}
-\end{figure}
+Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu einem Gebirgskamm gehören \cite{extracting_skeletons_distancemaps}.
 \section{Weitere Verfahren}
 \Autor{Christopher Kroll}\\ \\
 Neben Thinning und Distanztransformation bilden Algorithmen, die auf kritische Punkte basieren, die dritte Kategorie. Hier werden kritische, bzw. wichtige Punkte detektiert, die dann zu einem Skelett verbunden werden. Zwei Vertreter dieser Kategorie sind der einfache Kritische-Punkte-Ansatz und die Triangulations-Technik. \\ 
