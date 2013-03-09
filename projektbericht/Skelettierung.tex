@@ -290,7 +290,12 @@ Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu
 \label{sec:weitere_verfahren}
 \Autor{Christopher Kroll}\\ \\
 Neben Thinning und Distanztransformation bilden Algorithmen, die auf kritische Punkte basieren, die dritte Kategorie. Hier werden kritische, bzw. wichtige Punkte detektiert, die dann zu einem Skelett verbunden werden. Zwei Vertreter dieser Kategorie sind der einfache Kritische-Punkte-Ansatz und die Triangulations-Technik. \\ 
-Beim einfachen Kritische-Punkte-Ansatz wird das Quellbild spalten- oder zeilenweise durchgegangen. Werden Objektpixel gefunden, so wird die Mitte dieses 'Objektpixelblocks' markiert. Dies sind die kritischen Punkte, die nach der Markierung verbunden werden und somit das Skelett bilden. Ein Nachteil dieses Ansatzes ist, dass abh"angig von der Lage des Objektes und der Wahl, ob das Quellbild zeilen- oder spaltenweise durchlaufen wird unterschiedliche Ergebnisse erzielt werden, das Verfahren ist somit nicht isotrop.
-TODO naeher beschreiben, drauf eingehen
+Beim einfachen Kritische-Punkte-Ansatz wird das Quellbild spalten- oder zeilenweise durchgegangen. Werden Objektpixel gefunden, so wird die Mitte dieses 'Objektpixelblocks' markiert. Dies sind die kritischen Punkte, die nach der Markierung verbunden werden und somit das Skelett bilden. Ein Nachteil dieses Ansatzes ist, dass abh"angig von der Lage des Objektes und der Wahl, ob das Quellbild zeilen- oder spaltenweise durchlaufen wird unterschiedliche Ergebnisse erzielt werden, das Verfahren ist somit nicht isotrop. Abbildung \ref{fig:isotrop} zeigt die Skelettierung bei bei zeilenweiser Durchlaufen des Bildes. Abh"angig von der Lage des Objektes ergibt sich ein anderes Skelett. Wenn dieses Objekt spaltenweise durchlaufen werden w"urde, w"urde man beim rechten Kreuz eine horizontale statt vertikale Linie erhalten. Dieses Verfahren ist deswegen daf"ur geeignet, wenn man die Lage des Objektes und das gew"unschte Ergebnis vorher kennt, bzw. die Lage vor der Skelettierung beeinflussen lassen kann.
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{./fig/isotrop.png}
+\caption{Skelettierung beim einfachen Kritische-Punkte-Ansatz und die Ver"anderung bei der Drehung}
+\label{fig:isotrop}
+\end{figure}
 \\ \\
 Zu erw"ahnen ist au"serdem, dass es neben diesen drei vorgestellten Skelettierungskategorien noch weitere Algorithmen gibt, die jedoch sehr speziell und sich dadurch schwer kategorisieren lassen (zum Beispiel das Hamilton-Jacobi-Skelett).
