@@ -1,4 +1,5 @@
 \chapter{Implementierung der Algorithmen}
+\label{ch:implementierung}
 \Autor{Sandra Schröder}\\\\
 Im Rahmen des Projekts wurden zwei Algorithmen für die Skelettierung implementiert. Dies ist zum einen
 die Skelettierung nach Thinning nach dem Algorithmus der in Abschnitt \ref{subsec:fastparallel} beschrieben wurde. Die Skelettierung mittels Distanztransformation wurde nach einer eigenen Idee entwickelt und
@@ -9,6 +10,7 @@ Die Segmentierung des Spielers ist bei beiden Ansätzen identisch.
 In diesem Kapitel wird die Umsetzung der Algorithmen anhand signifikanten Codeausschnitten der Implementierungen vorgestellt. Ein Überblick über die technische Umsetzung gibt einen Eindruck über die
 verwendeten Programmiersprachen und Arbeitsumgebungen.
 \section{Technische Umsetzung}
+\label{sec:technische_umsetzung}
 \Autor{Christopher Kroll}\\
 F"ur die Implementierung wurden die bereitgestellten iMacs am Informatikum in Stellingen gew"ahlt. Der Vorteil war neben der Performanz die schon eingerichtete Arbeitsumgebung.\\
 Um die Verbindung zu der Kinect herzustellen, wurde das quelloffene Framework libfreenect  der OpenKinect-Gruppe benutzt. Libfreenect bietet Treiber und Bibliotheken, um zum Beispiel die Bilder der Kamera anzuzeigen oder den eingebauten Motor zu steuern. \\
@@ -53,7 +55,7 @@ TODO quelle heraussuchen vergleich python-c++?
 Nun sollten jedoch nicht zwei unterschiedliche Programme entstehen - Distanztransformation mit Python und Thinning mit C++ und die Spieler-Segmentierung in Python sollte auch f"ur die Thinning-Skelettierung benutzt werden. Die L"osung war die M"oglichkeit der Anbindung von Python an eine andere Programmiersprache, in diesem Fall C++.
 
 \section{Skelettierung mittels Distanztransformation}
-%Sandra
+\label{sec:impl_distanztrans}
 \Autor{Sandra Schröder}\\\\
 Der theoretische Ablauf der Skelettierung wurde bereits im Kapitel \ref{ch:Skelettierung} beschrieben. Zur
 Rekapitulation werden die Schritte kurz aufgezählt. \\

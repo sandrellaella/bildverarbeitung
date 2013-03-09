@@ -17,6 +17,7 @@ Zwei Verfahren wurden im Rahmen der Projektarbeit genauer untersucht: Die Skelet
 Um die Übersicht über die weiteren grundlegenden Verfahren und Konzepte zu vervollständigen, werden diese in einem separaten 
 Abschnitt kurz vorgestellt.
 \section{Skelettierung mittels Thinning}
+\label{sec:thinning}
 \Autor{Johannes Böhler, Christopher Kroll}\\ \\
 Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschlie"slich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. \\ \\
 Alle Thinning-Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche. Dabei werden nach und nach die Konturpixel, also die Objektpixel, die mit den Hintergrundpixeln benachbart sind, "uberpr"uft. Je nach Algorithmus liegen verschiedene Kriterien vor, ob diese gel"oscht, also als Hintergrundpixel markiert werden k"onnen. Ein Kriterium ist auf jeden Fall, dass die Zusammengeh"origkeit der Skelettpixel bewahrt wird. Eine weitere Gemeinsamkeit der unterschiedlichen Ans"atze ist, dass das Ausd"unnen solange stattfindet, bis am Objekt keine "Anderung mehr gemacht wurde.
@@ -246,6 +247,7 @@ Im Folgenden wird das aus der Distanztransformation bestimmte Skelett zur Abgren
 %\end{figure}
 \clearpage
 \subsection{Verwandte Arbeit \cite{extracting_skeletons_distancemaps}: Extracting Skeletons From Distance Maps}
+\label{subsec:distancemap_verwandt}
 \Autor{Sandra Schröder}\\\\ 
 Zur oben beschrieben Berechnung des Skelettes aus einer Distance Map gibt es verwandte Arbeiten, von denen nun eine vorgestellt wird. 
 In dem Paper \emph{Extracting Skeletons from Distance Maps} beschreibt der Autor einen Algorithmus, der effizient und schnell
@@ -292,6 +294,7 @@ Diese Markierung gibt die Stärke der Sicherheit des Punktes wieder, ein Punkt a
 Wurden alle Punkte in beide Richtungen untersucht, hat jeder Punkt ein passendes Label. Diese Labels werden weiter benutzt, um eine Graphenrepräsentation des Skeletts zu erstellen.\\
 Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu einem Gebirgskamm gehören \cite{extracting_skeletons_distancemaps}.
 \section{Weitere Verfahren}
+\label{sec:weitere_verfahren}
 \Autor{Christopher Kroll}\\ \\
 Neben Thinning und Distanztransformation bilden Algorithmen, die auf kritische Punkte basieren, die dritte Kategorie. Hier werden kritische, bzw. wichtige Punkte detektiert, die dann zu einem Skelett verbunden werden. Zwei Vertreter dieser Kategorie sind der einfache Kritische-Punkte-Ansatz und die Triangulations-Technik. \\ 
 Beim einfachen Kritische-Punkte-Ansatz wird das Quellbild spalten- oder zeilenweise durchgegangen. Werden Objektpixel gefunden, so wird die Mitte dieses 'Objektpixelblocks' markiert. Dies sind die kritischen Punkte, die nach der Markierung verbunden werden und somit das Skelett bilden. Ein Nachteil dieses Ansatzes ist, dass abh"angig von der Lage des Objektes und der Wahl, ob das Quellbild zeilen- oder spaltenweise durchlaufen wird unterschiedliche Ergebnisse erzielt werden, das Verfahren ist somit nicht isotrop.
