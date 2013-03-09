@@ -9,6 +9,7 @@ import image_conversion
 import skeletonization
 import numpy
 import skeleton_improvement
+import cProfile
 
     
 
@@ -50,6 +51,12 @@ def test(image):
     
     #return features, image, dist_img, diff_img, drawImage
     return diff_img, features, dist_gradient, dist_map
+    
+def multipleCalls(num,features,img):
+  i = 0
+  while i < num:
+    skeleton_improvement.startConnect(features,20,img)
+    i = i + 1
   
 img = cv.LoadImage("person.jpg")
 #img2 = cv.LoadImage("person.jpg")
@@ -59,7 +66,9 @@ img = cv.LoadImage("person.jpg")
 diff_img, features, dist_gradient, dist_img = test(img)
 skeleton_improvement.drawFeatures(features,diff_img)
 #comparison.connectFeatures(diff_img,features,10)
-neighbours = skeleton_improvement.startConnect(features,20,img)
+#neighbours = skeleton_improvement.startConnect(features,20,img)
+cProfile.run('multipleCalls(500,features,img)')
+
 #skeleton_improvement.connectDFS(features)
 print img.depth
 diff_img_arr = image_conversion.cv2array(diff_img)
@@ -70,13 +79,5 @@ cv.SaveImage("hand-bfs.png",img)
 cv.ShowImage("Gradient", dist_gradient)
 cv.ShowImage("Distance", dist_img)
 
-#cv.ShowImage('Originalbild', image1)
-#cv.ShowImage('Distance Map',dist_img1)
-#cv.ShowImage('Differenz',diff_img1)
-#cv.ShowImage("Zeichnung",drawImage)
-
-#cv.ShowImage('Originalbild2', image2)
-#cv.ShowImage('Distance Map2',dist_img2)
-#cv.ShowImage('Differenz2',diff_img2)
 
 cv.WaitKey()

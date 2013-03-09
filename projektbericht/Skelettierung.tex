@@ -155,7 +155,7 @@ Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen gen
   }
    \caption{Gesamter Algorithmus in der Übersicht}
 \end{figure}
-
+\FloatBarrier
 
 
 
@@ -257,14 +257,16 @@ Die Gebirgskammdetektion ist ein gradientenbasiertes Verfahren. Liegt ein Punkt 
 seiner unmittelbaren Umgebung den größten Abstand zum Objektrand und den größten Grauwert relativ zu seinen Nachbarn. Dieser Punkt ist somit ein lokales Maximum. Aufgrund dieser Tatsache eignet  sich der Gradient am besten, um solch einen Punkt zu detektieren. Der Gradient zeigt nach Definition in die Richtung des stärksten Anstiegs. Dies bedeutet, dass der Gradient eines Punktes, der nicht auf dem Kamm liegt, in die Richtung des Kammes zeigt. Wählt man nun Punkte näher am Kamm, so wird der Anstieg
 geringer, da die Differenz zwischen dem Grauwert des betrachteten Gebirgspunktes und dem aktuell gewählten Punkt kleiner wird. Überquert man den Kamm, kehrt sich die Richtung des Gradienten um und zeigt wieder zum Kamm. Hier findet ein Vorzeichenwechsel des Gradientenbetrags statt. Der Punkt auf dem Gebirgskamm bildet eine \emph{sign barrier} zwischen den Gradientenbeträgen der sich gegenüberliegenden Punkte, wobei sich der Gebirgspunkt zwischen diesen beiden Punkten befindet. Diese
 Beobachtung ist in Abbildung \ref{fig:paper_ridge_point_detection} dargestellt. Es ist ein Querschnitt eines Grauwertgebirges
-abgebildet. Legt man nun eine Projektionslinie genau durch das lokale Maximum (roter Punkt), und projiziert die Gradienten (violette Pfeile) der sich gegenüberliegenden Punkte (blau) auf diese Linie, so kann man erkennen, dass die Projektionen der Gradienten (orangene Pfeile) genau in die entgegengesetzte Richtung zeigen.\
-\begin{figure}
+abgebildet. Legt man nun eine Projektionslinie genau durch das lokale Maximum (roter Punkt), und projiziert die Gradienten (violette Pfeile) der sich gegenüberliegenden Punkte (blau) auf diese Linie, so kann man erkennen, dass die Projektionen der Gradienten (orangene Pfeile) genau in die entgegengesetzte Richtung zeigen.
+\begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/paper_ridge_point_detection.pdf}
 \caption{Ridge Point Detection. Der rote Punkt ist ein lokales Maximum auf dem Gebirgskamm. Die blauen Punkte liegen sich
 gegenüber und umschließen den roten Punkt. Ihre auf die Projektionlinie projizierten Gradientenrichtungen zeigen in entgegengesetzte Richtungen. Der rote Punkt bildet somit eine \emph{sign barrier} für die beiden Richtungen.}
 \label{fig:paper_ridge_point_detection}
 \end{figure}
+\FloatBarrier
+\noindent
 Die Idee des Algorithmus ist, Projektionslinien durch die Distance Map zu legen und das Verhalten der Gradientenbeträge
 auf diesen Lininen zu beobachten. Man stellt fest, dass sich dabei mehrere Muster von Vorzeichenwechsel der
 Gradientenbeträge erkennen lassen. Diese Muster können dabei ein Indiz für einen Gebirgspunkt und somit für einen Punkt des Skeletts sein. \\

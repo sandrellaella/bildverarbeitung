@@ -95,8 +95,7 @@ def DFS(nodes,searchDistance):
         if nodes[i].visited == False:
             DFSVisit(nodes[i],nodes,searchDistance)
     return nodes
-            
-def run(img):
+    
 
 
 #Zuordnung Features zu Knoten 

@@ -42,6 +42,7 @@ def drawFeatures(features,image):
 die Breitensuche beginnen soll und dann Aufruf einer weiteren Funktion,
 die die eigentliche Breitensuche ausfuehrt."""      
 def startConnect(features,searchDistance,img):
+    features = [(183.0, 225.0), (174.0, 177.0), (206.0, 245.0), (205.0, 185.0), (220.0, 176.0), (25.0, 224.0), (187.0, 191.0), (191.0, 170.0), (196.0, 235.0), (176.0, 160.0), (155.0, 168.0), (266.0, 128.0), (143.0, 25.0), (83.0, 49.0), (203.0, 71.0), (156.0, 93.0), (145.0, 44.0), (150.0, 68.0), (160.0, 109.0), (168.0, 132.0), (203.0, 133.0), (185.0, 213.0), (43.0, 227.0), (99.0, 250.0), (105.0, 97.0), (91.0, 69.0), (53.0, 231.0), (146.0, 250.0), (86.0, 245.0), (164.0, 122.0), (63.0, 235.0), (153.0, 81.0), (160.0, 243.0), (172.0, 149.0), (196.0, 154.0), (200.0, 144.0), (148.0, 58.0), (203.0, 116.0), (203.0, 94.0), (117.0, 252.0), (186.0, 201.0), (203.0, 106.0), (100.0, 87.0), (232.0, 170.0), (248.0, 154.0), (257.0, 142.0), (123.0, 132.0), (134.0, 150.0), (169.0, 235.0), (140.0, 158.0)]
     startpoint = features.pop()
     #Breitensuche
     neighbours = connectFeatures(startpoint,features,searchDistance,img)
@@ -50,7 +51,6 @@ def startConnect(features,searchDistance,img):
 """Breitensuche. Beginnt mit dem Punkt startpoint und sucht nach naechsten
 Nachbarn in der Liste features in einer Distanz searchDistance."""       
 def connectFeatures(startpoint,features,searchDistance,img):    
-    
     #Nachbarn des Punktes startpoint
     neighbours = []
     #Knoten, die bereits besucht wurden. Werden dann nicht mehr besucht.
