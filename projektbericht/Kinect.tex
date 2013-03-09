@@ -10,15 +10,22 @@ Die drei Haupt Hardware-Komponenten der Kinect sind ein Infrarotprojektor, eine 
    \caption{\emph {Links:} Infrarotprojektor \emph {Mitte:}: RGB-Kamera  \emph {Rechts:}: Infrarotkamera }
 \end{figure}
 Die Kombination aus Infrarotstrahler und Infrarotkamera ermöglicht die Gewinnung von Tiefeninformationen aus der Umgebung. Im Gegensatz zu gewöhnlichen Kameras welche einem Pixel Farbinformation (z.B.  über RGB-Farbkanäle) zuordnen, wird dem Pixel mit Hilfe der Infrarot Kamera eine Entfernung zugeordnet.
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \vspace{-20pt}
-  \begin{center}
-        \includegraphics[height=5cm]{Res/Kinect_9Points.png}
-  \end{center}
-  \vspace{-20pt}
-  \caption{Vom Infrarotprojektor ausgestrahltes strukturiertes Licht }
-  \vspace{-10pt}
-\end{wrapfigure}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{./Res/Kinect_9Points}
+\caption{Vom Infrarotprojektor ausgestrahltes strukturiertes Licht}
+\label{fig:Kinect_9Points}
+\end{figure}
+
+%\begin{wrapfigure}{r}{0.4\textwidth}
+%  \vspace{-20pt}
+%  \begin{center}
+%        \includegraphics[height=5cm]{Res/Kinect_9Points.png}
+%  \end{center}
+%  \vspace{-20pt}
+%  \caption{Vom Infrarotprojektor ausgestrahltes strukturiertes Licht } %
+ % \vspace{-10pt}
+%\end{wrapfigure}
 Diese ergibt sich aus der Art und Weise wie der Infrarotstrahl von dem durch den Pixel repräsentierten Bereich eines Objektes reflektiert wurde.
 \\
 Die Tiefenbilder welche man von der IR Kamera erhält, sehen aus wie komplett verrauschte Graustufenbilder. Hierbei steht jeder Grau Wert eines Pixels für die entsprechende Entfernung des korrespondierenden Objektausschnittes zur Kinect.\\
@@ -31,28 +38,41 @@ Der Infrarotprojektor emittiert elektromagnetische Strahlen, deren Wellenlänge 
 Der Projektor strahlt zur Tiefenbestimmung ein Gitter von Infrarotpunkten (strukturiertes Licht) auf die Objekte in seiner Umgebung ab. 
 Zur Generierung dieses Musters wird ein besonderes Verfahren implementiert.
 Normalerweise produzieren Filter die diese Art von Muster generieren einen sehr hellen Punkt in der Mitte des Bildes, welcher die Leistungsfähigkeit des IR Projektors limitiert.Durch das hier verwendete Verfahren entstehen statt einem einzigen sehr hellen, neun helle Punkte, welche durch unvollständige Lichtfilterung zur Mustererstellung bedingt sind. Das hier eingesetzte Verfahren produziert weniger starke Artefakte und ermöglicht die Verwendung einer leistungsfähigeren Diode was eine erhöhte Genauigkeit sowie eine größere Reichweite ermöglicht. Die Reichweite des IR Projektors ist dennoch eingeschränkt, da zu hohe Intensitäten der IR Strahlen Augenschäden verursachen könnten.
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \vspace{-20pt}
-  \begin{center}
-        \includegraphics[height=6cm]{Res/9_Dots.png}
-  \end{center}
-  \vspace{-20pt}
-  \caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen }
-  \vspace{-10pt}
-\end{wrapfigure}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{./Res/9_Dots}
+\caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen}
+\label{fig:9_Dots}
+\end{figure}
+\FloatBarrier
+%\begin{wrapfigure}{r}{0.5\textwidth}
+%  \vspace{-20pt}
+%  \begin{center}
+%        \includegraphics[height=6cm]{Res/9_Dots.png}
+%  \end{center}
+%  \vspace{-20pt}
+%  \caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen }
+%  \vspace{-10pt}
+%\end{wrapfigure}
 Es ist wichtig dass die Wellenlänge der Infrarot strahlen konstant bleibt, was durch eine gleichbleibende Temperatur der Laserdiode und eine konstante Stromleistung (60 mW) gewährleistet wird. Problematisch sind variierende Außentemperaturen(die empfohlene Betriebstemperatur  liegt zwischen 5 und 35 °C). Um diese Konstanz zu gewährleisten wird ein sogenanntes  Peltier-Element verwendet, welches sowohl kühlen als auch wärmen kann.\\
 \subsubsection{Infrarotkamera}
 Die IR Kamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixeln, bei einer Bildwiederholrate von 30 Hz auf. Weitergeleitet werden allerdings nur Bilder mit einer Auflösung von 640x480 Pixeln da der USB Datenbus eine Limitierung bezüglich der Datenübertragungsrate darstellt. Das Blickfeld der IR Kamera beträgt in der Horizontalen 58 °, in der Vertikalen 45 °. Damit sich die Mustererkennung funktioniert ist eine Mindestabstand von 0,8 Metern erforderlich, ab einer Entfernung von 3,5 Metern wird die Intensität der reflektierten Strahlen zu gering um Tiefeninformationen mit ausreichender Präzision zu erhalten.
 Bei einem optimalen Abstand von 2 Metern zum Objekt beträgt die Auflösung 
-\begin{wrapfigure}{r}{0.65\textwidth}
-  \vspace{-20pt}
-  \begin{center}
-        \includegraphics[height=8cm]{Res/Res_to_Dist.png}
-  \end{center}
-  \vspace{-20pt}
-  \caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen }
-  \vspace{-10pt}
-\end{wrapfigure}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./Res/Res_to_Dist}
+\caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen}
+\label{fig:Res_to_Dist}
+\end{figure}
+%\begin{wrapfigure}{r}{0.65\textwidth}
+%  \vspace{-20pt}
+%  \begin{center}
+%        \includegraphics[height=8cm]{Res/Res_to_Dist.png}
+%  \end{center}
+%  \vspace{-20pt}
+%  \caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen }
+%  \vspace{-10pt}
+%\end{wrapfigure}
 
 in der XY Ebene 3 mm, in der Z Ebene 1 cm.
 

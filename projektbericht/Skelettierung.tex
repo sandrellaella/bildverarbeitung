@@ -148,21 +148,13 @@ In der Matrix Search M befinden sich während der ersten Iteration alle Pixel di
 
 Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich null so wird der Vorgang iterativ fortgeführt.\\
 
-
-\begin{figure}[!ht]
-  \centering
-  \makebox[\textwidth]{%
-  \includegraphics[width=5cm]{Res/AlgUebersicht.png}
-  }
-   \caption{Gesamter Algorithmus in der Übersicht}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{./Res/AlgUebersicht}
+\caption{Gesamter Algorithmus in der Übersicht}
+\label{fig:AlgUebersicht}
 \end{figure}
 \FloatBarrier
-
-
-
-
-
-
 \subsubsection{Resultate}
 
 Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit und Rauschverhalten der Randpunkte. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen.
@@ -220,7 +212,7 @@ Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimen
 \begin{figure}
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/bildung_gradient}
-\caption{Segmentierung des Gradientenbetrags aus der Distance Map.}
+\caption{Segmentierung des Gradientenbetrags aus der Distance Map. Von links nach rechts: Distance Map, Gradientenbetrag der Distance Map, Segmentiertes Gradientbetragsbild}
 \label{fig:bildung_gradient}
 \end{figure}
 \FloatBarrier
