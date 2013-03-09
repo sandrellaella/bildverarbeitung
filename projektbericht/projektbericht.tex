@@ -41,9 +41,6 @@
 \usepackage{amssymb} %mathe-symbole
 \usepackage{xcolor}
 
-
-
-
 \lstset{
 	%basicstyle=\ttfamily,
 	basicstyle=\ttfamily\scriptsize,
@@ -124,8 +121,12 @@
 \bibliographystyle{alpha}
 \bibliography{literatur}
 
-\appendix       %Beginn des Anhangs
+\appendix			%Beginn des Anhangs
 \include{anhang}
 \include{uebersicht}
+
+\cleardoublepage
+\thispagestyle{empty}
+\chapter*{}
 
 \end{document}

@@ -87,7 +87,7 @@ Die Segmentierung des Gradientenbetrages der Distance Map erzeugt Lücken im Dis
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/person_gradienten_problem.pdf}
-\caption{Bestimmung des Skelett mittels Distanztransformation. (a) Originalbild (b) Gradientenbild (c) Gradientenbild segmentiert(d) Skelett}
+\caption{Bestimmung des Skelett mittels Distanztransformation. (a) Originalbild (b) Gradientenbild des Distanzskeletts (c) Gradientenbild segmentiert (d) Distanzkelett}
 \label{fig:person-skelett}
 \end{figure}\\
 In den nächsten Abschnitten werden Methoden zur Verbesserung des Skeletts vorgestellt. Dies umfasst zum einen die Herstellung Konnektivität der Skelettkomponenten beziehungsweise dem Füllen der Lücken zwischen den Skelettlinien. Zum anderen ist es wünschenswert, dass die Skelettlinie des Objektes nicht breiter als ein Pixel ist. Zuerst wurden markante Punkte auf dem Skelett bestimmt. Diese wurden
@@ -113,7 +113,7 @@ Qualitätsmaß, wird diese Ecke verworfen. Die verbleibenden Ecken werden nach i
 \end{figure}
 Abbildung \ref{fig:features} zeigt das Ergebnis der Berechnung. Die Kreise markieren die Feature-Punkte. Wie man erkennen kann, befinden sich die Features auf der Skelettlinie. Dies ist eine Grundlage für die weiteren
 Verbesserungen des Skeletts. Befänden sich Features außerhalb der Skelettlinien, könnte die ursprüngliche Form des Skeletts und die Topologie des Objekts verfälscht werden. Diese Problematik wurde bei dem gewählten
-Algorithmus \cite{extracting_skeletons_distancemaps} nicht beobachtet.
+Algorithmus \cite{goodfeatures} nicht beobachtet.
 \subsection{Breitensuche}
 \label{subsec:breitesuche}
 Der Breitensuche-Algorithmus durchsucht einen Graphen ausgehend von einem Startpunkt nach weiteren 
@@ -129,7 +129,7 @@ In Anhang \ref{anhang:quellcode} befindet sich der Quellcode zur Breitensuche (L
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/suchdistanz_naechster_nachbar}
-\caption{Das aufgespannte Suchkreuz vom Punkt $(x,y)$ (rot) aus. Für den schwarzen Punkt wird überprüft, ob er in den festgelegten Suchintervallen des Punktes $(x,y)$ liegt.}
+\caption{Das aufgespannte Suchkreuz von Punkt $(x,y)$ (rot). Für den schwarzen Punkt wird überprüft, ob er in den festgelegten Suchintervallen des Punktes $(x,y)$ liegt.}
 \label{fig:suchdistanz_naechster_nachbar}
 \end{figure}\\
 Das Ergebnis des Algorithmus ist in Abbildung \ref{fig:hand_BFS} im Vergleich zum vorigen Skelett zu sehen.
@@ -148,7 +148,7 @@ sind fächerartige Ausläufer.
 		\centering
 		\includegraphics[width=1.0\linewidth]{./fig/hand-bfs}
 	\end{minipage}
-	\caption{Ergebnis der Breitensuche.}
+	\caption{Ergebnis der Breitensuche. Links: Distanzskelett. Rechts: Verbessertes Skelett.}
 	\label{fig:hand_BFS}
 	\end{figure}
 \FloatBarrier
@@ -171,7 +171,7 @@ Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass e
 		\centering
 		\includegraphics[width=1.0\linewidth]{./fig/hand-dfs}
 	\end{minipage}
-	\caption{Ergebnis der Tiefensuche.}
+	\caption{Ergebnis der Tiefensuche. Links: Distanzskelett. Rechts: Verbessertes Skelett.}
 	\label{fig:hand_DFS}
 	\end{figure}\\
 Um die Konnektivität des Skeletts zu gewährleisten, muss das Skelett nachbearbeitet werden. \\
@@ -189,7 +189,7 @@ wobei eine Zusammenhangskomponente aus genau einem Punkt besteht
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.4\linewidth]{./fig/offeneEnden.png}
-\caption{Zusammenhangskomponenten und ihre Endpunkte.}
+\caption{Zusammenhangskomponenten (weiß) und ihre Endpunkte.}
 \label{fig:offeneenden}
 \end{figure}
 \FloatBarrier
@@ -197,8 +197,7 @@ wobei eine Zusammenhangskomponente aus genau einem Punkt besteht
 \centering
 \includegraphics[width=0.4\linewidth]{./fig/dfs-endergebnis-hand2.png}
 \caption{Ergebnis des zweiten Verarbeitungsschrittes der Tiefensuche. Die weiße Linie ist das Skelett,
-das aus dem ersten Verarbeitungsschritt entstanden ist. Die grünen
-Linien sind die Verbindungen zwischen den Zusammenhangskomponenten.}
+das aus dem ersten Verarbeitungsschritt entstanden ist. Die magenta-farbenen Linien sind die Verbindungen zwischen den Zusammenhangskomponenten.}
 \label{fig:hand-DFS-endergebnis}
 \end{figure}
 \FloatBarrier
