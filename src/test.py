@@ -67,7 +67,8 @@ diff_img, features, dist_gradient, dist_img = test(img)
 skeleton_improvement.drawFeatures(features,diff_img)
 #comparison.connectFeatures(diff_img,features,10)
 #neighbours = skeleton_improvement.startConnect(features,20,img)
-cProfile.run('multipleCalls(500,features,img)')
+cProfile.run('skeleton_improvement.startConnect(features,20,img)')
+cProfile.run('test(img)')
 
 #skeleton_improvement.connectDFS(features)
 print img.depth

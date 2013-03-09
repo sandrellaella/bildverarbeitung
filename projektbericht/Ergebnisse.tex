@@ -213,9 +213,9 @@ Skeletts. Dabei ist die Skelettqualität unterschiedlich. Der
 Thinning-Algorithmus liefert bezüglich Pixelkonnektivität, 
 1-Pixel-Breite und Wiedergabe der Topologie hervorragende Ergebnisse. Bei der Skelettierung mittels Distanztransformation
 ist vor allem auffällig, dass die Skelettkonnektivität nicht vollständig gegeben ist. \\
-Es wurden Verbesserungsmöglichkeiten diskutiert, die zur globalen Skelettkonnektivität bei einem Distanzskelett führen. Dabei
+Es wurden Verbesserungsmöglichkeiten diskutiert, die zur globalen Skelettkonnektivität bei einem Distanzskelett führen. Die Grundlage der
+Verbesserung war die Berechnung von markanten Punkten, die mittels Breitensuche oder Tiefensuche verbunden wurden. Die
 liefert die Tiefensuche nicht nur bei der Konnektivität sehr gute Ergebnisse. Auch die topologischen Eigenschaften des Objektes werden
 hervorragend beschrieben. Bei der Breitensuche fielen vor allem die fächerartigen Ausläufer auf. Diese sind nicht Teil der Topologie
 des ursprünglichen Objekts. Es muss auch hier abhängig vom konkreten Anwendungsfall disktuiert werden, ob die Ausläufer stören. Das durch die Tiefensuche verbesserte Skelett realisiert am besten die in Kapitel \ref{ch:Skelettierung} genannten Qualitätsanforderungen.\\ Da diese Verbesserungen nach der offiziellen Projektarbeitszeit entstanden sind, konnten keine detaillierten Laufzeit-Messungen mit der Kinect vorgenommen werden. Die Laufzeiten
-der beiden Algorithmen wurden deshalb mit dem Tool \emph{CProfile} auf statischen Bildern gemessen. Die Laufzeiten fallen bei beiden Algorithmen für einen einzigen Durchlauf sehr gering aus. Deshalb wurden beide Algorithmen mehrmals ausgeführt (bis zu 500 Mal, entspricht einer Bildfolge von etwa 20 Sekunden). Dabei viel auf, dass der Breitensuche-Algorithmus bei mehreren Durchläufen deutlich langsamer wurde als der Tiefensuche-Algorithmus, der selbst bei einer hohen Anzahl von Wiederholungen schnell ein Ergebnis lieferte. Bei einer Integration in die
-Kinect-Umgebung ist der Tiefensuche-Algorithmus aufgrund der geringen Laufzeit und der überzeugenden Skelettqualität zu bevorzugen. 
+der beiden Algorithmen wurden deshalb mit dem Tool \emph{CProfile} auf statischen Bildern gemessen. Die Laufzeiten pro Bild fallen bei beiden Algorithmen sehr gering ($<0.001$ s) aus. Das Berechnen der Features dauert $0.01$ s und damit bleibt die Skelettierung mittels Distanztransformation auch mit den Verbesserungen immer noch deutlich schneller als der Thinning-Algorithmus.
