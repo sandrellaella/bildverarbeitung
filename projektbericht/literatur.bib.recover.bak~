@@ -67,15 +67,17 @@ author={Authors: M.R. Andersen, T. Jensen, P. Lisouski, A.K. Mortensen, M.K. Han
 }
 
 
-@misc{kinectinfo,
 
-Howpublished={\url{http://www.ros.org/wiki/openni_kinect/kinect_accuracy}},
-Title={Kinect Acuuracy}
+@ONLINE{kin,
+
+title = {Kinect Accuracy},
+
+url = {http://www.ros.org/wiki/openni_kinect/kinect_accuracy},
 }
 
 	
-@misc{stereotriangluation,
-Howpublished={\url{http://en.wikipedia.org/wiki/Triangulation_(computer_vision)}},
-Title={Stereotriangulation}
+@article{stereotriangluation,
+url={http://www.google.de/imgres?um=1&hl=de&client=safari&rls=en&biw=1113&bih=1080&tbm=isch&tbnid=GILVr-Eo_KjRrM:&imgrefurl=http://en.wikipedia.org/wiki/Triangulation_(computer_vision)&docid=EF5c4vd2z_l1MM&imgurl=http://upload.wikimedia.org/wikipedia/en/thumb/2/2c/TriangulationIdeal.svg/380px-TriangulationIdeal.svg.png&w=380&h=271&ei=DMw8UbDcKsSotAbWvIHwCw&zoom=1&iact=hc&vpx=4&vpy=169&dur=51&hovh=190&hovw=266&tx=136&ty=102&page=1&tbnh=138&tbnw=182&start=0&ndsp=35&ved=1t:429,r:0,s:0,i:78}
+
 }	
 

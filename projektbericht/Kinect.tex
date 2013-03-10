@@ -7,14 +7,14 @@ Die drei Haupt-Hardware-Komponenten der Kinect sind ein Infrarotprojektor, eine 
   \makebox[\textwidth]{%
    \includegraphics[height=5cm]{Res/Kinect_Components.png}
   }
-   \caption{\emph {Links:} Infrarotprojektor \emph {Mitte:}: RGB-Kamera  \emph {Rechts:}: Infrarotkamera }
+   \caption{\emph {Links:} Infrarotprojektor \emph {Mitte:}: RGB-Kamera  \emph {Rechts:}: Infrarotkamera. Bildquelle:\cite{borenstein2012making}  }
 \end{figure}
 Die Kombination aus Infrarotstrahler und Infrarotkamera ermöglicht die Gewinnung von Tiefeninformationen aus der Umgebung. Im Gegensatz zu gewöhnlichen Kameras, welche einem Pixel Farbinformation (z.B.  über RGB-Farbkanäle) zuordnen, wird dem Pixel mit Hilfe der Infrarot Kamera eine Entfernung zugeordnet.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.5\linewidth]{./Res/Kinect_9Points}
-\caption{Vom Infrarotprojektor ausgestrahltes strukturiertes Licht}
+\caption{Vom Infrarotprojektor ausgestrahltes strukturiertes Licht. Bildquelle:\cite{Kramer}}
 \label{fig:Kinect_9Points}
 \end{figure}
 
@@ -43,7 +43,7 @@ Normalerweise produzieren Filter, die diese Art von Muster generieren einen sehr
 \begin{figure}
 \centering
 \includegraphics[width=0.5\linewidth]{./Res/9_Dots}
-\caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen}
+\caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen Bildquelle:\cite{Kramer}}
 \label{fig:9_Dots}
 \end{figure}
 \FloatBarrier
@@ -63,7 +63,7 @@ Die Infrarotkamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixel
  	\begin{center}
  		\includegraphics[width=0.65\textwidth]{./Res/Res_to_Dist}
  	\end{center}
- 	\caption{Fehlerbehaftung  der Tiefeninformation in Abhängigkeit von der Objektentfernung}
+ 	\caption{Fehlerbehaftung der Tiefeninformation in Abhängigkeit von der Objektentfernung. Bildquelle: \cite{kinectinfo}}
  	\label{fig:Res_to_Dist}
  \end{figure}
  
@@ -103,7 +103,7 @@ Das "Bild" (die Lochmaske) des Projektors ist immer identisch und statisch. Das 
   \makebox[\textwidth]{%
     \includegraphics[height=6cm]{Res/Triangulation.png}
   }
-   \caption{ aktive Stereotriangulation }
+   \caption{ Stereotriangulation Bildquelle:\cite{stereotriangluation}}
 \end{figure}
 Zur Gewinnung der Tiefeninformation wird die horizontale Differenz des Punktes Y1 des von der Infrarotkamera aufgenommenen Bildes zum korrespondierenden Punkt Y2 des virtuellen, statischen Referenzbildes des Projektors berechnet. Aus dieser Differenz lässt sich die Tiefe des betreffenden Pixels durch aufstellen der beiden Projektionslinien und Schnittpunktbestimmung derselben berechnen. \\
 Der Grund weshalb die Pixel der statischen „Schablone“ im Projektor zufällig angeordnet sind, liegt darin, dass die unterschiedlichen lokalen Nachbarschaftsbedingungen die Pixelzuordnung zwischen dem statischen und dem dynamisch veränderten Bild erleichtern.
@@ -120,14 +120,14 @@ Schatten im Tiefenbild entstehen aufgrund der Entfernung des Infrarotprojektors 
   \makebox[\textwidth]{%
     \includegraphics[height=6cm]{Res/Schatten_Strahl.png}
   }
-   \caption{Blockierte Infrarotstrahlen }
+   \caption{Blockierte Infrarotstrahlen.Bildquelle:\cite{kinectdepth}}
 \end{figure}
 Der Schatten im Muster macht es für den Sensor unmöglich die Tiefe festzustellen. Die Pixel in diesen Bereichen werden stattdessen auf den Wert 0 gesetzt.
-Das Objekt blockiert die Strahlen des Lasers. Da für die Tiefenberechnung das vom Infrarotprojektor emittierte Musters benötigt wird, ist es für die Kinect unmöglich die Distanz in Bereichen zu berechnen, welche außerhalb der Erreichbarkeit des Infrarot-Strahlenmusters liegen. 
+Das Objekt blockiert die Strahlen des Lasers. Da für die Tiefenberechnung das von der Umgebung reflektierte Muster benötigt wird, ist es für die Kinect unmöglich die Distanz in Bereichen zu berechnen, welche außerhalb der Erreichbarkeit des Infrarot-Strahlenmusters liegen. 
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
    \includegraphics[height=5cm]{Res/Schatten.png}
   }
-   \caption{Da der Infrarot Sensor links des Projektors positioniert ist, treten die Schatten auch linksseitig der Objekte auf.  }
+   \caption{Da die Infrarotkamera links des Projektors positioniert ist, treten die Schatten auch linksseitig der Objekte auf. Bildquelle:\cite{kinectdepth}}
 \end{figure}

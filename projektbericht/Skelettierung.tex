@@ -57,6 +57,8 @@ Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auc
                
         \end{subfigure}
         \caption{Zustände des Algorithmus}
+         Bildquelle: \cite{thinning}
+        
 \end{figure}
 
 \subsubsection{Anforderungen an den Algorithmus}
@@ -81,8 +83,9 @@ Die Bedingungen, welche zum Ausführen der Transformation erfüllt sein müssen 
 \begin{figure} [!ht]
 \centering
 \includegraphics[width=0.7\linewidth]{./Res/PixelNachbarschaft}
-\caption{Betrachteter Pixel P1 und Nachbarumgebung}
+\caption{Betrachteter Pixel P1 und Nachbarumgebung. Bildquelle: \cite{thinning}}
 \label{fig:PixelNachbarschaft}
+
 \end{figure}
 
 Der Algorithmus entfernt alle Randpunkte des Musters, außer den Pixeln welche Bestandteil des Skeletts sind. Um die Verbundenheit des Skeletts zu gewährleisten wird ein  Iterationsschritt in zwei Subiterationen aufgeteilt.\\\\
@@ -107,7 +110,8 @@ Wird eine der Bedingungen nicht erfüllt, so bleibt der Pixelwert bei 1.\\
   \makebox[\textwidth]{%
    \includegraphics[width=8cm]{Res/01Folgen.png}
   }
-   \caption{Bedingung B: Anzahl 01 folgen in zyklischer Reihenfolge  }
+   \caption{Bedingung B: Anzahl 01 folgen in zyklischer Reihenfolge. Bildquelle: \cite{thinning} }
+   
 \end{figure}
 
 In der zweiten Subiteration wird P1 gelöscht falls folgende Bedingungen gelten:
@@ -129,36 +133,39 @@ P1 ist somit Nord- oder West-Grenzpunkt oder Südosteckpunkt.\\
   \makebox[\textwidth]{%
    \includegraphics[width=8cm]{Res/Orientierung.png}
   }
-   \caption{Betrachteten Nachbarpunkte in den Bedingungen c und d  }
+   \caption{Betrachteten Nachbarpunkte in den Bedingungen c und d. Bildquelle:
+   \cite{thinning} }
+  
 \end{figure}
 
 
 
 
-Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werden, so wird mit Bedingung B (A(P1)=1) die Auslöschung von Punkten zwischen den Endpunkten der Skelettlinie verhindert.\\
+Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werden, so wird mit Bedingung B (A(P1)=1) die Auslöschung von Punkten zwischen den Endpunkten der Skelettlinie verhindert.\\ 
 
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
   \includegraphics[width=8cm]{Res/EndpktVerbheit.png}
   }
-   \caption{Gewährleistung der Pixelverbundenheit}
+   \caption{Gewährleistung der Pixelverbundenheit. Bildquelle: \cite{thinning}}
+   
 \end{figure}
 
 \subsubsection{Der Algorithmus im Überblick}
 Diese Abschnitt nimmt Bezug auf Abbildung 3.6, und stellt den Algorithmus im Gesamtzusammenhang dar.
 In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter gleich Null und der Algorithmus beendet, da es keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
 
-Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich Null so wird der Vorgang iterativ fortgeführt bis der Counter am Ende einer Subiteration den Wert Null hat und damit das Ende der Skelettierung bezeichnet.\\ \\ \\ \\ \\ \\ 
+Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich Null so wird der Vorgang iterativ fortgeführt bis der Counter am Ende einer Subiteration den Wert Null hat und damit das Ende der Skelettierung bezeichnet.\\ \\ 
 
 
 
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
-  \includegraphics[width=11cm]{Res/AlgUebersicht.png}
+  \includegraphics[width=10cm]{Res/AlgUebersicht.png}
   }
-   \caption{Gesamter Algorithmus in der Übersicht}
+   \caption{Gesamter Algorithmus in der Übersicht. Bildquelle: \cite{thinning}}
 \end{figure}
 \FloatBarrier
 \subsubsection{Resultate}
