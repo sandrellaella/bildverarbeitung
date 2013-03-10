@@ -29,7 +29,7 @@ TODO arten des thinnings
 \subsection{A Fast Parallel Algorithm for Thinning Digital Patterns} 
 \Autor{Johannes Böhler}\\\\
 \label{subsec:fastparallel}
-Der ganze Abschnitt bezieht sich auf das Paper\emph{ A Fast Parallel Algorithm for Thinning Digital Patterns} von T. Y. ZHANG und C. Y. SUEN und erläutert das beschriebene Verfahren zur Generierung eines Skeletts mit Hilfe von Thinning-Methoden.
+Der Abschnitt bezieht sich auf das Paper\emph{ A Fast Parallel Algorithm for Thinning Digital Patterns} von T. Y. ZHANG und C. Y. SUEN und erläutert das beschriebene Verfahren zur Generierung eines Skeletts mit Hilfe von Thinning.
 Der gesamte Algorithmus erstreckt sich über mehrere Iterationen, dabei wird je Iteration eine Schicht (Menge an Randpixeln) des Musters abgetragen sofern bestimmte Kriterien erfüllt werden. Die Iterationen selbst, sind wiederum in zwei Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten.
 Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest-Eckpunkte entfernt. Das entfernen von Nord- und Westgrenzpunkten sowie von Südosteckpunkten erfolgt in der zweiten Subiteration.
 \begin{figure}[!ht]
@@ -156,14 +156,14 @@ Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werde
 Diese Abschnitt nimmt Bezug auf Abbildung 3.6, und stellt den Algorithmus im Gesamtzusammenhang dar.
 In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter gleich Null und der Algorithmus beendet, da es keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
 
-Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich Null so wird der Vorgang iterativ fortgeführt bis der Counter am Ende einer Subiteration den Wert Null hat und damit das Ende der Skelettierung bezeichnet.\\ \\ 
+Falls der Counter ungleich Null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird Null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich Null so wird der Vorgang iterativ fortgeführt bis der Counter am Ende einer Subiteration den Wert Null hat und damit das Ende der Skelettierung bezeichnet.
 
 
 
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
-  \includegraphics[width=10cm]{Res/AlgUebersicht.png}
+  \includegraphics[width=9cm]{Res/AlgUebersicht.png}
   }
    \caption{Gesamter Algorithmus in der Übersicht. Bildquelle: \cite{thinning}}
 \end{figure}
