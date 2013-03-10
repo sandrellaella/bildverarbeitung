@@ -146,19 +146,33 @@ Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werde
 
 In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter=0 und der Algorithmus beendet, da es keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
 
-Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich null so wird der Vorgang iterativ fortgeführt.\\
+Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich null so wird der Vorgang iterativ fortgeführt.\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
 
+<<<<<<< HEAD
 \begin{figure}
 \centering
 \includegraphics[width=0.7\textwidth]{./Res/AlgUebersicht}
 \caption{Gesamter Algorithmus in der Übersicht}
 \label{fig:AlgUebersicht}
+=======
+
+\begin{figure}[!ht]
+  \centering
+  \makebox[\textwidth]{%
+  \includegraphics[width=8cm]{Res/AlgUebersicht.png}
+  }
+   \caption{Gesamter Algorithmus in der Übersicht}
+>>>>>>> Korrekrur schrift
 \end{figure}
 \FloatBarrier
 \subsubsection{Resultate}
 
+<<<<<<< HEAD
 Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit und Rauschverhalten der Randpunkte. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen kann der Algorithmus sehr schnell ausgeführt werden, da keine Warteabhängikeiten bestehen. \\ \\
 Nach dem Auseinandersetzen mit dem Algorithmus entschied man sich diesen auch zu implementieren.
+=======
+Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit und Rauschverhalten der Randpunkte. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen werden Warteabhängigkeiten vermieden und ein performantes Verarbeiten der Bildpixel gewährleistet.
+>>>>>>> Korrekrur schrift
 
 \newpage
 \section{Skelettierung mittels Distanztransformation}

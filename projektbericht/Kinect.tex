@@ -1,7 +1,7 @@
 \chapter{Die Kinect}
 \label{ch:kinect}
 \Autor{Johannes Böhler}\\\\
-Die drei Haupt Hardware-Komponenten der Kinect sind ein Infrarotprojektor, eine RGB-Kamera sowie eine Infrarotkamera.
+Die drei Haupt-Hardware-Komponenten der Kinect sind ein Infrarotprojektor, eine RGB-Kamera sowie eine Infrarotkamera.\\
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
@@ -10,6 +10,7 @@ Die drei Haupt Hardware-Komponenten der Kinect sind ein Infrarotprojektor, eine 
    \caption{\emph {Links:} Infrarotprojektor \emph {Mitte:}: RGB-Kamera  \emph {Rechts:}: Infrarotkamera }
 \end{figure}
 Die Kombination aus Infrarotstrahler und Infrarotkamera ermöglicht die Gewinnung von Tiefeninformationen aus der Umgebung. Im Gegensatz zu gewöhnlichen Kameras welche einem Pixel Farbinformation (z.B.  über RGB-Farbkanäle) zuordnen, wird dem Pixel mit Hilfe der Infrarot Kamera eine Entfernung zugeordnet.
+<<<<<<< HEAD
 \begin{figure}
 \centering
 \includegraphics[width=0.5\linewidth]{./Res/Kinect_9Points}
@@ -27,16 +28,29 @@ Die Kombination aus Infrarotstrahler und Infrarotkamera ermöglicht die Gewinnun
  % \vspace{-10pt}
 %\end{wrapfigure}
 Diese ergibt sich aus der Art und Weise wie der Infrarotstrahl von dem durch den Pixel repräsentierten Bereich eines Objektes reflektiert wurde.
+=======
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \vspace{-20pt}
+  \begin{center}
+        \includegraphics[height=5cm]{Res/Kinect_9Points.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{Vom Infrarotprojektor ausgestrahltes strukturiertes Licht }
+  \vspace{-10pt}
+\end{wrapfigure}
+Diese ergibt sich aus der Art und Weise wie der Infrarotstrahl von dem durch den Pixel repräsentierten Bereich eines Objektes reflektiert wird.
+>>>>>>> Korrekrur schrift
 \\
 Die Tiefenbilder welche man von der IR Kamera erhält, sehen aus wie komplett verrauschte Graustufenbilder. Hierbei steht jeder Grau Wert eines Pixels für die entsprechende Entfernung des korrespondierenden Objektausschnittes zur Kinect.\\
 Hohe Grauwerte (helle Pixel) repräsentieren nahe Objekte, während niedrige Grauwerte (dunkle Pixel) weiter entfernte Objekte beschreiben. In einem Tiefenbild ist die gesamte Information über die Entfernung der im Bildausschnitt erfassten Objekte zur Kinect enthalten.\\\\
 Wird die Tiefeninformation dazu genutzt um die Pixel im dreidimensionalen Raum anzuordnen, erhält man eine Punktwolke. Die in der 2d 
--Betrachtung benachbarte Pixel müssen in der 3d Repräsentation nicht miteinander verbunden da die Z-Koordinate unterschiedliche Werte aufweisen kann.
+-Betrachtung benachbarte Pixel müssen in der 3d Repräsentation nicht miteinander verbunden sein, da die Z-Koordinate unterschiedliche Werte aufweisen kann.
 \subsection{Funktionale Komponenten}
 \subsubsection{Infrarotprojektor}
-Der Infrarotprojektor emittiert elektromagnetische Strahlen, deren Wellenlänge (830nm) außerhalb des für den Menschen sichtbaren Bereichs liegt (380nm-780nm).
+Der Infrarotprojektor emittiert elektromagnetische Strahlen, deren Wellenlänge (830nm) außerhalb des für den Menschen sichtbaren Bereichs (380nm-780nm) liegt .
 Der Projektor strahlt zur Tiefenbestimmung ein Gitter von Infrarotpunkten (strukturiertes Licht) auf die Objekte in seiner Umgebung ab. 
 Zur Generierung dieses Musters wird ein besonderes Verfahren implementiert.
+<<<<<<< HEAD
 Normalerweise produzieren Filter die diese Art von Muster generieren einen sehr hellen Punkt in der Mitte des Bildes, welcher die Leistungsfähigkeit des IR Projektors limitiert.Durch das hier verwendete Verfahren entstehen statt einem einzigen sehr hellen, neun helle Punkte, welche durch unvollständige Lichtfilterung zur Mustererstellung bedingt sind. Das hier eingesetzte Verfahren produziert weniger starke Artefakte und ermöglicht die Verwendung einer leistungsfähigeren Diode was eine erhöhte Genauigkeit sowie eine größere Reichweite ermöglicht. Die Reichweite des IR Projektors ist dennoch eingeschränkt, da zu hohe Intensitäten der IR Strahlen Augenschäden verursachen könnten.
 \begin{figure}
 \centering
@@ -55,8 +69,21 @@ Normalerweise produzieren Filter die diese Art von Muster generieren einen sehr 
 %  \vspace{-10pt}
 %\end{wrapfigure}
 Es ist wichtig dass die Wellenlänge der Infrarot strahlen konstant bleibt, was durch eine gleichbleibende Temperatur der Laserdiode und eine konstante Stromleistung (60 mW) gewährleistet wird. Problematisch sind variierende Außentemperaturen(die empfohlene Betriebstemperatur  liegt zwischen 5 und 35 °C). Um diese Konstanz zu gewährleisten wird ein sogenanntes  Peltier-Element verwendet, welches sowohl kühlen als auch wärmen kann.\\
+=======
+Normalerweise produzieren Filter, die diese Art von Muster generieren, einen sehr hellen Punkt in der Mitte des Bildes, welcher die Leistungsfähigkeit des IR-Projektors limitiert. Durch das hier angewandte Verfahren entstehen statt einem einzigen sehr hellen, neun helle Punkte, welche durch unvollständige Lichtfilterung zur Mustererstellung entstehen. Das hier eingesetzte Verfahren produziert weniger starke Artefakte und ermöglicht die Verwendung einer leistungsfähigeren Diode, was eine höhere Genauigkeit sowie eine größere Reichweite ermöglicht. Die Reichweite des IR-Projektors ist dennoch eingeschränkt, da zu hohe Intensitäten der IR-Strahlen Augenschäden verursachen könnten.
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \vspace{-20pt}
+  \begin{center}
+        \includegraphics[height=6cm]{Res/9_Dots.png}
+  \end{center}
+  \vspace{-20pt}
+  \caption{Gernerierung des Infrarot Random-Patterns mit Hilfe von 9 Bereichen }
+  \vspace{-10pt}
+\end{wrapfigure}
+Es ist wichtig dass die Wellenlänge der Infrarot strahlen konstant bleibt.Dies wird durch eine gleichbleibende Temperatur der Laserdiode und eine konstante Stromleistung (60 mW) gewährleistet. Problematisch sind in diesem Zusammenhang variierende Außentemperaturen(die empfohlene Betriebstemperatur  liegt zwischen 5 und 35 °C). Um diese Konstanz zu gewährleisten wird ein sogenanntes  Peltier-Element verwendet, welches sowohl kühlen als auch wärmen kann.\\
+>>>>>>> Korrekrur schrift
 \subsubsection{Infrarotkamera}
-Die IR Kamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixeln, bei einer Bildwiederholrate von 30 Hz auf. Weitergeleitet werden allerdings nur Bilder mit einer Auflösung von 640x480 Pixeln da der USB Datenbus eine Limitierung bezüglich der Datenübertragungsrate darstellt. Das Blickfeld der IR Kamera beträgt in der Horizontalen 58 °, in der Vertikalen 45 °. Damit sich die Mustererkennung funktioniert ist eine Mindestabstand von 0,8 Metern erforderlich, ab einer Entfernung von 3,5 Metern wird die Intensität der reflektierten Strahlen zu gering um Tiefeninformationen mit ausreichender Präzision zu erhalten.
+Die IR Kamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixeln, bei einer Bildwiederholrate von 30 Hz auf. Weitergeleitet werden allerdings nur Bilder mit einer Auflösung von 640x480 Pixeln, da der USB Datenbus eine Limitierung bezüglich der Datenübertragungsrate darstellt. Das Blickfeld der IR Kamera beträgt in der Horizontalen 58 °, in der Vertikalen 45 °. Damit sich die Mustererkennung funktioniert ist eine Mindestabstand von 0,8 Metern erforderlich. Ab einer Entfernung von 3,5 Metern wird die Intensität der reflektierten Strahlen zu gering um Tiefeninformationen mit ausreichender Präzision zu erhalten.
 Bei einem optimalen Abstand von 2 Metern zum Objekt beträgt die Auflösung 
 \begin{figure}
 \centering
@@ -77,15 +104,15 @@ Bei einem optimalen Abstand von 2 Metern zum Objekt beträgt die Auflösung
 in der XY Ebene 3 mm, in der Z Ebene 1 cm.
 
 Die Quantisierungsauflösung liegt bei  (2048) Bit.
-Es muss sichergestellt werden dass die IR Kamera nur die erwünschte elektromagnetische Strahlung im 830 nm Bereich aufnimmt und nicht von Strahlungen anderer Wellenlänge gestört wird . Dies wird durch einen Filter, welcher auf dem IR Kameraobjektiv angebracht ist realisiert.
+Es muss sichergestellt werden dass die IR-Kamera nur die erwünschte elektromagnetische Strahlung im 830 nm Bereich aufnimmt und nicht von Strahlen anderer Wellenlänge gestört wird . Dies wird durch einen Filter, welcher auf dem IR Kamera-objektiv angebracht ist realisiert.
 Trotz des Filters sollte die Kinect in abgedunkelten Innenräumen verwendet werden, da  Sonnenlicht auch elektromagnetische Wellen im Infrarotbereich enthält.
 \subsubsection{RGB Kamera}
 Die RGB Kamera nimmt bei einer Wiederholrate von 30 Hz ebenfalls mit einer Auflösung von 640x480 Pixeln auf, könnte jedoch auch mit einer Auflösung von 1280x1024 Pixeln bei einer reduzierten Wiederholrate von 15 Bildern pro Sekunde angesteuert werden.
-Die Quantisierungsauflösung liegt hier bei  (256)Bit. 
+Die Quantisierungsauflösung der Kamera liegt bei  (256)Bit. 
 \subsubsection{Mikrofon Array}
 Die Kinect beinhaltet vier Mikrofone, welche verteilt verbaut sind. Sie dienen sowohl der Erfassung von Ton, als auch der Lokalisierung und Unterscheidung von Soundquellen. Jedes der Mikrophone tastet mit einer Quantisierungsauflösung von  (65536) Bit und einer Abtastrate von 16 KHz ab.
 \subsection{Tiefenberechnung}
-Die Berechnung der Objektentfernungen (Tiefenwerte) innerhalb der Kinect erfolgt durch Aussendung von strukturiertem Licht durch die Projektionseinheit und durch Weiterverwertung  der durch die Infrarotkamera empfangen reflektierten Strahlen auf einem Chip der Firma PrimeSense (PS1080-A2-Chip). Das Muster für das strukturierte Licht wird mit Hilfe eines Diffusors(einer Lochplatte mit fest definiertem Muster) erzeugt.\\
+Die Berechnung der Objektentfernungen (Tiefenwerte) innerhalb der Kinect erfolgt durch Aussendung von strukturiertem Licht durch die Projektionseinheit und durch Weiterverwertung  der durch die Infrarotkamera empfangen reflektierten Strahlen . Das Muster für das strukturierte Licht wird mit Hilfe eines Diffusors(einer Lochplatte mit fest definiertem Muster) erzeugt.\\
 Das Prinzip des Strukturierten Lichts ist an ein Verfahren angelehnt, welches sich Streifenprojektion nennt und in dieser Anwendung abgewandelt wurde um die Erfassung von beweglichen Objekten zu ermöglichen. Statt Lichtstreifen wird eine Punktematrix verwendet, welche zufällig und fest definiert ist. Die IR Kamera sowie der Projektor müssen sich hierzu in einem definierten, gleich großen Abstand zueinander befinden.
 Die Umgebungsreflektionen der projizierten Punktematrix werden von der Infrarotkamera erfasst.
 Um aus diesem Gitter von Infrarotpunkten Tiefeninformation zu extrahieren, wird das Verfahren der aktiven Stereotriangulation verwendet.\\
@@ -95,7 +122,7 @@ Aktive Triangulation bedeutet, dass mindestens eine strukturierte Lichtquelle zu
 Da der IR Projektor ein statisches Pseudozufallsmuster emittiert, ist dieser als strukturierte Lichtquelle einzuordnen.
 Stereotriangulation bedeutet dass zwei unterschiedliche Bildquellen benötigt werden um die Tiefe jedes Pixels eines Bildausschnittes berechnen zu können.
 Eine Bildquelle ist der Diffusor (das „Lochmuster“) welcher die vom Projektor emittierten Strahlen statisch definiert. Die andere Bildquelle ist die IR Kamera.
-Das erste Bild ist immer identisch und statisch, das zweite hingegen variiert je nach Umgebung. Diese beiden Bilder sind die Grundlage für die trigonometrischen Operationen zur Berechnung der Tiefeninformationen.
+Das "Bild" (die Lochmaske) des Projektors ist immer identisch und statisch, das Bild der IR-Kamera hingegen variiert je nach Umgebung. Diese beiden Bilder sind die Grundlage für die trigonometrischen Operationen zur Berechnung der Tiefeninformationen.
 
 \begin{figure}[!ht]
   \centering
@@ -121,7 +148,7 @@ Schatten im Tiefenbild entstehen aufgrund der Entfernung des Infrarotprojektors 
   }
    \caption{Blockierte IR Strahlen }
 \end{figure}
-Der Schatten im Muster macht es für den Sensor unmöglich die Tiefe festzustellen. Die Pixel in diesen Bereichen werden auf den Wert 0 gesetzt.
+Der Schatten im Muster macht es für den Sensor unmöglich die Tiefe festzustellen. Die Pixel in diesen Bereichen werden stattdessen auf den Wert 0 gesetzt.
 Das Objekt blockiert die Strahlen des Lasers. Da für die Tiefenberechnung das vom IR-Projektor emittierte Musters benötigt wird, ist es für die Kinect unmöglich die Distanz in Bereichen zu berechnen, welche außerhalb der Erreichbarkeit des IR Strahlenmusters liegen. \\
 \begin{figure}[!ht]
   \centering
