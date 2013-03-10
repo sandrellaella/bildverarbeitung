@@ -19,16 +19,17 @@ Abschnitt kurz vorgestellt.
 \section{Skelettierung mittels Thinning}
 \label{sec:thinning}
 \Autor{Johannes Böhler, Christopher Kroll}\\ \\
-Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2D sowie 3D Objekten. In dieser Projektarbeit ist der Fokus ausschlie"slich auf die 2D Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5 dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3D Modell zu erhalten müssten mindestens 2 Kinects verwendet werden und die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. \\ \\
-Alle Thinning-Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche. Dabei werden nach und nach die Konturpixel, also die Objektpixel, die mit den Hintergrundpixeln benachbart sind, "uberpr"uft. Je nach Algorithmus liegen verschiedene Kriterien vor, ob diese gel"oscht, also als Hintergrundpixel markiert werden k"onnen. Ein Kriterium ist auf jeden Fall, dass die Zusammengeh"origkeit der Skelettpixel bewahrt wird. Eine weitere Gemeinsamkeit der unterschiedlichen Ans"atze ist, dass das Ausd"unnen solange stattfindet, bis am Objekt keine "Anderung mehr gemacht wurde.
+Das Thinning bezeichnet eine Kategorie von Methoden zur Skelettierung von 2d- sowie 3d-Objekten. In dieser Projektarbeit ist der Fokus ausschließlich auf die 2d-Skelettierung gerichtet, da die Kinect kein vollkommenes 3D Modell eines Objektes liefert. Sie erfasst das Objekt lediglich aus einem Blickwinkel, desshalb erhält man nur ein 2,5-dimensionales Modell. Es werden nur Tiefeninformationen bezüglich der Seite des Objektes, welche der Kinect zugewendet ist bereitgestellt. Die  Tiefeninformationen der Rückseite bleiben verborgen. Um ein vollständiges 3d-Modell zu erhalten müssten mindestens 2 Kinects verwendet, sowie die Informationen beider Geräte zusammengeführt und vereinheitlicht werden. \\ \\
+Alle Thinning-Algorithmen verbindet das iterative Abtragen des Musters oder der Oberfläche. Dabei werden nach und nach die Konturpixel,die Objektpixel, die mit den Hintergrundpixeln benachbart sind, überprüft. Je nach Algorithmus liegen verschiedene Kriterien vor, ob diese gelöscht, also als Hintergrundpixel markiert werden können. Ein Kriterium ist auf jeden Fall, dass die Zusammengehörigkeit der Skelettpixel bewahrt wird. Eine weitere Gemeinsamkeit der unterschiedlichen Ansätze ist, dass das Ausdünnen solange stattfindet, bis am Objekt keine Änderung mehr vorgenommen wurde.
 
-Beim Thinning wird die Zusammengeh"origkeit nicht ver"andert, wodurch die topologische Struktur des Objektes erhalten bleibt. 
+Beim Thinning wird die Zusammengehörigkeit nicht verändert, wodurch die topologische Struktur des Objektes erhalten bleibt. 
 
 \subsection{A Fast Parallel Algorithm for Thinning Digital Patterns} 
 \Autor{Johannes Böhler}\\\\
 \label{subsec:fastparallel}
-Der gesamte Algorithmus erstreckt sich über mehrere Iterationen. Die Randpixel des Musters werden Schicht für Schicht abgetragen. Die Iterationen selbst, sind wiederum in zwei Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten.
-Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest Eckpunkte entfernt. Das entfernen von Nord- und Westgrenzpunkten sowie von Südosteckpunkten erfolgt in der zweiten Subiteration.
+Der ganze Abschnitt bezieht sich auf das Paper\emph{ A Fast Parallel Algorithm for Thinning Digital Patterns} von T. Y. ZHANG und C. Y. SUEN und erläutert das beschriebene Verfahren zur Generierung eines Skeletts mit Hilfe von Thinning-Methoden.
+Der gesamte Algorithmus erstreckt sich über mehrere Iterationen, dabei wird je Iteration eine Schicht (Menge an Randpixeln) des Musters abgetragen sofern bestimmte Kriterien erfüllt werden. Die Iterationen selbst, sind wiederum in zwei Subiterationen unterteilt. Das Abtragen der „Schichten“ wird somit in zwei unterschiedliche Phasen aufgespalten.
+Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auch Nordwest-Eckpunkte entfernt. Das entfernen von Nord- und Westgrenzpunkten sowie von Südosteckpunkten erfolgt in der zweiten Subiteration.
 \begin{figure}[!ht]
         \centering
         \begin{subfigure}[b]{0.3\textwidth}
@@ -59,10 +60,10 @@ Mit Hilfe der ersten Subiteration werden sowohl Süd- und Ostgrenzpunkte als auc
 \subsubsection{Anforderungen an den Algorithmus}
 
 \begin{itemize}
-\item[-] Das Rauschen, welches der Algorithmus verursacht soll so gering wie möglich gehalten werden.
+\item[-] Das Rauschen, welches der Algorithmus verursacht soll so gering wie möglich sein.
 \item[-] Das Skelett des Ursprungsmusters soll die Endpunkt- und Pixelverbundenheit erhalten.
 Endpunktverbundenheit bedeutet, dass sich zwischen zwei Endpunkten eines Skeletts keine unverbundenen Stellen befinden.
-\item[-] Das Skelett soll nach Durchlaufen des kompletten Algorithmus in einheitlicher Dicke von einem Pixel vorliegen.
+\item[-] Das Skelett soll nach Durchlaufen des kompletten Algorithmus in einer einheitlichen Dicke von einem Pixel vorliegen.
 \item[-] Der Algorithmus soll möglichst schnell und effizient arbeiten um Echtzeitfähigkeit gewährleisten zu können. \\
 \end{itemize}
 
@@ -70,10 +71,10 @@ Endpunktverbundenheit bedeutet, dass sich zwischen zwei Endpunkten eines Skelett
 
 Es wird davon ausgegangen, dass zu Beginn ein binär digitalisiertes Bild vorliegt.
 Die Pixel werden mit Hilfe einer zweidimensionalen Matrix IT durchlaufen, deren Wert an der jeweiligen Stelle IT(i,j) entweder 0 oder 1 ist.
-Mit Muster ist die Menge an Pixeln gemeint, welche den Wert eins haben.
-Es werden in Abhängigkeit von den 8 Nachbarpixeln (siehe Abbildung 4.5), Transformationen auf den betrachteten Pixel P1 angewendet. Dieser Vorgang wird iterativ auf die Matrix IT angewendet.
+Mit Muster ist im Folgenden die Menge an Pixeln gemeint, welche den Wert eins haben.
+Es werden in Abhängigkeit von den 8 Nachbarpixeln (siehe Abbildung 3.2), Transformationen auf den betrachteten Pixel P1 angewendet. Der Wert des des Pixels P1 wird bei Erfüllung bestimmter Kriterien welche im Folgenden erläutert werden auf 0 gesetzt. Dieser Vorgang wird iterativ auf die Matrix IT angewendet. Nach einmaligem Durchlaufen der Matrix IT ist eine Subiteration abgeschlossen.
 
-Der neue Wert eines Pixels während der n-ten Iteration hängt von dem eigenen Wert während der (n-1)ten Iteration und den Werten der acht Nachbarn während der (n-1)ten Iteration ab. Dies ermöglicht paralleles Transformieren mehrerer Bildpunkte. 
+Der neue Wert eines Pixels während der n-ten Iteration hängt von dem eigenen Wert während der (n-1)ten Iteration und den Werten der acht Nachbarn während der (n-1)ten Iteration ab. Dies ermöglicht paralleles Transformieren mehrerer Bildpunkte zur selben Zeit. 
 Die Bedingungen, welche zum Ausführen der Transformation erfüllt sein müssen werden über ein 3x3 Pixel Fenster abgefragt. Der Punkt P1 über dessen Transformation entschieden wird, ist mit allen acht Nachbarn direkt verbunden.\\
 \begin{figure} [!ht]
 \centering
@@ -86,7 +87,7 @@ Der Algorithmus entfernt alle Randpunkte des Musters, außer den Pixeln welche B
 In der ersten Subiteration wird der Punkt P1 aus dem Muster gelöscht, wenn er folgende Bedingungen erfüllt:
 \begin{itemize} 
 \item \emph{a)} 2<=B(P1)<=6     
-B entspricht der Anzahl der Nachbarn von P1 !=0
+B entspricht der Anzahl der Nachbarn von P1 welche ungleich 0 sind.
 Die Anzahl der Nachbarn von P1 welche den Wert 1 haben, muss somit zwischen 2 und 6 liegen.
 \item \emph{b)}  A(P1)=1
 Anzahl der „01“-Folgen 
@@ -115,12 +116,11 @@ In der zweiten Subiteration wird P1 gelöscht falls folgende Bedingungen gelten:
 \item \emph{d)}  P2*P6*P8=0
 \end{itemize}
 
-Nur die Bedingungen c und d haben sich geändert.\\
+Nur die Bedingungen c und d haben sich im direkten Vergleich zur ersten Subiteration verändert.\\
 Um die Bedingungen der ersten Subiteration zu erfüllen, muss
 P4=0 oder P6=0 oder (P2=0 und P8=0)  erfüllt sein.
-Dies impliziert dass P1 entweder Süd- oder Ost-Grenzpunkt, oder Nordwesteckpunkt ist.Um die Bedingungen der zweiten Subiteration zu erfüllen muss
-P2=0 oder P8=0 oder (P4=0 und P6=0) sein.
-P1 ist Nord- oder West-Grenzpunkt oder Südosteckpunkt.\\
+Dies impliziert dass P1 entweder Süd- oder Ost-Grenzpunkt, oder Nordwesteckpunkt ist. Um die Bedingungen der zweiten Subiteration zu erfüllen mussP2=0 oder P8=0 oder (P4=0 und P6=0) sein.
+P1 ist somit Nord- oder West-Grenzpunkt oder Südosteckpunkt.\\
 
 \begin{figure}[!ht]
   \centering
@@ -143,17 +143,18 @@ Während mit Bedingung A (2<=B(P1)<=6) die Endpunkte des Skeletts erhalten werde
    \caption{Gewährleistung der Pixelverbundenheit}
 \end{figure}
 
+\subsubsection{Der Algorithmus im Überblick}
+Diese Abschnitt nimmt Bezug auf Abbildung 3.6, und stellt den Algorithmus im Gesamtzusammenhang dar.
+In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter gleich Null und der Algorithmus beendet, da es keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
 
-In der Matrix Search M befinden sich während der ersten Iteration alle Pixel die gelöscht werden dürfen, da sie den Bedingungen der ersten Iteration genügen. Ist dies nicht der Fall, so ist der Counter=0 und der Algorithmus beendet, da es keine zu löschenden Pixel mehr gibt. Die Skelettierung ist somit beendet.
-
-Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich null so wird der Vorgang iterativ fortgeführt.\\ \\ \\ \\ \\ \\ \\ \\ 
+Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen genügen von der Matrix IT (Skelett-Muster) abgezogen, der Counter wird null gesetzt und es wird zur zweiten Iteration fortgeschritten. Dort findet der Ablauf mit veränderten Bedinungen c und d wiederholt statt. Ist der Counter auch nach dem Durchlaufen der zweiten Subitertation ungleich Null so wird der Vorgang iterativ fortgeführt bis der Counter am Ende einer Subiteration den Wert Null hat und damit das Ende der Skelettierung bezeichnet.\\ \\ \\ \\ \\ \\ 
 
 
 
 \begin{figure}[!ht]
   \centering
   \makebox[\textwidth]{%
-  \includegraphics[width=8cm]{Res/AlgUebersicht.png}
+  \includegraphics[width=11cm]{Res/AlgUebersicht.png}
   }
    \caption{Gesamter Algorithmus in der Übersicht}
 \end{figure}
@@ -161,8 +162,15 @@ Falls der Counter ungleich null ist, werden die Pixel welche den Bedingungen gen
 \subsubsection{Resultate}
 
 
-Der Algorithmus erzielt sehr gute Ergebnisse im Bezug auf Verbundenheit und Rauschverhalten der Randpunkte. Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel. Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen werden Warteabhängigkeiten vermieden und ein performantes Verarbeiten der Bildpixel gewährleistet.
-Nach dem Auseinandersetzen mit dem Algorithmus entschied man sich diesen auch zu implementieren.
+\begin{itemize} 
+\item Der Algorithmus erzielt sehr gute Ergebnisse in  Bezug auf Verbundenheit und Rauschverhalten der Randpunkte.
+\item Die Bedingungen welche zum Auffinden der zu löschenden Randpunkte führen sind sehr simpel.
+\item  Durch den Bezug auf die n-1te Iteration zur Abfrage der Bedingungen werden Warteabhängigkeiten vermieden und ein performantes Verarbeiten der Bildpixel gewährleistet.
+
+\end{itemize}
+
+
+Nach Betrachtung des Algorithmus wurde die Entscheidung getroffen, diesen vor allem aufgrund der Kriterien Performanz und Implementierbarkeit umzusetzen.
 
 \newpage
 \section{Skelettierung mittels Distanztransformation}
