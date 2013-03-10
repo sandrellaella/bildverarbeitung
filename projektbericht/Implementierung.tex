@@ -21,7 +21,7 @@ TODO numpy
 \section{Spielersegmentierung}
 \label{segmentierung}
 \Autor{Sandra Schröder}\\\\
-Es wird anhand der Tiefeninformation segmentiert, die die Kinect liefert. Der Open-Source-Treiber für die Kinect - \emph{Freenect} - bietet Funktionen für den Zugriff auf die
+Es wird anhand der Tiefeninformation segmentiert, die die Kinect liefert. Somit kann der Spieler in einfacher Weise vom Hintergrund und von anderen Objekten, die nicht skelettiert werden sollen, getrennt werden. Der Open-Source-Treiber für die Kinect - \emph{Freenect} - bietet Funktionen für den Zugriff auf die
 Tiefenwerte. Die Funktion \texttt{pretty\_depth} des Moduls
 \texttt{frame\_convert} normiert die Tiefenwerte auf das 
 Intervall $[0,...,255]$. 
@@ -62,7 +62,7 @@ Rekapitulation werden die Schritte kurz aufgezählt. \\
 Die Skelettierung anhand der Distanztransformation läuft folgendermaßen ab:
 \begin{itemize}
 \item Bestimmen der Distanztransformation des Binärbildes
-\item Berechne den Gradientenbetrag auf der Distance Map
+\item Berechne den Gradientenbetrag auf der Distance Map und führe die Segmentierung auf dem Gradientenbetragsbild aus.
 \item Differenz zwischen dem Gradientenbild und der Distance Map bilden
 \end{itemize}
 Die Distance Map kann mit einer Funktion aus der Bildverarbeitungsbibliothek \emph{OpenCV} einfach berechnet
@@ -70,11 +70,11 @@ werden. Die Funktion (Listing \ref{lst:disttransform}) erwartet als Eingabe das 
 das Ergebnis speichern zu können (gleiche Größe und Dimension wie das Originalbild). Eine weitere Möglichkeit, die die Funktion bietet, ist die Angabe einer Metrik, nach der der Abstand eines Pixels zum
 Hintergrund bestimmt wird. Es wurde die euklidische Metrik benutzt.
 \lstset{
-caption={Berechnen der Distance Map des Spielers.}
+caption={Berechnen der Distance Map des Binärbildes des Spielers.}
 \label{lst:disttransform}
 }
 \lstinputlisting{./listing/distancetransform.py}
-Zur Bestimmung des Gradientenbetrages der Distance Map wurde die Numpy-Funktion \texttt{gaussian\_gradient\_magnitude} genutzt. Die Funktion berechnet den Gradientenbetrag mit Ableitungen
+Zur Bestimmung des Gradientenbetrages der Distance Map wurde die Numpy-Funktion \texttt{gaussian\_gradient\_magnitude} genutzt (Listing \ref{lst:gradient}). Die Funktion berechnet den Gradientenbetrag mit Ableitungen
 der Gaussfunktion. Die Variable \texttt{sigma} ist die Standardabweichung 
 des Gaussfilters. Das Ergebnis dieser Funktion wird in ein Bildobjekt
 konvertiert und entsprechend festgelegter Schwellwerte (\texttt{lowerbound}, \texttt{upperbound}) segmentiert.
@@ -83,8 +83,7 @@ caption={Gradientenbetrag der Distance Map und Segmentierung des Gradientenbetra
 \label{lst:gradient}
 }
 \lstinputlisting{./listing/gradient.py}
-Zur Differenzbildung und endgültigen Berechnung des Distanzskelettes werden die Bildobjekte in Arrays umgewandelt. 
-Diese Arrays können einfach voneinander abgezogen werden. 
+Zur Differenzbildung und endgültigen Berechnung des Distanzskelettes werden die Bildobjekte in Arrays umgewandelt. Diese Arrays können einfach voneinander abgezogen werden (Listing \ref{lst:difference}). 
 \lstset{
 caption={Differenz zwischen Distance Map und segmentiertem Gradientenbetrag}
 \label{lst:difference}

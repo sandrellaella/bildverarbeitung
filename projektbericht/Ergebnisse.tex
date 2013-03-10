@@ -12,14 +12,14 @@ gewünschten Eigenschaften eines Skeletts zurück (Kapitel \ref{ch:Skelettierung
 Zum Vergleich der Algorithmen wurden Posen des Spielers aufgenommen (Abbildung \ref{fig:posen}). Bei gleichen Eingabedaten
 weisen die beiden Algorithmen Resultate von unterschiedlicher Qualität auf. Pose 1 zeigt
 den Unterkörper des Spielers. Beide Skelette beschreiben die Grundstruktur des Spieler sehr gut. Arme und Beine werden jeweils durch eine im ursprünglichen Objekt mittig liegende Linie beschrieben. Die Hände des Spielers sind deutlich vom Körper gestreckt und die Finger gespreizt. Der Thinning-Algorithmus ist in der Lage die Topologie der Hände und Finger wiederzugeben, während bei der
-Distanztransformationen das Skelett der Hände schlechter zu erkennen ist.
+Distanztransformation das Skelett der Hände schlechter zu erkennen ist.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/posen.pdf}
 \caption{Vergleich zweier Posen. Der Thinning-Algorithmus und die Skelettierung mittels Distanztransformation weisen jeweils Resultate von unterschiedlicher Qualität auf.}
 \label{fig:posen}
 \end{figure}
-Die zweite getestete Pose erzeugt ebenfalls Skelette von unterschiedlicher Qualität. Auffallend sind die Lücken in den Skelettlinien des Skeletts, das aus der Distanztransformation entstanden 
+Die zweite getestete Pose (Pose 2 in Abbildung \ref{fig:posen}) erzeugt ebenfalls Skelette von unterschiedlicher Qualität. Auffallend sind die Lücken in den Skelettlinien des Skeletts, das aus der Distanztransformation entstanden 
 ist. Der Thinning-Algorithmus hat stets ein Skelett mit zusammenhängenden Skelettkomponenten als Ergebnis. 
 Jedoch ist beim Skelett des Thinning-Algorithmus auf Bauchhöhe ein horizontaler Ausläufer zu erkennen, der nicht die eigentliche Form
 des Objektes beschreibt. Das aus der Distanztransformation resultierende Skelett gibt den Oberkörper bis
@@ -38,7 +38,7 @@ wichtigsten Funktionen der Programme wurden aus der Statistik entnommen. Die Tab
 Überblick über die Laufzeiten. \\
 Obwohl der Thinning-Algorithmus bezüglich der geforderten Eigenschaften von Skeletten die besten Ergebnisse
 liefert, ist er deutlich langsamer als die Skelettierung mittels
-Distanztransformation. Zur initialisierung der Algorithmen wird einmalig zu Beginn eine Startfunktion ausgeführt. Diese beansprucht weniger als 30 Sekunden und kann gegenüber der Gesamtlaufzeit der Anwendung (Minuten bis Stunden) vernachlässigt werden. Die Spielersegmentierung und die Skelettberechnung wird pro Bild einmalig ausgeführt. Die Segmentierung unterscheidet sich bei den beiden Ansätzen nicht. Die Abweichung zwischen den Laufzeiten ist auf Messungenauigkeiten zurück zu führen.  Die Skelettierung nimmt bei beiden Ansätzen deutlich mehr CPU-Zeit in Anspruch als die Segmentierung. Pro Bild ergibt sich eine Verhältnis der Laufzeiten von:
+Distanztransformation. Zur Initialisierung der Algorithmen wird einmalig zu Beginn eine Startfunktion ausgeführt. Diese beansprucht weniger als 30 Sekunden und kann gegenüber der Gesamtlaufzeit der Anwendung (Minuten bis Stunden) vernachlässigt werden. Die Spielersegmentierung und die Skelettberechnung wird pro Bild einmalig ausgeführt. Die Segmentierung unterscheidet sich bei den beiden Ansätzen nicht. Die Abweichung zwischen den Laufzeiten ist auf Messungenauigkeiten zurück zu führen.  Die Skelettierung nimmt bei beiden Ansätzen deutlich mehr CPU-Zeit in Anspruch als die Segmentierung. Pro Bild ergibt sich ein Verhältnis der Laufzeiten von:
 \begin{equation}
 \frac{\textnormal{Laufzeit Skelett aus Thinning}}{\textnormal{Laufzeit Skelett aus Distanztransformation}}=\frac{0.003\,\textnormal{s}+0.904\,\textnormal{s}}{0.004\,\textnormal{s}+0.076\,\textnormal{s}}\approx 11
 \end{equation}
@@ -83,14 +83,14 @@ Die Berechnung des Distanzskeletts ist also um mehr als eine Größenordung schn
 Im Folgenden wird ein Ansatz zur Verbesserung der Skelettqualität
 vorgestellt. \\
 Das Skelett, welches mit der Methode der Distanztransformation bestimmt wurde, weist Lücken zwischen den Skelettteilen auf. Um die Topologie und geometrische Eigenschaften des Objekts gut wiederzugeben, ist ein lückenloses Skelett wünschenswert. \\
-Die Segmentierung des Gradientenbetrages der Distance Map erzeugt Lücken im Distanzskeletts. Dies wird anhand von Abbildung \ref{fig:person-skelett} deutlich. Im Gradientenbild (Teilabbildung b) sind noch durchgehende Skelettlinien zu erkennen. Per Schwellwert-Filter wird das Skelett aus dem Gradientenbild extrahiert. Für das gezeigte Beispielbild konnte allerdings kein geeigneter Schwellwert gefunden werden, der sowohl Pixelkonnektivität gewährleistet als auch Artefakte verhindert. Teilabbildung c zeight die Segmentierung des Gradientenbildes. In diesem Schritt ist die Pixelkonnektivität erstmals nicht gewährleistet. Auch in den folgenden Schritten wird die Pixelkonnektivität nicht wieder hergestellt. 
+Die Segmentierung des Gradientenbetrages der Distance Map erzeugt Lücken im Distanzskeletts. Dies wird anhand von Abbildung \ref{fig:person-skelett} deutlich. Im Gradientenbild (Teilabbildung b) sind noch durchgehende Skelettlinien zu erkennen. Per Schwellwert-Filter wird das Skelett aus dem Gradientenbild extrahiert. Für das gezeigte Beispielbild konnte allerdings kein geeigneter Schwellwert gefunden werden, der sowohl Skelettkonnektivität gewährleistet als auch Artefakte verhindert. Teilabbildung c zeigt die Segmentierung des Gradientenbildes. In diesem Schritt ist die Skelettkonnektivität erstmals nicht gewährleistet. Auch in den folgenden Schritten wird die Skelettkonnektivität nicht wieder hergestellt. 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/person_gradienten_problem.pdf}
 \caption{Bestimmung des Skelett mittels Distanztransformation. (a) Originalbild (b) Gradientenbild des Distanzskeletts (c) Gradientenbild segmentiert (d) Distanzkelett}
 \label{fig:person-skelett}
 \end{figure}\\
-In den nächsten Abschnitten werden Methoden zur Verbesserung des Skeletts vorgestellt. Dies umfasst zum einen die Herstellung Konnektivität der Skelettkomponenten beziehungsweise dem Füllen der Lücken zwischen den Skelettlinien. Zum anderen ist es wünschenswert, dass die Skelettlinie des Objektes nicht breiter als ein Pixel ist. Zuerst wurden markante Punkte auf dem Skelett bestimmt. Diese wurden
+In den nächsten Abschnitten werden Methoden zur Verbesserung des Skeletts vorgestellt. Dies umfasst zum einen die Herstellung der Konnektivität der Skelettkomponenten beziehungsweise dem Füllen der Lücken zwischen den Skelettlinien. Zuerst wurden markante Punkte auf dem Skelett bestimmt. Diese wurden
 genutzt, um mittels Breitensuche oder Tiefensuche Pfade zwischen ihnen zu finden und sie zu verbinden. Punkte werden miteinander
 verbunden, wenn sie nah genug beieinander sind. Das Ergebnis ist ein Skelett mit
 zusammenhängenden Skelettlinien. 
@@ -102,9 +102,10 @@ Ecke an einem bestimmten Pixel ausreicht, um in die Featuremenge aufgenommen zu 
 Funktion können der Wert des Qualitätsmaßes, den eine Ecke erfüllen muss, die Anzahl der Ecken, die gefunden werden sollen und die
 minimale Distanz zwischen den stärksten Ecken übergeben werden.\\
 Die Qualität einer Ecke wird anhand von Eigenwerten bestimmt. Die Eigenwerte beziehen sich dabei auf 
-die Kovarianzmatrix von Ableitungen einer festgelegten Umgebung eines Pixels. Es wird minimale Eigenwert
+die Kovarianzmatrix von Ableitungen einer festgelegten Umgebung eines Pixels. Es wird der minimale Eigenwert
 für die Eckendetektion weiterverwendet. Ist der minimale Eigenwert einer Ecke kleiner als das gewünschte
-Qualitätsmaß, wird diese Ecke verworfen. Die verbleibenden Ecken werden nach ihrer Qualität absteigend sortiert. Anschließend wird überprüft, ob es in der spezifizierten Distanz Ecken gibt, die stärker sind. 
+Qualitätsmaß, wird diese Ecke verworfen. Die verbleibenden Ecken werden nach ihrer Qualität absteigend sortiert. Anschließend wird überprüft, ob es in der spezifizierten Distanz Ecken gibt, die stärker sind. Die
+stärksten Ecken werden dann endgültig in die Feature-Menge aufgenommen. 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\linewidth]{./fig/features.pdf}
@@ -157,8 +158,7 @@ sind fächerartige Ausläufer.
 Wie bei der Breitensuche wird ausgehend von einem Startknoten ein Graph nach weiteren Knoten durchsucht. 
 Im Gegensatz zur Breitensuche erfolgt das Traversieren des Graphens in die Tiefe. Wurde ein Nachfolgeknoten
 gefunden, wird für diesen weiter geprüft, ob er ebenfalls einen Nachfolgeknoten besitzt. Dies wird
-solange wiederholt (rekursiv) bis kein Nachfolgeknoten mehr gefunden werden kann. Mittels \emph{Backtracking} wird der Pfad zurückverfolgt. Anschließend wird ein neuer Knoten als Startpunkte gesucht, der noch nicht besucht wurde und das Durchsuchen nach nächsten Nachbarn wird für diesen Knoten wiederholt.\\
-Die Suche nach dem nächsten Nachbarn funktioniert wie bei der Breitensuche (Abbildung \ref{fig:suchdistanz_naechster_nachbar}). \\
+solange wiederholt (rekursiv) bis kein Nachfolgeknoten mehr gefunden werden kann. Mittels \emph{Backtracking} wird der Pfad zurückverfolgt. Anschließend wird ein neuer Knoten als Startpunkte gesucht, der noch nicht besucht wurde und das Durchsuchen nach nächsten Nachbarn wird für diesen Knoten wiederholt. Die Suche nach dem nächsten Nachbarn funktioniert wie bei der Breitensuche (Abbildung \ref{fig:suchdistanz_naechster_nachbar}). \\
 Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass es noch Lücken im Skelett gibt, was auf die Suchdistanz zurückzuführen ist. Ist sie zu klein, können keine weiteren Punkte im Umkreis des aktuellen Punktes gefunden werden und der Algorithmus endet für diesen Pfad. 
 \begin{figure}[htbp]
 	\centering
@@ -175,7 +175,7 @@ Das Ergebnis ist in Abbildung \ref{fig:hand_DFS} zu sehen. Es fällt auf, dass e
 	\label{fig:hand_DFS}
 	\end{figure}\\
 Um die Konnektivität des Skeletts zu gewährleisten, muss das Skelett nachbearbeitet werden. \\
-Das Skelett, welches aus der ersten Stufe der Verbesserung entstanden ist, besitzt Zusammenhangskomponenten. Innerhalb der Zusammenhangskomponenten ist die Pixelkonnektivität gewährleistet, die globale Konnektivität zwischen den Komponenten jedoch nicht. Die Idee des
+Das Skelett, welches aus der ersten Stufe der Verbesserung entstanden ist, besitzt Zusammenhangskomponenten. Innerhalb der Zusammenhangskomponenten ist die Skelettkonnektivität gewährleistet, die globale Konnektivität zwischen den Komponenten jedoch nicht. Die Idee des
 nächsten Verbesserungsschrittes ist es, die Zusammenhangskomponenten
 zu verbinden, die am nächsten beieinander liegen. Dazu werden
 die Punkte aus den Zusammenhangskomponenten extrahiert, die die Endpunkte der Komponenten sind. In Graphenrepräsentation entsprechen diese Punkte den Wurzeln und Blättern des Waldes. Das sind
@@ -202,19 +202,17 @@ das aus dem ersten Verarbeitungsschritt entstanden ist. Die magenta-farbenen Lin
 \end{figure}
 \FloatBarrier
 \noindent
-Abbildung \ref{fig:hand-DFS-endergebnis} zeigt, wie die Zusammenhangskomponenten miteinander verbunden
-wurden. Es wurden immer die Zusammenhangskomponenten miteinander verbunden, die sich am nächsten liegen.
-Nun ist die Skelettkonnektivität gegeben.
+Abbildung \ref{fig:hand-DFS-endergebnis} zeigt, dass die Zusammenhangskomponenten miteinander verbunden
+wurden, die am nächsten beieinander liegen. Nun ist die Skelettkonnektivität gegeben.
 \section{Fazit}
 Beide Algorithmen (Thinning und Distanztransformation) liefern 
 Skelette. Diese realisieren die gewünschten Eigenschaften eines
 Skeletts. Dabei ist die Skelettqualität unterschiedlich. Der
-Thinning-Algorithmus liefert bezüglich Pixelkonnektivität, 
+Thinning-Algorithmus liefert bezüglich Skelettkonnektivität, 
 1-Pixel-Breite und Wiedergabe der Topologie hervorragende Ergebnisse. Bei der Skelettierung mittels Distanztransformation
 ist vor allem auffällig, dass die Skelettkonnektivität nicht vollständig gegeben ist. \\
 Es wurden Verbesserungsmöglichkeiten diskutiert, die zur globalen Skelettkonnektivität bei einem Distanzskelett führen. Die Grundlage der
-Verbesserung war die Berechnung von markanten Punkten, die mittels Breitensuche oder Tiefensuche verbunden wurden. Die
-liefert die Tiefensuche nicht nur bei der Konnektivität sehr gute Ergebnisse. Auch die topologischen Eigenschaften des Objektes werden
+Verbesserung war die Berechnung von markanten Punkten, die mittels Breitensuche oder Tiefensuche verbunden wurden. Die Tiefensuche liefert nicht nur bei der Skelettkonnektivität sehr gute Ergebnisse. Auch die topologischen Eigenschaften des Objektes werden
 hervorragend beschrieben. Bei der Breitensuche fielen vor allem die fächerartigen Ausläufer auf. Diese sind nicht Teil der Topologie
 des ursprünglichen Objekts. Es muss auch hier abhängig vom konkreten Anwendungsfall disktuiert werden, ob die Ausläufer stören. Das durch die Tiefensuche verbesserte Skelett realisiert am besten die in Kapitel \ref{ch:Skelettierung} genannten Qualitätsanforderungen.\\ Da diese Verbesserungen nach der offiziellen Projektarbeitszeit entstanden sind, konnten keine detaillierten Laufzeit-Messungen mit der Kinect vorgenommen werden. Die Laufzeiten
 der beiden Algorithmen wurden deshalb mit dem Tool \emph{CProfile} auf statischen Bildern gemessen. Die Laufzeiten pro Bild fallen bei beiden Algorithmen sehr gering ($<0.001$ s) aus. Das Berechnen der Features dauert $0.01$ s und damit bleibt die Skelettierung mittels Distanztransformation auch mit den Verbesserungen immer noch deutlich schneller als der Thinning-Algorithmus.

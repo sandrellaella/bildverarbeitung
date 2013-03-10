@@ -179,7 +179,7 @@ kommen die diagonalen Richtungen dazu. Abhängig von der gewählten
 Nachbarschaft und der Metrik ergeben sich unterschiedliche Distance
 Maps.\\\\
 Die Pixel mit dem größten Abstand zum ersten Pixel des Hintergrunds sind die hellsten Pixel in der Distance Map. Die umgebenden Pixel haben einen kleineren Grauwert und der Grauwert der Pixel verringert sich, je näher die Pixel am Hintergrund liegen.
-Dementsprechend beschreiben die hellsten Pixel des \emph{Grauwertgebirges} eine skelettförmige Struktur, die im Folgenden aus extrahiert werden soll.
+Dementsprechend beschreiben die hellsten Pixel des \emph{Grauwertgebirges} eine skelettförmige Struktur, die im Folgenden aus der Distance Map extrahiert werden soll.
 Wir verfolgen einen Ansatz, der auf der Bildung des Gradienbetrages der Distance Map beruht.\\
 \begin{figure}[h]
 	\centering
@@ -209,7 +209,7 @@ Die Idee ist, den Gradienten beziehungsweise den Gradientenbetrag der Distance M
 %  \]
 \end{equation}
 Entsprechend der Definition des Gradienten, ist an den lokalen Maxima des Grauwertgebirges der Gradientenbetrag gleich null.\\
-Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimension und Größe wie die Distance Map, wird der Gebirgskamm als Linie mit kleinen Grauwerten (fast Null) kodiert. Diese markiert das Skelett. Eine schwellwerbasierte Segmentierung des Gradientenbetragbildes bewirkt, dass die Skelettlinien schwarz sind (Abbildung \ref{fig:bildung_gradient}). Andere Bereiche, die größer als der Schwellwert sind und somit nicht zum Skelett gehören erhalten den Grauwert $255$ (weiß). 
+Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimension und Größe wie die Distance Map, wird der Gebirgskamm als Linie mit kleinen Grauwerten (fast Null) kodiert. Diese markiert das Skelett. Eine schwellwerbasierte Segmentierung des Gradientenbetragbildes bewirkt, dass die Skelettlinien schwarz sind (Abbildung \ref{fig:bildung_gradient}). Andere Bereiche, die größer als der Schwellwert sind und somit nicht zum Skelett gehören, erhalten den Grauwert $255$ (weiß). 
 \begin{figure}
 \centering
 \includegraphics[width=1.0\linewidth]{./fig/bildung_gradient}
@@ -220,7 +220,7 @@ Speichert man den Gradientenbetrag ebenfalls als Grauwertbild mit gleicher Dimen
 \noindent
 Um endgültig nur die Skelettlinie zu erhalten, wird die Differenz
 zwischen der Distance Map und dem segmentierten Gradientenbetragsbild gebildet. Der Teil der Distance Map der nicht
-auf der höchsten Stelle des Grauwertgebirges liegt hat entweder einen Grauwert kleiner oder gleich $255$. Bei
+auf der höchsten Stelle des Grauwertgebirges liegt, hat entweder einen Grauwert kleiner oder gleich $255$. Bei
 der Differenzbildung kann der Grauwert dieser Pixel nur kleiner gleich 0 werden, da von diesen Grauwerten der Grauwert $255$ abgezogen wird (weißer Bereich des segmentierten Gradientenbetragsbildes). Negative
 Grauwerte werden auf $0$ gesetzt. Als Ergebnis erhält man die Skelettlinie mit Grauwerten ungleich $0$. Um ein binärkodiertes Skelett zu erhalten, wird auf dem Differenzbild
 anschließend eine schwellwertbasierte Segmentierung ausgeführt (Abbildung \ref{fig:differenzbildung}).
@@ -247,10 +247,9 @@ In dem Paper \emph{Extracting Skeletons from Distance Maps} beschreibt der Autor
 aus einem distanztransformierten Bild ein Skelett extrahiert \cite{extracting_skeletons_distancemaps}. Der Autor legt besonders hohen Wert darauf, dass die Extraktion keine komplizierten Berechnungen beinhaltet. Er möchte vor allem auf die Berechnung
 von Ableitungen höherer Ordnung und die Auswertung von komplexen Gleichungen verzichten. Das Verfahren, welches der Autor zur 
 Extraktion der Skelettlinien eines Objekt vorstellt, ist die sogenannte \emph{Ridge Point Detection} (deutsch: \emph{Gebirgskammdetektion}). Dabei nutzt der Autor eine grundlegende Eigenschaft der Distance Map. Wie in Abschnitt \ref{sec:distanztransformation} beschrieben, ist die Distance Map ein Grauwertgebirge, wobei der Gebirgskamm zentriert im Objekt liegt. Betrachtet man nur diesen Teil der Distance Map und projiziert ihn auf das Originalbild, 
-lässt sich eine skelett-artige Beschreibung des Objekts erkennen.\\\\
-Die Gebirgskammdetektion ist ein gradientenbasiertes Verfahren. Liegt ein Punkt auf den Gebirgskamm, so hat er in 
-seiner unmittelbaren Umgebung den größten Abstand zum Objektrand und den größten Grauwert relativ zu seinen Nachbarn. Dieser Punkt ist somit ein lokales Maximum. Aufgrund dieser Tatsache eignet  sich der Gradient am besten, um solch einen Punkt zu detektieren. Der Gradient zeigt nach Definition in die Richtung des stärksten Anstiegs. Dies bedeutet, dass der Gradient eines Punktes, der nicht auf dem Kamm liegt, in die Richtung des Kammes zeigt. Wählt man nun Punkte näher am Kamm, so wird der Anstieg
-geringer, da die Differenz zwischen dem Grauwert des betrachteten Gebirgspunktes und dem aktuell gewählten Punkt kleiner wird. Überquert man den Kamm, kehrt sich die Richtung des Gradienten um und zeigt wieder zum Kamm. Hier findet ein Vorzeichenwechsel des Gradientenbetrags statt. Der Punkt auf dem Gebirgskamm bildet eine \emph{sign barrier} zwischen den Gradientenbeträgen der sich gegenüberliegenden Punkte, wobei sich der Gebirgspunkt zwischen diesen beiden Punkten befindet. Diese
+ist eine skelett-artige Beschreibung des Objekts zu erkennen.\\\\
+Die Gebirgskammdetektion ist ein gradientenbasiertes Verfahren. Der Gradient zeigt nach Definition in die Richtung des stärksten Anstiegs (Gleichung \ref{eq:gradient}). Dies bedeutet, dass der Gradient eines Punktes, der nicht auf dem Kamm liegt, in die Richtung des Kammes zeigt. Wählt man nun Punkte näher am Kamm, so wird der Anstieg
+geringer, da die Differenz zwischen dem Grauwert des betrachteten Gebirgspunktes und dem aktuell gewählten Punkt kleiner wird. Überquert man den Kamm, kehrt sich die Richtung des Gradienten um und zeigt wieder zum Kamm. Hier findet ein Vorzeichenwechsel des Gradientenbetrags statt. Der Punkt auf dem Gebirgskamm bildet eine \emph{sign barrier} zwischen den Gradientenbeträgen der sich gegenüberliegenden Punkte, wobei sich der dieser Punkt zwischen den beiden Punkten befindet. Diese
 Beobachtung ist in Abbildung \ref{fig:paper_ridge_point_detection} dargestellt. Es ist ein Querschnitt eines Grauwertgebirges
 abgebildet. Legt man nun eine Projektionslinie genau durch das lokale Maximum (roter Punkt), und projiziert die Gradienten (violette Pfeile) der sich gegenüberliegenden Punkte (blau) auf diese Linie, so kann man erkennen, dass die Projektionen der Gradienten (orangene Pfeile) genau in die entgegengesetzte Richtung zeigen.
 \begin{figure}[ht]
@@ -278,14 +277,13 @@ zu untersuchen. Dabei wählt man die eine Richtung parallel zur x-Achse und die 
 \end{figure}
 Es existieren insgesamt vier Muster, die auf einen Gebirgskamm deuten. Zwei davon sind in Abbildung \ref{fig:muster_strong_good}
 zu sehen. Die Muster beschreiben, in welcher Weise Vorzeichenwechsel zwischen zwei benachbarten Pixeln auftreten können. Die Symbole $+$ und $-$ die Richtungen der Gradienten. $+$ ist eine positive Richtung (bergauf), $-$ eine negative Richtung (bergab) auf einer Projektionslinie. Das Symbol $\circ$ besagt, dass sich in diesem Bereich der Gradient nicht ändert, da der Grauwert im nächsten Nachbarpunkt gleich ist. Die linke Abbildung entspricht genau der Beobachtung, wie sie anhand Abbildung
-\ref{fig:paper_ridge_point_detection} beschrieben wurde. Schneidet die Projektionslinie genau einen Punkt auf dem Gebirgskamm,
-erzeugt dieser Punkt einen Vorzeichwechsel zwischen den beiden Punkten, die den Punkt auf dem Kamm umschließen. Die rechte
+\ref{fig:paper_ridge_point_detection} beschrieben wurde. Schneidet die Projektionslinie einen Punkt auf dem Gebirgskamm,
+erzeugt dieser Punkt einen Vorzeichenwechsel zwischen den beiden Punkten, die den Punkt auf dem Kamm umschließen. Die rechte
 Abbildung zeigt, dass es mehrere Punkte hintereinander in der Distance Map mit dem gleichen Grauwert geben kann, aber auch ein
 Hinweis für einen Gebirgskamm sind. Dies entspricht im Grauwertgebirge einem Plateau.\\
 Der Algorithmus sucht nun in x -und in y Richtung - von oben nach unten und von links nach rechts - in der Distance Map nach diesen Mustern und markiert die Punkte nach den Eigenschaften \emph{strong}, \emph{good}, \emph{weak} und \emph{none}. 
-Diese Markierung gibt die Stärke der Sicherheit des Punktes wieder, ein Punkt auf dem Gebirgskamm zu sein. \\
-Wurden alle Punkte in beide Richtungen untersucht, hat jeder Punkt ein passendes Label. Diese Labels werden weiter benutzt, um eine Graphenrepräsentation des Skeletts zu erstellen.\\
-Der Algorithmus findet zu jedem Punkt das richtige Label und alle Punkte, die zu einem Gebirgskamm gehören \cite{extracting_skeletons_distancemaps}.
+Diese Markierung gibt die Stärke der Sicherheit des Punktes wieder, ein Punkt auf dem Gebirgskamm zu sein und somit zum Skelett zu gehören. \\
+Wurden alle Punkte in beide Richtungen untersucht, hat der Algorithmus zu jedem Punkt das richtige Label gefunden und alle Punkte, die zu einem Gebirgskamm gehören \cite{extracting_skeletons_distancemaps}. Diese Labels werden weiter benutzt, um eine Graphenrepräsentation des Skeletts zu erstellen.
 \section{Weitere Verfahren}
 \label{sec:weitere_verfahren}
 \Autor{Christopher Kroll}\\ \\
