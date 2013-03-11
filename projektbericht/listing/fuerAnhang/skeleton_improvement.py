@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 """
 Verbesserung der Skelettqualitaet des Distanzskeletts mittels
 Breitensuche.
-
-Created on Wed Jan 16 12:27:19 2013
 
 @author: Sandra Schroeder
 """
