@@ -52,7 +52,7 @@ Es wurden vorgefertigte Funktionen von OpenCV benutzt, die diese Konvertierung v
 \section{Skelettierung mittels Thinning} 
 \label{implThinning}
 \Autor{Christopher Kroll} \\ \\
-Da man sich schon durch den Seminarteil mit dem Algorithmus 'A Fast Parallel Algorithm for Thinning Digital Patterns' besch"aftigte, fiel die Wahl des Thinning-Algorithmus zun"achst auf diesen. \\
+Da man sich schon durch den Seminarteil mit dem Algorithmus nach \cite{thinning} besch"aftigte, fiel die Wahl des Thinning-Algorithmus zun"achst auf diesen. \\
 Der Algorithmus arbeitet mit Bin"arbildern, also alle Objektpixel sind auf 1, bzw. 255 gesetzt und alle Hintergrundpixel auf 0. Die in Kapitel \ref{segmentierung} vorgestellte Spieler-Segmentierung lieferte jedoch anfangs nur ein Grauwertbild. So war nun der erste Schritt dieses Bild in ein Bin"arbild umzuwandeln. Die Idee war das zweidimensionale Grauwertbildarray mit zwei Schleifen zu durchlaufen und jeden Wert, der gr"o"ser als 128 ist auf 255 zu setzen. Jeder Wert der kleiner oder gleich 128 ist, wird auf 0 gesetzt (siehe Listing \ref{lst:grayscaleToBinary}). 
 \lstset{
 caption={Binarisierung des Grauwertbildes.}
@@ -73,7 +73,7 @@ caption={Aufruf der C++-Funktion.}
 }
 \lstinputlisting{./listing/callC.py}
 
-Da nun mit dem 'A Fast Parallel Algorithm for Thinning Digital Patterns'-Algorithmus trotz mehrst"undiger Fehlersuche und Optimierung jedoch keine guten Ergebnisse erzielt werden konnten, wurde auf den verwandten Guo-Hall-Algorithmus zur"uckgegriffen. Auch er hat vier Kriterien, die zutreffen m"ussen, damit ein Pixel gel"oscht werden kann. Aufgrund der Pixelbenennung im 3x3-Pixel-Fenster aus Abbildung 3.2 ergeben sich folgende Kriterien in der C++-Implementation: \\
+Da nun mit dem Algorithmus nach \cite{thinning} trotz mehrst"undiger Fehlersuche und Optimierung jedoch keine guten Ergebnisse erzielt werden konnten, wurde auf den verwandten Guo-Hall-Algorithmus zur"uckgegriffen. Auch er hat vier Kriterien, die zutreffen m"ussen, damit ein Pixel gel"oscht werden kann. Aufgrund der Pixelbenennung im 3x3-Pixel-Fenster aus Abbildung 3.2 ergeben sich folgende Kriterien in der C++-Implementation: \\
 \lstset{
 caption={Guo-Hall-Kriterien in C++}
 \label{lst:thinningImpl}
