@@ -5,16 +5,15 @@ Im Master-Studiengang Informatik an der Universit"at Hamburg ist ein zweisemestr
 Der Verlauf und das Ergebnis dieses Projektes wird in dem vorliegenden Dokument dargestellt.
 \\ \\
 Die Studenten sollten in diesem Projekt die Daten der Microsoft Kinect-Kamera nutzen und diese f"ur ein Thema ihrer Wahl verarbeiten. Nach einer Vorstellung der Kinect und der Programmiersprache Python wurden die Gruppen eingeteilt und das Thema gew"ahlt (siehe Kapitel \ref{aufgabenstellung} ).  \\ \\
-
 Die digitale Bildverarbeitung hilft unter anderem bei der Erkennung von Objekten, wie zum Beispiel bei der vollautomatisierten Qualit"atskontrolle. Um auch bei gro"sen Datenmengen noch performant arbeiten zu k"onnen, bedient man sich oft des Mittels der Abstraktion. Das Projektthema dieser Arbeit dreht sich um eine M"oglichkeit der Abstraktion, n"amlich der Skelettierung. \\ \\
-Der Begriff 'Skelett' taucht in vielen Fachbereichen, wie zum Beispiel der Anatomie, Biologie oder Architektur auf. In der digitalen Bildverarbeitung hat er einen "ahnlichen Sinn wie in diesen Bereichen: Es stellt von einem Objekt das Grundger"ust dar. Dieses Ger"ust ist der zentrale Hauptbestandteil, mit dessen Hilfe sich R"uckschl"usse auf das gesamte Objekt (siehe Dinosaurierskelette) ergeben. \\ \\
+Der Begriff 'Skelett' taucht in vielen Fachbereichen, wie zum Beispiel der Anatomie, Biologie oder Architektur auf. In der digitalen Bildverarbeitung hat er einen "ahnlichen Sinn wie in diesen Bereichen: Es stellt von einem Objekt das Grundger"ust dar. Dieses Ger"ust ist der zentrale Hauptbestandteil, mit dessen Hilfe sich R"uckschl"usse auf das gesamte Objekt (zum Beispiel bei Dinosaurierskeletten) ergeben. \\ \\
 Aus Sicht der Bildverarbeitung kann ein Skelett folgenderma"sen definiert werden: Ein Skelett ist ein n"utzlicher Deskriptor, um Informationen "uber die Region und den Rand eines Objektes kompakt und effizient zu kodieren und gibt die wesentlichen Grundz"uge eines Objektes wieder. In diesem Fachbereich kommen noch weitere Eigenschaften des Skeletts hinzu. Das Ziel ist die Information eines Objektes zu reduzieren ohne dabei die Grundstruktur zu verletzen. So ist eine Anforderung, dass die 'Pixelkonnektivit"at' gew"ahrleistet ist, also alle sp"ateren Skelettpixel mindestens einen benachbarten Skelettpixel besitzen und das Skelett nicht unterbrochen ist. \\ \\
-Bei der Skelettierung muss weiterhin beachtet werden, dass die topologische Struktur des Originalbildes nicht ver"andert wird. Trotz eventueller Verformung bei der Skelettbildung, wie in Abbildung \ref{fig:topologischeStruktur} dargestellt, muss die strukturelle Eigenschaft erhalten bleiben; so ist bei einer automatisierten Zeichenerkennung die Strichst"arke unerheblich, lediglich der generelle Aufbau des Buchstaben ist relevant. \\
+Bei der Skelettierung muss weiterhin beachtet werden, dass die topologische Struktur des Originalbildes nicht ver"andert wird. Trotz eventueller Verformung bei der Skelettbildung, wie in Abbildung \ref{fig:topologischeStruktur} dargestellt, muss die strukturelle Eigenschaft erhalten bleiben; so ist bei einer automatisierten Zeichenerkennung die Strichst"arke unerheblich, lediglich der generelle Aufbau des Buchstaben ist relevant \cite{buhlmann}. \\
 %\includegraphics[width=1.0\linewidth]{./fig/topologischeStruktur}
 \begin{figure}
 \centering
 \includegraphics[width=0.7\linewidth]{./fig/topologischeStruktur}
-\caption{Skelettierung des Buchstaben A TODO cite \cite{buhlmann}}
+\caption{Skelettierung des Buchstaben 'A'  \cite{buhlmann}}
 \label{fig:topologischeStruktur}
 \end{figure}
 
