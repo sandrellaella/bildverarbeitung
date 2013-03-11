@@ -24,9 +24,6 @@
  */
 void thinningGuoHallIteration(cv::Mat& im, int iter)
 {
-    //printf("C++ %d\n",im.rows);
-    //printf("C++ %d\n",im.cols);
-    //cv::Mat marker = cv::Mat::zeros(im.size(), CV_32FC1); 
     cv::Mat marker = cv::Mat::zeros(im.size(), CV_8UC1); 
     for (int i = 1; i < im.rows; i++)
     {
@@ -53,9 +50,7 @@ void thinningGuoHallIteration(cv::Mat& im, int iter)
                 marker.at<uchar>(i,j) = 1;
         }
     }
-    //printf("C++ In thinningGuoHallIteration %d\n",iter);
     im &= ~marker;
-    //printf("C++ Ende thinningGuoHallIteration %d\n",iter);
 }
 
 /**
@@ -66,24 +61,16 @@ void thinningGuoHallIteration(cv::Mat& im, int iter)
 void thinningGuoHall(cv::Mat& im)
 {
     im /= 255;
-    //cv::Mat prev = cv::Mat::zeros(im.size(), CV_32FC1);
     cv::Mat prev = cv::Mat::zeros(im.size(), CV_8UC1);
     cv::Mat diff;
     do {
         thinningGuoHallIteration(im, 0);
-        //printf("C++: Nach thinningGuoHallIteration 0\n");
         thinningGuoHallIteration(im, 1);
-        //printf("C++: Nach thinningGuoHallIteration 1\n");
-        //printf("%d\n", im.type());
-        //printf("%d\n", prev.type());
         cv::absdiff(im, prev, diff);
-        //printf("C++: Absdiff\n");
         im.copyTo(prev);
     } 
     while (cv::countNonZero(diff) > 0);
-    //printf("C++: Nach dem Thinning\n");
     im *= 255;
-    //printf("C++: Ende thinningGuoHall\n");
 }
 
 /**
@@ -91,28 +78,14 @@ void thinningGuoHall(cv::Mat& im)
  */
 LIBEXPORT int vigra_reflectimage_c( int *arr,  int *arr2, const  int width, const  int height, const int reflect_method){ 
 
-    //TRY: Height und Width vertauscht
-    //cv::Mat source(height,width,CV_32FC1,arr);
     cv::Mat source(height,width,CV_8UC1,arr);
     if (source.empty())
         return -1;
     
-    //printf("Width: %d\n",width);
-    //printf("Height: %d\n",height);
-    
-    //cv::Mat bw = cv::Mat::zeros(source.size(), CV_32FC1);
     cv::Mat bw = cv::Mat::zeros(source.size(), CV_8UC1);
-    //printf("%d\n",bw.type());
-    //printf("%d\n",source.type());
-    
     cv::threshold(source, bw, 10, 255, CV_THRESH_BINARY);
-    //printf("%d\n",bw.type());
     thinningGuoHall(source);
-    //printf("C++: Aus thinningGuoHall raus\n");
     cv::imshow("Thinning", source);
-    //cv::imshow("dst", bw);
-    
-    //cv::waitKey();
     return 0;
 }
 
