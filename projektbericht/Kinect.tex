@@ -35,7 +35,7 @@ Hohe Grauwerte (helle Pixel) repräsentieren nahe Objekte, während niedrige Gra
 Wird die Tiefeninformation dazu genutzt um die Pixel im dreidimensionalen Raum anzuordnen, erhält man eine 3d-Punktwolke. Die in der 2d-Betrachtung benachbarte Pixel müssen in der 3d-Repräsentation nicht miteinander verbunden sein, da die Z-Koordinaten unterschiedliche Werte aufweisen können. 
 \subsection{Funktionale Komponenten}
 \subsubsection{Infrarotprojektor}
-Der Infrarotprojektor emittiert elektromagnetische Strahlen, deren Wellenlänge (830nm) außerhalb des für den Menschen sichtbaren Bereichs (380nm-780nm) liegt\cite{borenstein2012making}.
+Der Infrarotprojektor emittiert elektromagnetische Strahlen, deren Wellenlänge (830nm) außerhalb des für den Menschen sichtbaren Bereichs (380nm-780nm) liegt \cite{borenstein2012making}.
 Der Projektor strahlt zur Tiefenbestimmung ein Gitter von Infrarotpunkten (strukturiertes Licht) auf die Objekte in seiner Umgebung ab. 
 Zur Generierung dieses Musters wird ein besonderes Verfahren implementiert.
 Normalerweise produzieren Filter, die diese Art von Muster generieren einen sehr hellen Punkt in der Mitte des Bildes, welcher die Leistungsfähigkeit des Infrarotprojektors limitiert. Durch das hier verwendete Verfahren entstehen statt einem einzigen sehr hellen, neun helle Punkte, welche durch unvollständige Lichtfilterung zur Mustererstellung entstehen\cite{Kramer}. Das hier eingesetzte Verfahren produziert weniger starke Artefakte und ermöglicht die Verwendung einer leistungsfähigeren Diode. Dies führt zu einer höheren Genauigkeit der Abstandsauflösung und zu einer größeren Reichweite im Bezug auf die Umgebung in welcher die Entfernungsmessung durchgeführt wird. Die Reichweite des Infrarotprojektors ist dennoch eingeschränkt, da zu hohe Intensitäten der Infrarotstrahlen Augenschäden verursachen könnten.
@@ -57,7 +57,7 @@ Normalerweise produzieren Filter, die diese Art von Muster generieren einen sehr
 %\end{wrapfigure}
 
 \subsubsection{Infrarotkamera}
-Die Infrarotkamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixeln, bei einer Bildwiederholrate von 30 Hz auf. Weitergeleitet werden allerdings nur Bilder mit einer Auflösung von 640x480 Pixeln, da der USB Datenbus eine Limitierung bezüglich der Datenübertragungsrate darstellt\cite{borenstein2012making}. Das Blickfeld der Infrarotkamera beträgt in der Horizontalen 58 °, in der Vertikalen 45 °. Damit die Mustererkennung funktioniert, ist ein Mindestabstand von 0,8 Metern erforderlich.\cite{borenstein2012making} \\
+Die Infrarotkamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixeln, bei einer Bildwiederholrate von 30 Hz auf. Weitergeleitet werden allerdings nur Bilder mit einer Auflösung von 640x480 Pixeln, da der USB Datenbus eine Limitierung bezüglich der Datenübertragungsrate darstellt\cite{borenstein2012making}. Das Blickfeld der Infrarotkamera beträgt in der Horizontalen 58 °, in der Vertikalen 45 °. Damit die Mustererkennung funktioniert, ist ein Mindestabstand von 0,8 Metern erforderlich \cite{borenstein2012making}. \\
  \begin{figure}[!ht]
  	\begin{center}
  		\includegraphics[width=0.6\textwidth]{./Res/Res_to_Dist}
@@ -68,7 +68,7 @@ Die Infrarotkamera nimmt Bilder mit einer nativen Auflösung von 1280x1024 Pixel
  
  Ab einer Entfernung von 3,5 Metern wird die Intensität der reflektierten Strahlen zu gering um Tiefeninformationen mit ausreichender Aussagekraft und Präzision zu erhalten.
 Bei einem optimalen Abstand von 2 Metern zum Objekt beträgt die Auflösung 
-in der XY-Ebene 3 mm, in der Z-Ebene 1 cm.
+in der XY-Ebene 3 mm, in der Z-Ebene 1 cm \cite{borenstein2012making}.
 
 
 
@@ -90,12 +90,12 @@ Die Umgebungsreflektionen der projizierten Punktematrix werden von der Infrarotk
 Um aus diesem Gitter von reflektierten Infrarotpunkten Tiefeninformation zu extrahieren, wird das Verfahren der aktiven Stereotriangulation verwendet.\\\\
 Die Triangulation ist ein Verfahren zur optischen Abstandsmessung, welches sich hierzu trigonometrischer Funktionen innerhalb von aufgespannten Dreiecken bedient. 
 Es wird allgemein zwischen aktiver und passiver Triangulation unterschieden.
-Aktive Triangulation bedingt mindestens eine strukturierte Lichtquelle zur Abstandsberechnung, während dies bei passiver Triangulation nicht der Fall ist\cite{primesense}.\\
+Aktive Triangulation bedingt mindestens eine strukturierte Lichtquelle zur Abstandsberechnung, während dies bei passiver Triangulation nicht der Fall ist\cite{triangulation}.\\
 
 Da der Infrarotprojektor ein statisches Pseudozufallsmuster emittiert, ist dieser als strukturierte Lichtquelle einzuordnen.
 Stereotriangulation bedeutet dass zwei unterschiedliche Bildquellen benötigt werden um die Tiefe jedes Pixels eines Bildausschnittes berechnen zu können.
 Eine der zwei Bildquellen ist der Diffusor (das „Lochmuster“), welcher die vom Projektor emittierten Strahlen statisch definiert. Die andere Bildquelle ist die Infrarotkamera.
-Das "Bild" (die Lochmaske) des Projektors ist immer identisch und statisch. Das Bild der Infrarotkamera hingegen variiert je nach Umgebung. Diese beiden Bilder sind die Grundlage für die trigonometrischen Operationen zur Berechnung der Tiefeninformationen .
+Das "Bild" (die Lochmaske) des Projektors ist immer identisch und statisch. Das Bild der Infrarotkamera hingegen variiert je nach Umgebung. Diese beiden Bilder sind die Grundlage für die trigonometrischen Operationen zur Berechnung der Tiefeninformationen \cite{structured light}.
 
 \begin{figure}[!ht]
   \centering
