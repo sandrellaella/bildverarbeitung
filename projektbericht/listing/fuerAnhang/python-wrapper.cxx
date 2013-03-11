@@ -1,3 +1,4 @@
+#include <vigra/basicimageview.hxx>
 #include <cstdlib>
 #include <stdlib.h>
 
