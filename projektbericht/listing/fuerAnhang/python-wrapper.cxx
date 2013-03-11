@@ -88,23 +88,3 @@ LIBEXPORT int vigra_reflectimage_c( int *arr,  int *arr2, const  int width, cons
     cv::imshow("Thinning", source);
     return 0;
 }
-
-int main()
-{
-    cv::Mat src = cv::imread("hand.jpg");
-    
-    if (src.empty())
-        return -1;
-    
-    cv::Mat bw;
-    cv::cvtColor(src, bw, CV_BGR2GRAY);
-    cv::threshold(bw, bw, 10, 255, CV_THRESH_BINARY);
-    
-    thinningGuoHall(bw);
-    
-    cv::imshow("src", src);
-    cv::imshow("dst", bw);
-    cv::waitKey(0);
-    
-    return 0;
-}
