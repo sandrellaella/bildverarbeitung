@@ -66,16 +66,20 @@ caption={Laden der Wrapper-Bibliothek.}
 \label{lst:loadlib}
 }
 \lstinputlisting{./listing/loadlib.py}
-\\Die C++-Funktion kann nun mit Python aufgerufen werden (Listing \ref{lst:callC}).
+Die C++-Funktion kann nun mit Python aufgerufen werden (Listing \ref{lst:callC}).
 \lstset{
 caption={Aufruf der C++-Funktion.}
 \label{lst:callC}
 }
 \lstinputlisting{./listing/callC.py}
 
-
-
-Da nun mit dem 'A Fast Parallel Algorithm for Thinning Digital Patterns'-Algorithmus trotz mehrst"undiger Fehlersuche und Optimierung jedoch keine guten Ergebnisse erzielt werden konnten, wurde auf den verwandten Guo-Hall-Algorithmus zur"uckgegriffen. Auch er hat vier Kriterien, die zutreffen m"ussen, damit ein Pixel gel"oscht werden kann.
+Da nun mit dem 'A Fast Parallel Algorithm for Thinning Digital Patterns'-Algorithmus trotz mehrst"undiger Fehlersuche und Optimierung jedoch keine guten Ergebnisse erzielt werden konnten, wurde auf den verwandten Guo-Hall-Algorithmus zur"uckgegriffen. Auch er hat vier Kriterien, die zutreffen m"ussen, damit ein Pixel gel"oscht werden kann. Aufgrund der Pixelbenennung im 3x3-Pixel-Fenster aus Abbildung 3.2 ergeben sich folgende Kriterien in der C++-Implementation: \\
+\lstset{
+caption={Guo-Hall-Kriterien in C++}
+\label{lst:thinningImpl}
+}
+\lstinputlisting{./listing/thinningImpl.py}
+Treffen die Kriterien in Zeile 7 zu, wird der Pixel in Zeile 8 zum L"oschen markiert.
 
 \section{Skelettierung mittels Distanztransformation}
 \label{sec:impl_distanztrans}
