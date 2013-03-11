@@ -13,11 +13,21 @@ verwendeten Programmiersprachen und Arbeitsumgebungen.
 \label{sec:technische_umsetzung}
 \Autor{Christopher Kroll}\\\\
 F"ur die Implementierung wurden die bereitgestellten iMacs am Informatikum in Stellingen gew"ahlt. Der Vorteil war neben der Performanz die schon eingerichtete Arbeitsumgebung.\\
-Um die Verbindung zu der Kinect herzustellen, wurde das quelloffene Framework libfreenect  der OpenKinect-Gruppe benutzt. Libfreenect bietet Treiber und Bibliotheken, um zum Beispiel die Bilder der Kamera anzuzeigen oder den eingebauten Motor zu steuern. \\
-Um die empfangenen Bilder verarbeiteten zu k"onnen wurde die Bibliothek OpenCV eingesetzt. Sie unterst"utzt unter anderem beim Speichern und Laden von Bildern und bei der Segmentierung. \\
-Der Gro"steil der Programmierung erfolgte in der Sprache Python. Hierbei handelt es sich um eine leicht zu erlernende Skriptsprache. Allerdings traten im Laufe des Projektes Performanzprobleme bei der Implementierung des Thinning-Algorithmus auf. Aus diesem Grund wurde "uber einen Python-Wrapper der in C++ implementierte Algorithmus eingebaut. N"aheres dazu wird in Kapitel \ref{implThinning} beschrieben.
+Um die Verbindung zu der Kinect herzustellen, wurde das quelloffene Framework libfreenect  der OpenKinect-Gruppe benutzt. Libfreenect bietet Treiber und Bibliotheken, um zum Beispiel die Bilder der Kamera anzuzeigen oder den eingebauten Motor zu steuern (siehe Abbildung \ref{fig:libfreenect}). \\
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./fig/libfreenect}
+\caption{Libfreenect  \cite{libfreenect}}
+\label{fig:libfreenect}
+\end{figure}
+
+Um die empfangenen Bilder verarbeiteten zu k"onnen wurde die Bibliothek OpenCV eingesetzt. Sie unterst"utzt unter anderem beim Speichern und Laden von Bildern und bei der Segmentierung. Wichtige Aufrufe von OpenCV-Funktionen werden im Folgenden an geeigneter Stelle erw"ahnt.\\
+Eine weitere wichtige Bibliothek, die auch OpenCV benutzt, ist NumPy. Es ist eine Python-Erweiterung und wurde entwickelt, um Operationen bez"uglich mathematischen Funktionen und multidimensionalen Arrays effizienter zu gestalten \cite{numpy}. So wurde NumPy benutzt, um Arraywerte bei der Segmentierung logisch zu verkn"upfen (siehe Anhang \ref{anhang:segmentierung}). \\ \\ 
+Der Gro"steil der Programmierung erfolgte in der Sprache Python. Hierbei handelt es sich um eine leicht zu erlernende Interpretersprache. Allerdings traten im Laufe des Projektes Performanzprobleme bei der Implementierung des Thinning-Algorithmus auf. 
+ Aus diesem Grund wurde "uber einen Python-Wrapper der in C++ implementierte Algorithmus eingebaut. N"aheres dazu wird in Kapitel \ref{implThinning} beschrieben.
+
 Als Entwicklungsumgebung wurde Spyder f"ur die Python-Programmierung und Apples Xcode f"ur die C++-Programmierung benutzt.
-TODO numpy
+
 \section{Spielersegmentierung}
 \label{segmentierung}
 \Autor{Sandra Schröder}\\\\
@@ -49,9 +59,7 @@ caption={Binarisierung des Grauwertbildes.}
 \label{lst:grayscaleToBinary}
 }
 \lstinputlisting{./listing/grayscaleToBinary.py}
-So erhalten wir ein Array, das nur aus den Werten 0 und 255 besteht. Das Problem dabei war allerdings die nicht ausreichende Leistungsf"ahigkeit von Python. Schon bei diesen zwei ineinander verschachtelten Schleifen bestand keine Echtzeitf"ahigkeit mehr. Ohne auch nur den iterativen - und somit rechenintensiven - Thinning-Algorithmus eingesetzt zu haben stockte das Ergebnisbild zu stark. Aus diesem Grund musste eine Alternative zu Python gefunden werden. Die Wahl fiel auf die leistungsst"arkere Compilersprache C++. \\ \\
-TODO quelle heraussuchen vergleich python-c++?
-\\ \\
+So erhalten wir ein Array, das nur aus den Werten 0 und 255 besteht. Das Problem dabei war allerdings die nicht ausreichende Leistungsf"ahigkeit von Python. Schon bei diesen zwei ineinander verschachtelten Schleifen bestand keine Echtzeitf"ahigkeit mehr. Ohne auch nur den iterativen - und somit rechenintensiven - Thinning-Algorithmus eingesetzt zu haben stockte das Ergebnisbild zu stark. Python ist zwar "ahnlich schnell wie PHP, Perl oder Smalltalk, kann in Sachen Geschwindigkeit mit kompilierten Sprachen jedoch nicht mithalten \cite{python}. \\Aus diesem Grund musste eine Alternative zu Python gefunden werden. Die Wahl fiel auf die leistungsst"arkere Compilersprache C++. \\ \\
 Nun sollten jedoch nicht zwei unterschiedliche Programme entstehen - Distanztransformation mit Python und Thinning mit C++ und die Spieler-Segmentierung in Python sollte auch f"ur die Thinning-Skelettierung benutzt werden. Die L"osung war die M"oglichkeit der Anbindung von Python an eine andere Programmiersprache, in diesem Fall C++.
 
 \section{Skelettierung mittels Distanztransformation}
