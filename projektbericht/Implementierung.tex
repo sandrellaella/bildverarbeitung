@@ -71,9 +71,39 @@ Die C++-Funktion kann nun mit Python aufgerufen werden (Listing \ref{lst:callC})
 caption={Aufruf der C++-Funktion.}
 \label{lst:callC}
 }
+\lstset{basicstyle=\ttfamily\scriptsize,
+	frame=single,
+	frameround=tttt,
+	numbers=left,
+	language=C++,
+	breaklines=true,
+	breakatwhitespace=true,
+	postbreak=\hbox{$\hookrightarrow$ },
+	showstringspaces=false,
+	tabsize=1,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	%identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+    xleftmargin=\parindent}
 \lstinputlisting{./listing/callC.py}
 
 Da nun mit dem 'A Fast Parallel Algorithm for Thinning Digital Patterns'-Algorithmus trotz mehrst"undiger Fehlersuche und Optimierung jedoch keine guten Ergebnisse erzielt werden konnten, wurde auf den verwandten Guo-Hall-Algorithmus zur"uckgegriffen. Auch er hat vier Kriterien, die zutreffen m"ussen, damit ein Pixel gel"oscht werden kann. Aufgrund der Pixelbenennung im 3x3-Pixel-Fenster aus Abbildung 3.2 ergeben sich folgende Kriterien in der C++-Implementation: \\
+\lstset{basicstyle=\ttfamily\scriptsize,
+	frame=single,
+	frameround=tttt,
+	numbers=left,
+	language=C++,
+	breaklines=true,
+	breakatwhitespace=true,
+	postbreak=\hbox{$\hookrightarrow$ },
+	showstringspaces=false,
+	tabsize=1,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	%identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+    xleftmargin=\parindent}
 \lstset{
 caption={Guo-Hall-Kriterien in C++}
 \label{lst:thinningImpl}
@@ -100,6 +130,21 @@ Hintergrund bestimmt wird. Es wurde die euklidische Metrik benutzt.
 caption={Berechnen der Distance Map des Binärbildes des Spielers.}
 \label{lst:disttransform}
 }
+\lstset{basicstyle=\ttfamily\scriptsize,
+	frame=single,
+	frameround=tttt,
+	numbers=left,
+	language=python,
+	breaklines=true,
+	breakatwhitespace=true,
+	postbreak=\hbox{$\hookrightarrow$ },
+	showstringspaces=false,
+	tabsize=1,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	%identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+    xleftmargin=\parindent}
 \lstinputlisting{./listing/distancetransform.py}
 Zur Bestimmung des Gradientenbetrages der Distance Map wurde die Numpy-Funktion \texttt{gaussian\_gradient\_magnitude} genutzt (Listing \ref{lst:gradient}). Die Funktion berechnet den Gradientenbetrag mit Ableitungen
 der Gaussfunktion. Die Variable \texttt{sigma} ist die Standardabweichung 
