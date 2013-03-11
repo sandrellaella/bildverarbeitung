@@ -60,7 +60,22 @@ caption={Binarisierung des Grauwertbildes.}
 }
 \lstinputlisting{./listing/grayscaleToBinary.py}
 So erhalten wir ein Array, das nur aus den Werten 0 und 255 besteht. Das Problem dabei war allerdings die nicht ausreichende Leistungsf"ahigkeit von Python. Schon bei diesen zwei ineinander verschachtelten Schleifen bestand keine Echtzeitf"ahigkeit mehr. Ohne auch nur den iterativen - und somit rechenintensiven - Thinning-Algorithmus eingesetzt zu haben stockte das Ergebnisbild zu stark. Python ist zwar "ahnlich schnell wie PHP, Perl oder Smalltalk, kann in Sachen Geschwindigkeit mit kompilierten Sprachen jedoch nicht mithalten \cite{python}. \\Aus diesem Grund musste eine Alternative zu Python gefunden werden. Die Wahl fiel auf die leistungsst"arkere Compilersprache C++. \\ \\
-Nun sollten jedoch nicht zwei unterschiedliche Programme entstehen - Distanztransformation mit Python und Thinning mit C++ und die Spieler-Segmentierung in Python sollte auch f"ur die Thinning-Skelettierung benutzt werden. Die L"osung war die M"oglichkeit der Anbindung von Python an eine andere Programmiersprache, in diesem Fall C++. So wurde der in Kapitel \ref{ch:Skelettierung} vorgestellte Thinning-Algorithmus in C++ geschrieben und mit einem Makefile kompiliert. Der kompilierte Code wurde nun mit einem Wrapper eingebunden. 
+Nun sollten jedoch nicht zwei unterschiedliche Programme entstehen - Distanztransformation mit Python und Thinning mit C++ und die Spieler-Segmentierung in Python sollte auch f"ur die Thinning-Skelettierung benutzt werden. Die L"osung war die M"oglichkeit der Anbindung von Python an eine andere Programmiersprache, in diesem Fall C++. So wurde der in Kapitel \ref{ch:Skelettierung} vorgestellte Thinning-Algorithmus in C++ geschrieben und mit einem Makefile kompiliert. Der kompilierte Code wurde nun mit einem Wrapper eingebunden. Die Python-Datei pythonWrapper.py l"adt daf"ur die vom Makefile erstellte Bibliothek, um auf die kompilierten Daten zuzugreifen (Listing \ref{lst:loadlib}) .
+\lstset{
+caption={Laden der Wrapper-Bibliothek.}
+\label{lst:loadlib}
+}
+\lstinputlisting{./listing/loadlib.py}
+\\Die C++-Funktion kann nun mit Python aufgerufen werden (Listing \ref{lst:callC}).
+\lstset{
+caption={Aufruf der C++-Funktion.}
+\label{lst:callC}
+}
+\lstinputlisting{./listing/callC.py}
+
+
+
+Da nun mit dem 'A Fast Parallel Algorithm for Thinning Digital Patterns'-Algorithmus trotz mehrst"undiger Fehlersuche und Optimierung jedoch keine guten Ergebnisse erzielt werden konnten, wurde auf den verwandten Guo-Hall-Algorithmus zur"uckgegriffen. Auch er hat vier Kriterien, die zutreffen m"ussen, damit ein Pixel gel"oscht werden kann.
 
 \section{Skelettierung mittels Distanztransformation}
 \label{sec:impl_distanztrans}
